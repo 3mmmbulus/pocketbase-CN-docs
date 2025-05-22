@@ -52,35 +52,35 @@
     <div class="content">
         /api/collections/<code>collectionIdOrName</code>/request-email-change
     </div>
-    <p class="txt-hint txt-sm txt-right">Requires <code>Authorization:TOKEN</code></p>
+    <p class="txt-hint txt-sm txt-right">需要 <code>Authorization:TOKEN</code></p>
 </div>
 
-<div class="section-title">Body Parameters</div>
+<div class="section-title">请求体参数</div>
 <table class="table-compact table-border m-b-base">
     <thead>
         <tr>
-            <th>Param</th>
-            <th>Type</th>
-            <th width="50%">Description</th>
+            <th>参数</th>
+            <th>类型</th>
+            <th width="50%">说明</th>
         </tr>
     </thead>
     <tbody>
         <tr>
             <td>
                 <div class="inline-flex">
-                    <span class="label label-success">Required</span>
+                    <span class="label label-success">必填</span>
                     <span>newEmail</span>
                 </div>
             </td>
             <td>
                 <span class="label">String</span>
             </td>
-            <td>The new email address to send the change email request.</td>
+            <td>要发送邮箱变更请求的新邮箱地址。</td>
         </tr>
     </tbody>
 </table>
 
-<div class="section-title">Responses</div>
+<div class="section-title">响应</div>
 <div class="tabs">
     <div class="tabs-header compact combined left">
         {#each responses as response (response.code)}

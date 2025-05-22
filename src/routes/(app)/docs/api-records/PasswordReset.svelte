@@ -5,19 +5,18 @@
     import PasswordResetConfirmApi from "./PasswordResetConfirmApi.svelte";
 
     const apiTabs = [
-        { title: "Request password reset", component: PasswordResetRequestApi },
-        { title: "Confirm password reset", component: PasswordResetConfirmApi },
+        { title: "请求重置密码", component: PasswordResetRequestApi },
+        { title: "确认重置密码", component: PasswordResetConfirmApi },
     ];
 
     let activeApiTab = 0;
 </script>
 
-<Accordion single title="Password reset">
+<Accordion single title="重置密码">
     <div class="content m-b-sm">
-        <p>Sends auth record password reset email request.</p>
+        <p>发送认证记录密码重置邮件请求。</p>
         <p>
-            On successful password reset all previously issued auth tokens for the specific record will be
-            automatically invalidated.
+            密码重置成功后，该记录之前签发的所有认证令牌将会自动失效。
         </p>
     </div>
     <CodeTabs
@@ -31,10 +30,10 @@
             await pb.collection('users').requestPasswordReset('test@example.com');
 
             // ---
-            // (optional) in your custom confirmation page:
+            // （可选）在你的自定义确认页面中：
             // ---
 
-            // note: after this call all previously issued auth tokens are invalidated
+            // 注意：此调用后之前签发的所有认证令牌都会失效
             await pb.collection('users').confirmPasswordReset(
                 'RESET_TOKEN',
                 'NEW_PASSWORD',
@@ -51,10 +50,10 @@
             await pb.collection('users').requestPasswordReset('test@example.com');
 
             // ---
-            // (optional) in your custom confirmation page:
+            // （可选）在你的自定义确认页面中：
             // ---
 
-            // note: after this call all previously issued auth tokens are invalidated
+            // 注意：此调用后之前签发的所有认证令牌都会失效
             await pb.collection('users').confirmPasswordReset(
               'RESET_TOKEN',
               'NEW_PASSWORD',
@@ -63,7 +62,7 @@
         `}
     />
 
-    <h6 class="m-b-xs">API details</h6>
+    <h6 class="m-b-xs">API 详情</h6>
     <div class="tabs">
         <div class="tabs-header compact">
             {#each apiTabs as tab, i}

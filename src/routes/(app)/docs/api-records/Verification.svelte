@@ -5,16 +5,16 @@
     import VerificationConfirmApi from "./VerificationConfirmApi.svelte";
 
     const apiTabs = [
-        { title: "Request verification", component: VerificationRequestApi },
-        { title: "Confirm verification", component: VerificationConfirmApi },
+        { title: "请求邮箱验证", component: VerificationRequestApi },
+        { title: "确认邮箱验证", component: VerificationConfirmApi },
     ];
 
     let activeApiTab = 0;
 </script>
 
-<Accordion single title="Verification">
+<Accordion single title="邮箱验证">
     <div class="content m-b-sm">
-        <p>Sends auth record email verification request.</p>
+        <p>发送认证记录邮箱验证请求。</p>
     </div>
     <CodeTabs
         js={`
@@ -27,7 +27,7 @@
             await pb.collection('users').requestVerification('test@example.com');
 
             // ---
-            // (optional) in your custom confirmation page:
+            // （可选）在你的自定义确认页面中：
             // ---
 
             await pb.collection('users').confirmVerification('VERIFICATION_TOKEN');
@@ -42,14 +42,14 @@
             await pb.collection('users').requestVerification('test@example.com');
 
             // ---
-            // (optional) in your custom confirmation page:
+            // （可选）在你的自定义确认页面中：
             // ---
 
             await pb.collection('users').confirmVerification('VERIFICATION_TOKEN');
         `}
     />
 
-    <h6 class="m-b-xs">API details</h6>
+    <h6 class="m-b-xs">API 详情</h6>
     <div class="tabs">
         <div class="tabs-header compact">
             {#each apiTabs as tab, i}

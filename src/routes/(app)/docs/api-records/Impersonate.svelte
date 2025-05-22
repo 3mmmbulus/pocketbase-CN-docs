@@ -76,13 +76,12 @@
     let responseTab = responses[0].code;
 </script>
 
-<Accordion single title="Impersonate">
+<Accordion single title="模拟登录">
     <div class="content m-b-sm">
         <p>
-            Impersonate allows you to authenticate as a different user by generating a
-            <strong>nonrefreshable</strong> auth token.
+            模拟登录允许你通过生成一个<strong>不可刷新</strong>的认证令牌，以其他用户身份进行认证。
         </p>
-        <p>Only superusers can perform this action.</p>
+        <p>仅超级用户可执行此操作。</p>
     </div>
 
     <CodeTabs
@@ -93,18 +92,18 @@
 
             ...
 
-            // authenticate as superuser
+            // 以超级用户身份认证
             await pb.collection("_superusers").authWithPassword("test@example.com", "1234567890");
 
-            // impersonate
-            // (the custom token duration is optional and must be in seconds)
+            // 模拟登录
+            // （自定义令牌时长为可选，单位为秒）
             const impersonateClient = pb.collection("users").impersonate("USER_RECORD_ID", 3600)
 
-            // log the impersonate token and user data
+            // 打印模拟登录的 token 和用户数据
             console.log(impersonateClient.authStore.token);
             console.log(impersonateClient.authStore.record);
 
-            // send requests as the impersonated user
+            // 以模拟用户身份发送请求
             impersonateClient.collection("example").getFullList();
         `}
         dart={`
@@ -114,38 +113,38 @@
 
             ...
 
-            // authenticate as superuser
+            // 以超级用户身份认证
             await pb.collection("_superusers").authWithPassword("test@example.com", "1234567890");
 
-            // impersonate
-            // (the custom token duration is optional and must be in seconds)
+            // 模拟登录
+            // （自定义令牌时长为可选，单位为秒）
             final impersonateClient = pb.collection("users").impersonate("USER_RECORD_ID", 3600)
 
-            // log the impersonate token and user data
+            // 打印模拟登录的 token 和用户数据
             print(impersonateClient.authStore.token);
             print(impersonateClient.authStore.record);
 
-            // send requests as the impersonated user
+            // 以模拟用户身份发送请求
             impersonateClient.collection("example").getFullList();
         `}
     />
 
-    <h6 class="m-b-xs">API details</h6>
+    <h6 class="m-b-xs">API 详情</h6>
     <div class="api-route alert alert-success">
         <strong class="label label-primary">POST</strong>
         <div class="content">
             /api/collections/<code>collectionIdOrName</code>/impersonate/<code>id</code>
         </div>
-        <small class="txt-hint auth-header">Requires <code>Authorization:TOKEN</code></small>
+        <small class="txt-hint auth-header">需要 <code>Authorization:TOKEN</code></small>
     </div>
 
-    <div class="section-title">Path parameters</div>
+    <div class="section-title">路径参数</div>
     <table class="table-compact table-border m-b-base">
         <thead>
             <tr>
-                <th>Param</th>
-                <th>Type</th>
-                <th width="50%">Description</th>
+                <th>参数</th>
+                <th>类型</th>
+                <th width="50%">说明</th>
             </tr>
         </thead>
         <tbody>
@@ -154,32 +153,32 @@
                 <td>
                     <span class="label">String</span>
                 </td>
-                <td>ID or name of the auth collection.</td>
+                <td>认证集合的 ID 或名称。</td>
             </tr>
             <tr>
                 <td>id</td>
                 <td>
                     <span class="label">String</span>
                 </td>
-                <td>ID of the auth record to impersonate.</td>
+                <td>要模拟登录的认证记录 ID。</td>
             </tr>
         </tbody>
     </table>
 
-    <div class="section-title">Body Parameters</div>
+    <div class="section-title">请求体参数</div>
     <table class="table-compact table-border">
         <thead>
             <tr>
-                <th>Param</th>
-                <th>Type</th>
-                <th width="50%">Description</th>
+                <th>参数</th>
+                <th>类型</th>
+                <th width="50%">说明</th>
             </tr>
         </thead>
         <tbody>
             <tr>
                 <td>
                     <div class="inline-flex">
-                        <span class="label label-warning">Optional</span>
+                        <span class="label label-warning">可选</span>
                         <span class="txt">duration</span>
                     </div>
                 </td>
@@ -187,25 +186,25 @@
                     <span class="label">Number</span>
                 </td>
                 <td>
-                    Optional custom JWT duration for the <code>exp</code> claim (in seconds).
+                    <span>自定义 JWT <code>exp</code> 过期时长（单位：秒）。</span>
                     <br />
-                    If not set or 0, it fallbacks to the default collection auth token duration option.
+                    未设置或为 0 时，使用集合默认的认证令牌时长。
                 </td>
             </tr>
         </tbody>
     </table>
     <small class="block txt-hint m-t-10 m-b-base">
-        Body parameters could be sent as <em>JSON</em> or
-        <em>multipart/form-data</em>.
+        请求体参数可通过 <em>JSON</em> 或
+        <em>multipart/form-data</em> 发送。
     </small>
 
-    <div class="section-title">Query parameters</div>
+    <div class="section-title">查询参数</div>
     <table class="table-compact table-border m-b-base">
         <thead>
             <tr>
-                <th>Param</th>
-                <th>Type</th>
-                <th width="60%">Description</th>
+                <th>参数</th>
+                <th>类型</th>
+                <th width="60%">说明</th>
             </tr>
         </thead>
         <tbody>
@@ -214,7 +213,7 @@
         </tbody>
     </table>
 
-    <div class="section-title">Responses</div>
+    <div class="section-title">响应</div>
     <div class="tabs">
         <div class="tabs-header compact combined left">
             {#each responses as response (response.code)}

@@ -59,15 +59,14 @@
     let responseTab = responses[0].code;
 </script>
 
-<Accordion single title="Update record">
+<Accordion single title="更新记录">
     <div class="content m-b-sm">
-        <p>Updates an existing collection <em>Record</em>.</p>
+        <p>更新已有集合<em>记录</em>。</p>
         <p>
-            Depending on the collection's <code>updateRule</code> value, the access to this action may or may not
-            have been restricted.
+            是否允许执行此操作取决于集合的 <code>updateRule</code> 配置。
         </p>
         <p class="txt-hint">
-            <em>You could find individual generated records API documentation from the Dashboard.</em>
+            <em>你可以在仪表盘中查看每个集合自动生成的记录 API 文档。</em>
         </p>
     </div>
 
@@ -96,7 +95,7 @@
         `}
     />
 
-    <h6 class="m-b-xs">API details</h6>
+    <h6 class="m-b-xs">API 详情</h6>
     <div class="api-route alert alert-warning">
         <strong class="label label-primary">PATCH</strong>
         <div class="content">
@@ -104,13 +103,13 @@
         </div>
     </div>
 
-    <div class="section-title">Path parameters</div>
+    <div class="section-title">路径参数</div>
     <table class="table-compact table-border m-b-base">
         <thead>
             <tr>
-                <th>Param</th>
-                <th>Type</th>
-                <th width="50%">Description</th>
+                <th>参数</th>
+                <th>类型</th>
+                <th width="50%">说明</th>
             </tr>
         </thead>
         <tbody>
@@ -119,44 +118,44 @@
                 <td>
                     <span class="label">String</span>
                 </td>
-                <td>ID or name of the record's collection.</td>
+                <td>记录所属集合的 ID 或名称。</td>
             </tr>
             <tr>
                 <td>recordId</td>
                 <td>
                     <span class="label">String</span>
                 </td>
-                <td>ID of the record to update.</td>
+                <td>要更新的记录 ID。</td>
             </tr>
         </tbody>
     </table>
 
-    <div class="section-title">Body Parameters</div>
+    <div class="section-title">请求体参数</div>
     <table class="table-compact table-border">
         <thead>
             <tr>
-                <th>Param</th>
-                <th>Type</th>
-                <th width="50%">Description</th>
+                <th>参数</th>
+                <th>类型</th>
+                <th width="50%">说明</th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td colspan="3" class="txt-hint">Schema fields</td>
+                <td colspan="3" class="txt-hint">集合字段</td>
             </tr>
             <tr>
                 <td colspan="3">
-                    <strong>Any field from the collection's schema.</strong>
+                    <strong>集合 schema 中的任意字段。</strong>
                 </td>
             </tr>
 
             <tr>
-                <td colspan="3" class="txt-hint">Additional auth record fields</td>
+                <td colspan="3" class="txt-hint">额外认证记录字段</td>
             </tr>
             <tr>
                 <td>
                     <div class="inline-flex">
-                        <span class="label label-warning">Optional</span>
+                        <span class="label label-warning">可选</span>
                         <span>oldPassword</span>
                     </div>
                 </td>
@@ -164,52 +163,51 @@
                     <span class="label">String</span>
                 </td>
                 <td>
-                    Old auth record password.
+                    原认证记录密码。
                     <br />
-                    This field is required only when changing the record password. Superusers and auth records
-                    with "Manage" access can skip this field.
+                    仅在修改记录密码时必填。超级用户和拥有“管理”权限的认证记录可跳过此字段。
                 </td>
             </tr>
             <tr>
                 <td>
                     <div class="inline-flex">
-                        <span class="label label-warning">Optional</span>
+                        <span class="label label-warning">可选</span>
                         <span>password</span>
                     </div>
                 </td>
                 <td>
                     <span class="label">String</span>
                 </td>
-                <td>New auth record password.</td>
+                <td>新认证记录密码。</td>
             </tr>
             <tr>
                 <td>
                     <div class="inline-flex">
-                        <span class="label label-warning">Optional</span>
+                        <span class="label label-warning">可选</span>
                         <span>passwordConfirm</span>
                     </div>
                 </td>
                 <td>
                     <span class="label">String</span>
                 </td>
-                <td>New auth record password confirmation.</td>
+                <td>新认证记录密码确认。</td>
             </tr>
         </tbody>
     </table>
     <small class="block txt-hint m-t-10 m-b-base">
-        Body parameters could be sent as <em>JSON</em> or
-        <em>multipart/form-data</em>.
+        请求体参数可通过 <em>JSON</em> 或
+        <em>multipart/form-data</em> 发送。
         <br />
-        File upload is supported only through <em>multipart/form-data</em>.
+        文件上传仅支持 <em>multipart/form-data</em>。
     </small>
 
-    <div class="section-title">Query parameters</div>
+    <div class="section-title">查询参数</div>
     <table class="table-compact table-border m-b-lg">
         <thead>
             <tr>
-                <th>Param</th>
-                <th>Type</th>
-                <th width="60%">Description</th>
+                <th>参数</th>
+                <th>类型</th>
+                <th width="60%">说明</th>
             </tr>
         </thead>
         <tbody>
@@ -218,7 +216,7 @@
         </tbody>
     </table>
 
-    <div class="section-title">Responses</div>
+    <div class="section-title">响应</div>
     <div class="tabs">
         <div class="tabs-header compact combined left">
             {#each responses as response (response.code)}
