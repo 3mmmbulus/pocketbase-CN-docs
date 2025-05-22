@@ -6,19 +6,17 @@
 
 <Toc />
 
-<HeadingLink title="Overview" />
-<p>A common task when creating custom routes or emails is the need of generating HTML output.</p>
+<HeadingLink title="概述" />
+<p>在创建自定义路由或邮件时，一个常见的任务就是生成 HTML 输出。</p>
 <p>
-    There are plenty of Go template-engines available that you can use for this, but often for simple cases
-    the Go standard library <code>html/template</code> package should work just fine.
+    有许多可用的 Go 模板引擎可以用于此目的，但对于简单场景，Go 标准库中的 <code>html/template</code> 包通常已经足够。
 </p>
 <p>
-    To make it slightly easier to load template files concurrently and on the fly, PocketBase also provides a
-    thin wrapper around the standard library in the
+    为了让你可以更方便地并发和动态加载模板文件，PocketBase 还在标准库的基础上提供了一个轻量级封装，位于
     <a href="{import.meta.env.PB_GODOC_URL}/tools/template" target="_blank" rel="noopener noreferrer">
         <code>github.com/pocketbase/pocketbase/tools/template</code>
     </a>
-    utility package.
+    工具包中。
 </p>
 <CodeBlock
     language="go"
@@ -35,23 +33,19 @@
     `}
 />
 <p>
-    The general flow when working with composed and nested templates is that you create "base" template(s)
-    that defines various placeholders using the
-    <code>{`{{template "placeholderName" .}}`}</code> or
-    <code>{`{{block "placeholderName" .}}default...{{end}}`}</code> actions.
+    当你使用组合和嵌套模板时，一般流程是先创建“基础”模板，使用
+    <code>{`{{template "placeholderName" .}}`}</code> 或
+    <code>{`{{block "placeholderName" .}}default...{{end}}`}</code> 动作定义各种占位符。
 </p>
 <p>
-    Then in the partials, you define the content for those placeholders using the
-    <code>{`{{define "placeholderName"}}custom...{{end}}`}</code> action.
+    然后在分部模板中，使用
+    <code>{`{{define "placeholderName"}}custom...{{end}}`}</code> 动作为这些占位符定义内容。
 </p>
 <p>
-    The dot object (<code class="txt-bold">.</code>) in the above represents the data passed to the templates
-    via the <code>Render(data)</code> method.
+    上述中的点对象（<code class="txt-bold">.</code>）代表通过 <code>Render(data)</code> 方法传递给模板的数据。
 </p>
 <p>
-    By default the templates apply contextual (HTML, JS, CSS, URI) auto escaping so the generated template
-    content should be injection-safe. To render raw/verbatim trusted content in the templates you can use the
-    builtin <code>raw</code> function (e.g. <code>{`{{.content|raw}}`}</code>).
+    默认情况下，模板会自动应用上下文相关（HTML、JS、CSS、URI）的转义，因此生成的模板内容应当是安全的。若要在模板中渲染原始/可信内容，可以使用内置的 <code>raw</code> 函数（如 <code>{`{{.content|raw}}`}</code>）。
 </p>
 
 <div class="alert alert-info m-t-10 m-b-sm">
@@ -60,7 +54,7 @@
     </div>
     <div class="content">
         <p>
-            For more information about the template syntax please refer to the
+            有关模板语法的更多信息，请参考
             <a
                 href="https://pkg.go.dev/html/template#hdr-A_fuller_picture"
                 target="_blank"
@@ -68,13 +62,13 @@
             >
                 <em>html/template</em>
             </a>
-            and
+            和
             <a href="https://pkg.go.dev/text/template" target="_blank" rel="noopener noreferrer">
                 <em>text/template</em>
             </a>
-            package godocs.
+            包的官方文档。
             <strong>
-                Another great resource is also the Hashicorp's
+                另一个很好的学习资源是 Hashicorp 的
                 <a
                     href="https://developer.hashicorp.com/nomad/tutorials/templates/go-template-syntax"
                     target="_blank"
@@ -82,14 +76,14 @@
                 >
                     Learn Go Template Syntax
                 </a>
-                tutorial.
+                教程。
             </strong>
         </p>
     </div>
 </div>
 
-<HeadingLink title="Example HTML page with layout" />
-<p>Consider the following app directory structure:</p>
+<HeadingLink title="带布局的 HTML 页面示例" />
+<p>请参考以下应用目录结构：</p>
 <CodeBlock
     language="html"
     content={`
@@ -101,7 +95,7 @@
     `}
 />
 
-<p>We define the content for <code>layout.html</code> as:</p>
+<p>我们为 <code>layout.html</code> 定义的内容如下：</p>
 <CodeBlock
     language="html"
     content={`
@@ -123,7 +117,7 @@
     `}
 />
 
-<p>We define the content for <code>hello.html</code> as:</p>
+<p>我们为 <code>hello.html</code> 定义的内容如下：</p>
 <CodeBlock
     language="html"
     content={`
@@ -137,7 +131,7 @@
     `}
 />
 
-<p>Then to output the final page, we'll register a custom <code>/hello/:name</code> route:</p>
+<p>然后，为了输出最终页面，我们将注册一个自定义 <code>/hello/:name</code> 路由：</p>
 <CodeBlock
     language="go"
     content={`
