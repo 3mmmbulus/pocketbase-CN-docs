@@ -5,22 +5,18 @@
 </script>
 
 <p>
-    PocketBase provides a simple abstraction for sending emails via the
-    <code>app.NewMailClient()</code> factory.
+    PocketBase 提供了一个简单的抽象，通过 <code>app.NewMailClient()</code> 工厂方法发送邮件。
 </p>
 
 <p>
-    Depending on your configured mail settings (<em>Dashboard > Settings > Mail settings</em>) it will use the
-    <code>sendmail</code> command or a SMTP client.
+    根据你配置的邮件设置（<em>仪表盘 > 设置 > 邮件设置</em>），它会使用 <code>sendmail</code> 命令或 SMTP 客户端。
 </p>
 
 <Toc />
 
-<HeadingLink title="Send custom email" />
+<HeadingLink title="发送自定义邮件" />
 <p>
-    You can send your own custom email from everywhere within the app (hooks, middlewares, routes, etc.) by
-    using <code>app.NewMailClient().Send(message)</code>. Here is an example of sending a custom email after
-    user registration:
+    你可以在应用的任何地方（hooks、middlewares、routes 等）通过 <code>app.NewMailClient().Send(message)</code> 发送自定义邮件。下面是一个在用户注册后发送自定义邮件的示例：
 </p>
 <CodeBlock
     language="go"
@@ -66,17 +62,15 @@
     `}
 />
 
-<HeadingLink title="Overwrite system emails" />
+<HeadingLink title="覆盖系统邮件" />
 <p>
-    If you want to overwrite the default system emails for forgotten password, verification, etc., you can
-    adjust the default templates available from the
-    <em>Dashboard > Collections > Edit collection > Options</em>
-    .
+    如果你想覆盖默认的系统邮件（如忘记密码、验证等），可以在
+    <em>仪表盘 > 集合 > 编辑集合 > 选项</em>
+    中调整默认模板。
 </p>
 <p>
-    Alternatively, you can also apply individual changes by binding to one of the
-    <a href="/docs/go-event-hooks/#mailer-hooks">mailer hooks</a>. Here is an example of appending a Record
-    field value to the subject using the <code>OnMailerRecordPasswordResetSend</code> hook:
+    或者，你也可以通过绑定到某个
+    <a href="/docs/go-event-hooks/#mailer-hooks">mailer hook</a>，实现个性化修改。下面是一个使用 <code>OnMailerRecordPasswordResetSend</code> hook，将 Record 字段值追加到主题的示例：
 </p>
 <CodeBlock
     language="go"

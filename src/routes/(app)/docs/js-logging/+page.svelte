@@ -7,22 +7,20 @@
 </script>
 
 <p>
-    <code>$app.logger()</code> could be used to writes any logs into the database so that they can be later
-    explored from the PocketBase <em>Dashboard > Logs</em> section.
+    <code>$app.logger()</code> 可用于将任何日志写入数据库，以便之后可以在 PocketBase <em>Dashboard > Logs</em> 部分进行查看。
 </p>
 
 <LogsWriteAlert />
 
 <Toc />
 
-<HeadingLink title="Logger methods" />
+<HeadingLink title="日志方法" />
 <p>
-    All standard
+    所有标准
     <a href="/jsvm/interfaces/slog.Logger.html" target="_blank" rel="noopener noreferrer">
         <code>slog.Logger</code>
     </a>
-    methods are available but below is a list with some of the most notable ones. Note that attributes are represented
-    as key-value pair arguments.
+    方法都可用，下面列出了一些最常用的方法。请注意，属性以键值对参数的形式表示。
 </p>
 
 <HeadingLink title="debug(message, attrs...)" tag="h5" />
@@ -83,8 +81,7 @@
 
 <HeadingLink title="with(attrs...)" tag="h5" />
 <p>
-    <code>with(atrs...)</code> creates a new local logger that will "inject" the specified attributes with each
-    following log.
+    <code>with(atrs...)</code> 会创建一个新的本地 logger，并在之后的每条日志中“注入”指定的属性。
 </p>
 <CodeBlock
     language="javascript"
@@ -101,8 +98,7 @@
 
 <HeadingLink title="withGroup(name)" tag="h5" />
 <p>
-    <code>withGroup(name)</code> creates a new local logger that wraps all logs attributes under the specified
-    group name.
+    <code>withGroup(name)</code> 会创建一个新的本地 logger，将所有日志属性包裹在指定的分组名下。
 </p>
 <CodeBlock
     language="javascript"
@@ -116,13 +112,12 @@
 
 <LogsSettingsSection />
 
-<HeadingLink title="Custom log queries" />
+<HeadingLink title="自定义日志查询" />
 <p>
-    The logs are usually meant to be filtered from the UI but if you want to programmatically retrieve and
-    filter the stored logs you can make use of the
+    日志通常建议通过界面进行筛选，但如果你希望以编程方式获取和筛选已存储的日志，可以使用
     <a href="/jsvm/functions/_app.logQuery.html" target="_blank" rel="noopener noreferrer">
         <code>$app.logQuery()</code>
-    </a> query builder method. For example:
+    </a> 查询构建方法。例如：
 </p>
 <CodeBlock
     language="javascript"
@@ -146,3 +141,4 @@
             all(logs)
     `}
 />
+

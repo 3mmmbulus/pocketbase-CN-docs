@@ -4,40 +4,31 @@
 </script>
 
 <p>
-    One of the main feature of PocketBase is that
-    <strong>it can be used as a framework</strong> which enables you to write your own custom app business
-    logic in
-    <a href="/docs/go-overview">Go</a> or <a href="/docs/js-overview">JavaScript</a> and still have a portable
-    backend at the end.
+    PocketBase 的主要特性之一是
+    <strong>它可以作为一个框架使用</strong>，这使你能够用
+    <a href="/docs/go-overview">Go</a> 或 <a href="/docs/js-overview">JavaScript</a> 编写自定义的应用业务逻辑，并最终拥有一个可移植的后端。
 </p>
 
 <p>
     <strong>
-        Choose <a href="/docs/go-overview" class="label label-info">Extend with Go</a> if you are already familiar
-        with the language or have the time to learn it.
+        如果你已经熟悉 Go 语言或有时间学习，建议选择 <a href="/docs/go-overview" class="label label-info">使用 Go 扩展</a>。
     </strong>
-    As the primary PocketBase language, the Go APIs are better documented and you'll be able to integrate with
-    any 3rd party Go library since you'll have more control over the application flow. The only drawback is that
-    the Go APIs are slightly more verbose and it may require some time to get used to, especially if this is your
-    first time working with Go.
+    作为 PocketBase 的主要语言，Go API 文档更加完善，并且你可以集成任何第三方 Go 库，拥有更多对应用流程的控制。唯一的缺点是 Go API 稍显繁琐，尤其是第一次接触 Go 时，可能需要一些时间适应。
 </p>
 
 <p>
     <strong>
-        Choose <a href="/docs/js-overview" class="label label-warning">Extend with JavaScript</a>
-        if you don't intend to write too much custom code and want a quick way to explore the PocketBase capabilities.
+        如果你不打算编写太多自定义代码，想要快速体验 PocketBase 的功能，建议选择 <a href="/docs/js-overview" class="label label-warning">使用 JavaScript 扩展</a>。
     </strong>
-    The embedded JavaScript engine is a pluggable wrapper around the existing Go APIs, so most of the time the
-    slight performance penalty will be negligible because it'll invoke the Go functions under the hood.
+    内置的 JavaScript 引擎是对现有 Go API 的可插拔封装，大多数情况下轻微的性能损耗可以忽略，因为底层会调用 Go 函数。
     <br />
-    As a bonus, because the JS VM mirrors the Go APIs, you would be able migrate gradually without much code changes
-    from JS -> Go at later stage in case you hit a bottleneck or want more control over the execution flow.
+    另外，由于 JS 虚拟机与 Go API 保持一致，后续如遇到瓶颈或需要更高的控制权时，可以平滑地将代码从 JS 迁移到 Go，几乎无需修改代码。
 </p>
 
-<p>With both Go and JavaScript, you can:</p>
+<p>无论使用 Go 还是 JavaScript，你都可以：</p>
 <ul>
     <li class="m-b-sm">
-        <strong>Register custom routes:</strong>
+        <strong>注册自定义路由：</strong>
         <CodeTabs
             group={extendGroup}
             go={`
@@ -57,7 +48,7 @@
         />
     </li>
     <li class="m-b-sm">
-        <strong>Bind to event hooks and intercept responses:</strong>
+        <strong>绑定事件钩子并拦截响应：</strong>
         <CodeTabs
             group={extendGroup}
             go={`
@@ -83,7 +74,7 @@
         />
     </li>
     <li class="m-b-sm">
-        <strong>Register custom console commands:</strong>
+        <strong>注册自定义控制台命令：</strong>
         <CodeTabs
             group={extendGroup}
             go={`
@@ -104,10 +95,10 @@
             `}
         />
     </li>
-    <li>and many more...</li>
+    <li>以及更多功能……</li>
 </ul>
 
 <p class="m-t-base">
-    For further info, please check the related <a href="/docs/go-overview">Extend with Go</a> or
-    <a href="/docs/js-overview">Extend with JavaScript</a> guides.
+    更多信息请参考相关的 <a href="/docs/go-overview">使用 Go 扩展</a> 或
+    <a href="/docs/js-overview">使用 JavaScript 扩展</a> 指南。
 </p>

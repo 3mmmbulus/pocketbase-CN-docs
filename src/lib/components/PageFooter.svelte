@@ -15,14 +15,14 @@
     <div class="wrapper wrapper-lg">
         <div class="primary-bar">
             <nav class="footer-col links">
-                <a href="/faq" class="link-item">FAQ</a>
+                <a href="/faq" class="link-item">常见问题</a>
                 <a
                     href={import.meta.env.PB_DISCUSSIONS_URL}
                     class="link-item"
                     target="_blank"
                     rel="noopener noreferrer"
                 >
-                    Discussions
+                    讨论
                 </a>
                 <a href="/docs" class="link-item">Documentation</a>
             </nav>
@@ -47,7 +47,7 @@
             </nav>
 
             <div class="footer-col socials">
-                <div class="watermark-logo">Pocket<strong>Base</strong></div>
+                <div class="watermark-logo">PocketBase<strong>中文文档</strong></div>
                 <a
                     href="mailto:{supportEmail}"
                     class="btn btn-secondary btn-circle btn-hint social-item"
@@ -71,30 +71,21 @@
         <div class="secondary-bar">
             <div class="terms">
                 <span class="txt">
-                    © 2023-{new Date().getFullYear()} Pocket<strong>Base</strong>
+                    © 2023-{new Date().getFullYear()} PocketBase<strong>中文文档</strong>
                 </span>
                 <span class="gopher-credit">
-                    The Gopher artwork is from
+                    由1盾安全团队提供
                     <a
-                        href="https://github.com/marcusolsson/gophers"
+                        href="https://www.1dun.net/"
                         target="_blank"
                         rel="noreferrer noopener"
                     >
-                        marcusolsson/gophers
+                        1盾面板
                     </a>
                 </span>
             </div>
             <div class="flex-fill" />
-            <div class="credit">
-                Crafted by <a
-                    href="https://gani.bg"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="link-hint"
-                >
-                    <strong>Gani</strong>
-                </a>
-            </div>
+
         </div>
     </div>
 </footer>

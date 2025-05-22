@@ -91,13 +91,13 @@
     {#if footerLinks.prev?.href}
         <a href={footerLinks.prev.href} class="btn btn-secondary btn-prev">
             <i class="ri-arrow-left-line" />
-            <span class="txt">Prev: {footerLinks.prev.title}</span>
+            <span class="txt">上一页：{footerLinks.prev.title}</span>
         </a>
     {/if}
 
     {#if footerLinks.next?.href}
         <a href={footerLinks.next.href} class="btn btn-outline btn-expanded btn-next">
-            <span class="txt">Next: {footerLinks.next.title}</span>
+            <span class="txt">下一页：{footerLinks.next.title}</span>
             <i class="ri-arrow-right-line" />
         </a>
     {/if}

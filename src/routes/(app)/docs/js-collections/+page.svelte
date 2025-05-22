@@ -6,26 +6,24 @@
 </script>
 
 <p>
-    Collections are usually managed via the Dashboard interface, but there are some situations where you may
-    want to create or edit a collection programmatically (usually as part of a
-    <a href="/docs/js-migrations">DB migration</a>). You can find all available Collection related operations
-    and methods in
+    Collections 通常通过 Dashboard 界面进行管理，但在某些情况下，你可能希望以编程方式创建或编辑 Collection（通常作为
+    <a href="/docs/js-migrations">数据库迁移</a> 的一部分）。你可以在
     <a href="/jsvm/modules/_app.html" target="_blank" rel="noopener noreferrer">
         <code>$app</code>
     </a>
-    and
+    和
     <a href="/jsvm/classes/Collection.html" target="_blank" rel="noopener noreferrer">
         <code>Collection</code>
     </a>
-    , but below are listed some of the most common ones:
+    中找到所有可用的 Collection 相关操作和方法，下面列出了一些最常用的方法：
 </p>
 
 <Toc />
 
-<HeadingLink title="Fetch collections" />
+<HeadingLink title="获取 Collection" />
 
-<HeadingLink title="Fetch single collection" tag="h5" />
-<p class="txt-hint">All single collection retrieval methods throw an error if no collection is found.</p>
+<HeadingLink title="获取单个 Collection" tag="h5" />
+<p class="txt-hint">所有单个 Collection 检索方法在未找到 Collection 时会抛出错误。</p>
 <CodeBlock
     language="javascript"
     content={`
@@ -33,9 +31,9 @@
     `}
 />
 
-<HeadingLink title="Fetch multiple collections" tag="h5" />
+<HeadingLink title="获取多个 Collection" tag="h5" />
 <p class="txt-hint">
-    All multiple collections retrieval methods return an empty array if no collections are found.
+    所有多个 Collection 检索方法在未找到 Collection 时会返回空数组。
 </p>
 <CodeBlock
     language="javascript"
@@ -47,14 +45,14 @@
     `}
 />
 
-<HeadingLink title="Custom collection query" tag="h5" />
+<HeadingLink title="自定义 Collection 查询" tag="h5" />
 <p>
-    In addition to the above query helpers, you can also create custom Collection queries using
+    除了上述查询助手外，你还可以使用
     <a href="/jsvm/functions/_app.collectionQuery.html" target="_blank" rel="noopener noreferrer">
         <code>$app.collectionQuery()</code>
     </a>
-    method. It returns a SELECT DB builder that can be used with the same methods described in the
-    <a href="/docs/js-database">Database guide</a>.
+    方法创建自定义 Collection 查询。它返回一个 SELECT 数据库构建器，可与
+    <a href="/docs/js-database">数据库指南</a> 中描述的方法一起使用。
 </p>
 <CodeBlock
     language="javascript"
@@ -68,15 +66,14 @@
     `}
 />
 
-<HeadingLink title="Field definitions" />
+<HeadingLink title="字段定义" />
 <div class="alert alert-info m-t-sm m-b-sm">
     <div class="icon">
         <i class="ri-information-line" />
     </div>
     <div class="content">
         <p>
-            All collection fields <em>(with exception of the <code>JSONField</code>)</em> are non-nullable and
-            uses a zero-default for their respective type as fallback value when missing.
+            所有 Collection 字段 <em>（除了 <code>JSONField</code>）</em> 都为非空类型，并在缺失时使用其类型的零值作为默认值。
         </p>
     </div>
 </div>
@@ -90,7 +87,7 @@
     {/each}
 </ul>
 
-<HeadingLink title="Create new collection" />
+<HeadingLink title="创建新 Collection" />
 <CodeBlock
     language="javascript"
     content={`
@@ -131,7 +128,7 @@
     `}
 />
 
-<HeadingLink title="Update existing collection" />
+<HeadingLink title="更新已有 Collection" />
 <CodeBlock
     language="javascript"
     content={`
@@ -160,7 +157,7 @@
     `}
 />
 
-<HeadingLink title="Delete collection" />
+<HeadingLink title="删除 Collection" />
 <CodeBlock
     language="javascript"
     content={`

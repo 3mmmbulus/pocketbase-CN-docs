@@ -5,24 +5,23 @@
 </script>
 
 <p>
-    PocketBase exposes several test mocks and stubs (eg. <code>tests.TestApp</code>,
-    <code>tests.ApiScenario</code>, <code>tests.MockMultipartData</code>, etc.) to help you write unit and
-    integration tests for your app.
+    PocketBase 提供了多种测试 mock 和 stub（如 <code>tests.TestApp</code>、
+    <code>tests.ApiScenario</code>、<code>tests.MockMultipartData</code> 等），帮助你为应用编写单元测试和集成测试。
 </p>
 <p>
-    You could find more information in the
+    你可以在
     <a href="{import.meta.env.PB_GODOC_URL}/tests" target="_blank" rel="noreferrer noopener">
         <code>github.com/pocketbase/pocketbase/tests</code>
     </a>
-    sub package, but here is a simple example.
+    子包中找到更多信息，下面是一个简单示例。
 </p>
 
 <Toc />
 
-<HeadingLink title="1. Setup" />
+<HeadingLink title="1. 初始化" />
 
 <p>
-    Let's say that we have a custom API route <code>GET /my/hello</code> that requires superuser authentication:
+    假设我们有一个自定义 API 路由 <code>GET /my/hello</code>，需要超级用户认证：
 </p>
 <CodeBlock
     language="go"
@@ -61,29 +60,26 @@
     `}
 />
 
-<HeadingLink title="2. Prepare test data" />
+<HeadingLink title="2. 准备测试数据" />
 <p>
-    Now we have to prepare our test/mock data. There are several ways you can approach this, but the easiest
-    one would be to start your application with a custom <code>test_pb_data</code> directory, e.g.:
+    现在我们需要准备测试/模拟数据。有多种方式可以实现，最简单的方法是用自定义 <code>test_pb_data</code> 目录启动你的应用，例如：
 </p>
 <CodeBlock content={`./pocketbase serve --dir="./test_pb_data" --automigrate=0`} />
 <p>
-    Go to your browser and create the test data via the Dashboard (both collections and records). Once
-    completed you can stop the server (you could also commit <code>test_pb_data</code> to your repo).
+    打开浏览器，通过仪表盘创建测试数据（包括集合和记录）。完成后可以停止服务器（你也可以将 <code>test_pb_data</code> 提交到你的仓库）。
 </p>
 
-<HeadingLink title="3. Integration test" />
+<HeadingLink title="3. 集成测试" />
 
-<p>To test the example endpoint, we want to:</p>
+<p>要测试上述接口，我们希望：</p>
 <ul>
-    <li>ensure it handles only GET requests</li>
-    <li>ensure that it can be accessed only by superusers</li>
-    <li>check if the response body is properly set</li>
+    <li>确保它只处理 GET 请求</li>
+    <li>确保只有超级用户可以访问</li>
+    <li>检查响应体是否正确设置</li>
 </ul>
 
 <p>
-    Below is a simple integration test for the above test cases. We'll also use the test data created in the
-    previous step.
+    下面是针对上述测试用例的一个简单集成测试。我们还会用到前面步骤创建的测试数据。
 </p>
 <!-- prettier-ignore -->
 <CodeBlock

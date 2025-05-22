@@ -64,7 +64,7 @@
 </script>
 
 <svelte:head>
-    <title>{fullPageTitle} - Docs - PocketBase</title>
+    <title>{fullPageTitle} - 文档 - PocketBase</title>
 </svelte:head>
 
 <DocsSidebar />

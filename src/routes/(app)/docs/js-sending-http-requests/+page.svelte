@@ -6,15 +6,14 @@
 
 <Toc />
 
-<HeadingLink title="Overview" />
+<HeadingLink title="概述" />
 <p>
-    You can use the global <code>$http.send(config)</code> helper to send HTTP requests to external services.
+    你可以使用全局 <code>$http.send(config)</code> 辅助方法向外部服务发送 HTTP 请求。
     <br />
-    This could be used for example to retrieve data from external data sources, to make custom requests to a payment
-    provider API, etc.
+    这可以用于例如从外部数据源获取数据，或向支付服务商 API 发送自定义请求等场景。
 </p>
 
-<p>Below is a list with all currently supported config options and their defaults.</p>
+<p>下面列出了当前支持的所有 config 配置项及其默认值。</p>
 <CodeBlock
     language="javascript"
     content={`
@@ -36,8 +35,7 @@
 />
 
 <p class="m-t-sm">
-    Here is an example that will enrich a single book record with some data based on its ISBN details from
-    openlibrary.org.
+    下面是一个示例，将根据 openlibrary.org 的 ISBN 信息为单本图书记录补充数据。
 </p>
 <CodeBlock
     language="javascript"
@@ -64,22 +62,22 @@
     `}
 />
 
-<HeadingLink title="multipart/form-data requests" tag="h5" />
+<HeadingLink title="multipart/form-data 请求" tag="h5" />
 <p>
-    In order to send <code>multipart/form-data</code> requests (ex. uploading files) the request
-    <code>body</code> must be a <code>FormData</code> instance.
+    若要发送 <code>multipart/form-data</code> 请求（如上传文件），请求的
+    <code>body</code> 必须为 <code>FormData</code> 实例。
 </p>
 <p>
-    PocketBase JSVM's <code>FormData</code> has the same APIs as its
+    PocketBase JSVM 的 <code>FormData</code> 拥有与
     <a
         href="https://developer.mozilla.org/en-US/docs/Web/API/FormData"
         target="_blank"
-        rel="noopener noreferrer">browser equivalent</a
+        rel="noopener noreferrer">浏览器等效对象</a
     >
-    with the main difference that for file values instead of <code>Blob</code> it accepts
+    相同的 API，主要区别在于文件值部分，<code>Blob</code> 替换为
     <a href="/jsvm/modules/_filesystem.html" target="_blank" rel="noopener noreferrer"
         ><code>$filesystem.File</code></a
-    >.
+    >。
 </p>
 <CodeBlock
     language="javascript"
@@ -100,12 +98,12 @@
     `}
 />
 
-<HeadingLink title="Limitations" />
+<HeadingLink title="限制" />
 <p>
-    As of now there is no support for streamed responses or server-sent events (SSE). The
-    <code>$http.send</code> call blocks and returns the entire response body at once.
+    目前尚不支持流式响应或服务器推送事件（SSE）。
+    <code>$http.send</code> 调用会阻塞并一次性返回完整响应体。
 </p>
 <p>
-    For this and other more advanced use cases you'll have to
-    <a href="/docs/go-overview/">extend PocketBase with Go</a>.
+    如需此类或其他更高级的用例，你需要
+    <a href="/docs/go-overview/">通过 Go 扩展 PocketBase</a>。
 </p>

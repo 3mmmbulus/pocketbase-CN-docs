@@ -316,7 +316,7 @@
 </script>
 
 <svelte:head>
-    <title>PocketBase - Open Source backend in 1 file</title>
+    <title>PocketBase - 开源后端，仅需 1 个文件</title>
 </svelte:head>
 
 <svelte:window on:mousemove={onMousemove} />
@@ -326,28 +326,28 @@
 
     <div class="wrapper wrapper-lg">
         <div class="hero-content">
-            <div class="content-row">Open Source backend</div>
+            <div class="content-row">开源后端 翻译版权归1盾安全所有</div>
             <div class="content-row highlight">
-                <strong>in 1 file</strong>
+                <strong>仅需 1 个文件</strong>
             </div>
         </div>
 
         <div class="hero-checks">
             <div class="check-item">
                 <i class="ri-check-line" />
-                <span class="txt">Realtime database</span>
+                <span class="txt">实时数据库</span>
             </div>
             <div class="check-item">
                 <i class="ri-check-line" />
-                <span class="txt">Authentication</span>
+                <span class="txt">用户认证</span>
             </div>
             <div class="check-item">
                 <i class="ri-check-line" />
-                <span class="txt">File storage</span>
+                <span class="txt">文件存储</span>
             </div>
             <div class="check-item">
                 <i class="ri-check-line" />
-                <span class="txt">Admin dashboard</span>
+                <span class="txt">管理后台</span>
             </div>
         </div>
 
@@ -385,11 +385,11 @@
                     target="_blank"
                     rel="noreferrer noopener"
                 >
-                    <span class="txt">Live demo</span>
+                    <span class="txt">在线演示</span>
                 </a>
                 <div class="clearfix m-b-sm" />
                 <a href="/docs" class="btn btn-lg btn-outline btn-expanded">
-                    <span class="txt">Read the documentation</span>
+                    <span class="txt">阅读文档</span>
                 </a>
             </div>
         </figure>
@@ -400,7 +400,7 @@
 
 <div class="wrapper wrapper-lg">
     <section class="landing-section m-t-45">
-        <h2 class="landing-title">Ready to use out of the box</h2>
+        <h2 class="landing-title">开箱即用</h2>
 
         <div class="features-section">
             <nav class="features-tabs">
@@ -412,12 +412,11 @@
                 >
                     <h4 class="title">
                         <i class="ri-database-2-line" />
-                        <span class="txt">Realtime database</span>
+                        <span class="txt">实时数据库</span>
                     </h4>
                     <div class="content">
                         <p>
-                            Embedded performant database with schema builder, data validations, realtime
-                            subscriptions and easy to use REST api.
+                            内嵌高性能数据库，支持结构设计、数据校验、实时订阅和易用的 REST API。
                         </p>
                     </div>
                 </button>
@@ -429,12 +428,11 @@
                 >
                     <h4 class="title">
                         <i class="ri-group-line" />
-                        <span class="txt">Authentication</span>
+                        <span class="txt">用户认证</span>
                     </h4>
                     <div class="content">
                         <p>
-                            Manage your app users and handle email/password and OAuth2 sign ups (Google,
-                            Facebook, GitHub, GitLab) without the hassle.
+                            轻松管理应用用户，支持邮箱/密码和 OAuth2（Google、Facebook、GitHub、GitLab）注册登录，无需繁琐配置。
                         </p>
                     </div>
                 </button>
@@ -446,12 +444,11 @@
                 >
                     <h4 class="title">
                         <i class="ri-hard-drive-2-line" />
-                        <span class="txt">File storage</span>
+                        <span class="txt">文件存储</span>
                     </h4>
                     <div class="content">
                         <p>
-                            Safely store files locally or in a S3 storage. Easily attach media to your
-                            database records and generate thumbs on the fly.
+                            文件可安全存储于本地或 S3，轻松关联到数据库记录，并可实时生成缩略图。
                         </p>
                     </div>
                 </button>
@@ -463,17 +460,16 @@
                 >
                     <h4 class="title">
                         <i class="ri-terminal-line" />
-                        <span class="txt">Extendable</span>
+                        <span class="txt">可扩展</span>
                     </h4>
                     <div class="content">
                         <p>
-                            Use as a standalone app OR as a framework, that you can extend via Go and
-                            JavaScript hooks to create your own custom portable backend.
+                            可作为独立应用或框架使用，通过 Go 和 JavaScript 钩子扩展，打造属于你的便携后端。
                         </p>
                     </div>
                 </button>
                 <a href="/docs" class="btn btn-secondary btn-lg btn-block btn-next">
-                    <span class="txt">Explore all features</span>
+                    <span class="txt">探索全部功能</span>
                     <i class="ri-arrow-right-line" />
                 </a>
             </nav>
@@ -503,14 +499,14 @@
     </section>
 
     <section class="landing-section txt-center">
-        <h2 class="landing-title">Integrate nicely with your favorite frontend stack</h2>
+        <h2 class="landing-title">与主流前端框架无缝集成</h2>
         <div class="logos-list">
             <a
                 href={import.meta.env.PB_DART_SDK_URL}
                 target="_blank"
                 rel="noreferrer noopener"
                 class="list-item"
-                use:tooltip={"View Dart SDK"}
+                use:tooltip={"查看 Dart SDK"}
             >
                 <img src="/images/flutter_logo.svg?v2" alt="Flutter logo" width="40" height="50" />
             </a>
@@ -519,7 +515,7 @@
                 target="_blank"
                 rel="noreferrer noopener"
                 class="list-item"
-                use:tooltip={"View JavaScript SDK"}
+                use:tooltip={"查看 JavaScript SDK"}
             >
                 <img src="/images/svelte_logo.svg?v2" alt="Svelte logo" width="41" height="50" />
             </a>
@@ -528,7 +524,7 @@
                 target="_blank"
                 rel="noreferrer noopener"
                 class="list-item"
-                use:tooltip={"View JavaScript SDK"}
+                use:tooltip={"查看 JavaScript SDK"}
             >
                 <img src="/images/vue_logo.svg?v2" alt="Vue logo" width="53" height="46" />
             </a>
@@ -537,7 +533,7 @@
                 target="_blank"
                 rel="noreferrer noopener"
                 class="list-item"
-                use:tooltip={"View JavaScript SDK"}
+                use:tooltip={"查看 JavaScript SDK"}
             >
                 <img src="/images/react_logo.svg?v2" alt="React logo" width="57" height="51" />
             </a>
@@ -546,7 +542,7 @@
                 target="_blank"
                 rel="noreferrer noopener"
                 class="list-item"
-                use:tooltip={"View JavaScript SDK"}
+                use:tooltip={"查看 JavaScript SDK"}
             >
                 <img src="/images/angular_logo.svg?v2" alt="Angular logo" width="47" height="50" />
             </a>
@@ -555,3 +551,4 @@
 </div>
 
 <PageFooter />
+

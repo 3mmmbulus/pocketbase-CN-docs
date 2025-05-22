@@ -6,20 +6,19 @@
 </script>
 
 <p>
-    The most common task when extending PocketBase probably would be querying and working with your collection
-    records.
+    扩展 PocketBase 时最常见的任务可能就是查询和操作你的集合记录。
 </p>
 <p>
-    You could find detailed documentation about all the supported Record model methods in
+    你可以在
     <a href="/jsvm/interfaces/core.Record.html" target="_blank" rel="noopener noreferrer">
         <code>core.Record</code>
     </a>
-    type interface but below are some examples with the most common ones.
+    类型接口中找到所有支持的 Record 模型方法的详细文档，下面是一些最常用方法的示例。
 </p>
 
 <Toc />
 
-<HeadingLink title="Set field value" />
+<HeadingLink title="设置字段值" />
 <CodeBlock
     language="javascript"
     content={`
@@ -34,7 +33,7 @@
     `}
 />
 
-<HeadingLink title="Get field value" />
+<HeadingLink title="获取字段值" />
 <CodeBlock
     language="javascript"
     content={`
@@ -66,7 +65,7 @@
     `}
 />
 
-<HeadingLink title="Auth accessors" />
+<HeadingLink title="认证访问器" />
 <CodeBlock
     language="javascript"
     content={`
@@ -88,7 +87,7 @@
     `}
 />
 
-<HeadingLink title="Copies" />
+<HeadingLink title="副本" />
 <CodeBlock
     language="javascript"
     content={`
@@ -108,26 +107,25 @@
     `}
 />
 
-<HeadingLink title="Hide/Unhide fields" />
+<HeadingLink title="隐藏/显示字段" />
 <p>
-    Collection fields can be marked as "Hidden" from the Dashboard to prevent regular user access to the field
-    values.
+    可以在仪表盘中将集合字段标记为“隐藏”，以防止普通用户访问该字段的值。
 </p>
 <p>
-    Record models provide an option to further control the fields serialization visibility in addition to the
-    "Hidden" fields option using the
+    Record 模型还提供了进一步控制字段序列化可见性的选项，作为“隐藏”字段选项的补充，
+    可通过
     <a href="/jsvm/interfaces/core.Record.html#hide" target="_blank" rel="noopener noreferrer">
         <code>record.hide(fieldNames...)</code>
     </a>
-    and
+    和
     <a href="/jsvm/interfaces/core.Record.html#unhide" target="_blank" rel="noopener noreferrer">
         <code>record.unhide(fieldNames...)</code>
     </a>
-    methods.
+    方法实现。
 </p>
 <p>
-    Often the <code>hide/unhide</code> methods are used in combination with the <code>onRecordEnrich</code> hook
-    invoked on every record enriching (list, view, create, update, realtime change, etc.). For example:
+    通常 <code>hide/unhide</code> 方法会与 <code>onRecordEnrich</code> 钩子结合使用，
+    该钩子会在每次记录丰富（列表、查看、创建、更新、实时变更等）时被调用。例如：
 </p>
 <CodeBlock
     language="javascript"
@@ -152,16 +150,16 @@
     </div>
     <div class="content">
         <p>
-            For custom fields, not part of the record collection schema, it is required to call explicitly
-            <code>record.withCustomData(true)</code> to allow them in the public serialization.
+            对于不属于记录集合 schema 的自定义字段，必须显式调用
+            <code>record.withCustomData(true)</code> 才能在公开序列化中包含它们。
         </p>
     </div>
 </div>
 
-<HeadingLink title="Fetch records" />
+<HeadingLink title="获取记录" />
 
-<HeadingLink title="Fetch single record" tag="h5" />
-<p class="txt-hint">All single record retrieval methods throw an error if no record is found.</p>
+<HeadingLink title="获取单条记录" tag="h5" />
+<p class="txt-hint">所有单条记录检索方法在未找到记录时会抛出错误。</p>
 <CodeBlock
     language="javascript"
     content={`
@@ -181,8 +179,8 @@
     `}
 />
 
-<HeadingLink title="Fetch multiple records" tag="h5" />
-<p class="txt-hint">All multiple records retrieval methods return an empty array if no records are found.</p>
+<HeadingLink title="获取多条记录" tag="h5" />
+<p class="txt-hint">所有多条记录检索方法在未找到记录时返回空数组。</p>
 <CodeBlock
     language="javascript"
     content={`
@@ -211,7 +209,7 @@
     `}
 />
 
-<HeadingLink title="Fetch auth records" tag="h5" />
+<HeadingLink title="获取认证记录" tag="h5" />
 <CodeBlock
     language="javascript"
     content={`
@@ -224,14 +222,15 @@
     `}
 />
 
-<HeadingLink title="Custom record query" tag="h5" />
+<HeadingLink title="自定义记录查询" tag="h5" />
 <p>
-    In addition to the above query helpers, you can also create custom Record queries using
+    除了上述查询助手外，你还可以使用
     <a href="/jsvm/functions/_app.recordQuery.html" target="_blank" rel="noopener noreferrer">
         <code>$app.recordQuery(collection)</code>
     </a>
-    method. It returns a SELECT DB builder that can be used with the same methods described in the
-    <a href="/docs/js-database">Database guide</a>.
+    方法创建自定义 Record 查询。它返回一个 SELECT 数据库构建器，可与
+    <a href="/docs/js-database">数据库指南</a>
+    中描述的相同方法一起使用。
 </p>
 <CodeBlock
     language="javascript"
@@ -252,9 +251,9 @@
     `}
 />
 <p>
-    For retrieving <strong>multiple</strong> Record models with the <code>all()</code> executor, you can use
+    要使用 <code>all()</code> 执行器获取<strong>多条</strong> Record 模型，可以使用
     <code>arrayOf(new Record)</code>
-    to create an array placeholder in which to populate the resolved DB result.
+    创建一个数组占位符，用于填充解析后的数据库结果。
 </p>
 <CodeBlock
     language="javascript"
@@ -278,9 +277,9 @@
     `}
 />
 
-<HeadingLink title="Create new record" />
+<HeadingLink title="创建新记录" />
 
-<HeadingLink title="Create new record programmatically" tag="h5" />
+<HeadingLink title="以编程方式创建新记录" tag="h5" />
 <CodeBlock
     language="javascript"
     content={`
@@ -309,7 +308,7 @@
     `}
 />
 
-<HeadingLink title="Intercept create request" tag="h5" />
+<HeadingLink title="拦截创建请求" tag="h5" />
 <CodeBlock
     language="javascript"
     content={`
@@ -337,9 +336,9 @@
     `}
 />
 
-<HeadingLink title="Update existing record" />
+<HeadingLink title="更新已有记录" />
 
-<HeadingLink title="Update existing record programmatically" tag="h5" />
+<HeadingLink title="以编程方式更新已有记录" tag="h5" />
 <CodeBlock
     language="javascript"
     content={`
@@ -365,7 +364,7 @@
     `}
 />
 
-<HeadingLink title="Intercept update request" tag="h5" />
+<HeadingLink title="拦截更新请求" tag="h5" />
 <CodeBlock
     language="javascript"
     content={`
@@ -393,7 +392,7 @@
     `}
 />
 
-<HeadingLink title="Delete record" />
+<HeadingLink title="删除记录" />
 <CodeBlock
     language="javascript"
     content={`
@@ -403,7 +402,7 @@
     `}
 />
 
-<HeadingLink title="Transaction" />
+<HeadingLink title="事务" />
 <TransactionInfoJS />
 <CodeBlock
     language="javascript"
@@ -425,29 +424,29 @@
     `}
 />
 
-<HeadingLink title="Programmatically expanding relations" />
+<HeadingLink title="以编程方式展开关联关系" />
 <p>
-    To expand record relations programmatically you can use
+    你可以使用
     <a href="/jsvm/functions/_app.expandRecord.html" target="_blank" rel="noopener noreferrer">
         <code>$app.expandRecord(record, expands, customFetchFunc)</code>
     </a>
-    for single or
+    展开单条记录的关联关系，或使用
     <a href="/jsvm/functions/_app.expandRecords.html" target="_blank" rel="noopener noreferrer">
         <code>$app.expandRecords(records, expands, customFetchFunc)</code>
     </a>
-    for multiple records.
+    展开多条记录的关联关系。
 </p>
 <p>
-    Once loaded, you can access the expanded relations via
+    加载后，你可以通过
     <a href="/jsvm/interfaces/core.Record.html#expandedOne" target="_blank" rel="noopener noreferrer">
         <code>record.expandedOne(relName)</code>
     </a>
-    or
+    或
     <a href="/jsvm/interfaces/core.Record.html#expandedAll" target="_blank" rel="noopener noreferrer">
-        <code>record.expandedAll(relName)</code> methods.
+        <code>record.expandedAll(relName)</code> 方法访问已展开的关联数据。
     </a>
 </p>
-<p>For example:</p>
+<p>例如：</p>
 <CodeBlock
     language="javascript"
     content={`
@@ -462,17 +461,16 @@
     `}
 />
 
-<HeadingLink title="Check if record can be accessed" />
+<HeadingLink title="检查记录是否可访问" />
 <p>
-    To check whether a custom client request or user can access a single record, you can use the
+    要检查自定义客户端请求或用户是否可以访问某条记录，可以使用
     <a href="/jsvm/functions/_app.canAccessRecord.html" target="_blank" rel="noopener noreferrer">
         <code>$app.canAccessRecord(record, requestInfo, rule)</code>
     </a>
-    method.
+    方法。
 </p>
 <p>
-    Below is an example of creating a custom route to retrieve a single article and checking the request
-    satisfy the View API rule of the record collection:
+    下面是一个创建自定义路由以获取单篇文章并检查请求是否满足记录集合 View API 规则的示例：
 </p>
 <CodeBlock
     language="javascript"
@@ -492,24 +490,22 @@
     `}
 />
 
-<HeadingLink title="Generating and validating tokens" />
+<HeadingLink title="生成和验证令牌" />
 <p>
-    PocketBase Web APIs are fully stateless (aka. there are no sessions in the traditional sense) and an auth
-    record is considered authenticated if the submitted request contains a valid
+    PocketBase Web API 完全是无状态的（即没有传统意义上的会话），只要请求中包含有效的
     <code>Authorization: TOKEN</code>
-    header
+    头部，认证记录就会被视为已认证
     <em>
-        (see also <a href="/docs/js-routing/#builtin-middlewares">Builtin auth middlewares</a> and
+        （另见 <a href="/docs/js-routing/#builtin-middlewares">内置认证中间件</a> 和
         <a href="/docs/js-routing/#retrieving-the-current-auth-state">
-            Retrieving the current auth state from a route
+            路由中获取当前认证状态
         </a>
-        )
+        ）
     </em>
-    .
+    。
 </p>
 <p>
-    If you want to issue and verify manually a record JWT (auth, verification, password reset, etc.), you
-    could do that using the record token type specific methods:
+    如果你想手动签发和验证记录 JWT（认证、验证、重置密码等），可以使用记录令牌类型相关的方法：
 </p>
 <CodeBlock
     language="javascript"
@@ -528,20 +524,21 @@
     `}
 />
 <p>
-    Each token type has its own secret and the token duration is managed via its type related collection auth
-    option (<em>the only exception is <code>newStaticAuthToken</code></em>).
+    每种令牌类型都有自己的密钥，令牌有效期通过其类型相关的集合认证选项进行管理
+    （<em>唯一的例外是 <code>newStaticAuthToken</code></em>）。
 </p>
 <p>
-    To validate a record token you can use the
+    要验证记录令牌，可以使用
     <a href="/jsvm/functions/_app.findAuthRecordByToken.html" target="_blank" rel="noopener noreferrer">
         <code>$app.findAuthRecordByToken</code>
     </a>
-    method. The token related auth record is returned only if the token is not expired and its signature is valid.
+    方法。只有令牌未过期且签名有效时，才会返回相关认证记录。
 </p>
-<p>Here is an example how to validate an auth token:</p>
+<p>以下是验证认证令牌的示例：</p>
 <CodeBlock
     language="javascript"
     content={`
         let record = $app.findAuthRecordByToken("YOUR_TOKEN", "auth")
     `}
 />
+

@@ -9,11 +9,11 @@
     <a href="/jsvm/modules/_app.html" target="_blank">
         <code>$app</code>
     </a>
-    is the main interface to interact with your database.
+    是与数据库交互的主要接口。
 </p>
 <p>
     <code>$app.db()</code>
-    returns a <code>dbx.Builder</code> that could run all kind of SQL statements, including raw queries.
+    返回一个 <code>dbx.Builder</code>，可以运行各种 SQL 语句，包括原始查询。
 </p>
 <div class="alert alert-info">
     <div class="icon">
@@ -21,25 +21,25 @@
     </div>
     <div class="content">
         <p>
-            For more details and examples how to interact with Record and Collection models programmatically
-            you could also check <a href="/docs/js-collections">Collection operations</a>
-            and
-            <a href="/docs/js-records">Record operations</a> sections.
+            如需了解更多如何以编程方式与 Record 和 Collection 模型交互的详细信息和示例，
+            你也可以查看 <a href="/docs/js-collections">集合操作</a>
+            和
+            <a href="/docs/js-records">记录操作</a> 部分。
         </p>
     </div>
 </div>
 
 <Toc />
 
-<HeadingLink title="Executing queries" />
+<HeadingLink title="执行查询" />
 <p>
-    To execute DB queries you can start with the <code>newQuery("...")</code> statement and then call one of:
+    要执行数据库查询，可以从 <code>newQuery("...")</code> 语句开始，然后调用以下方法之一：
 </p>
 <ul>
     <li>
         <p>
             <HeadingLink title="execute()" tag="code" />
-            - for any query statement that is not meant to retrieve data:
+            - 用于不需要返回数据的查询语句：
         </p>
         <CodeBlock
             language="javascript"
@@ -53,7 +53,7 @@
     <li>
         <p>
             <HeadingLink id="execute-one" title="one()" tag="code" />
-            - to populate a single row into <code>DynamicModel</code> object:
+            - 将单行数据填充到 <code>DynamicModel</code> 对象中：
         </p>
         <CodeBlock
             language="javascript"
@@ -78,8 +78,7 @@
     <li>
         <p>
             <HeadingLink id="execute-all" title="all()" tag="code" />
-            - to populate multiple rows into an array of objects (note that the array must be created with
-            <code>arrayOf</code>):
+            - 将多行数据填充到对象数组中（注意数组必须用 <code>arrayOf</code> 创建）：
         </p>
         <CodeBlock
             language="javascript"
@@ -105,12 +104,10 @@
     </li>
 </ul>
 
-<HeadingLink title="Binding parameters" />
+<HeadingLink title="绑定参数" />
 <p>
-    To prevent SQL injection attacks, you should use named parameters for any expression value that comes from
-    user input. This could be done using the named <code>{`{:paramName}`}</code>
-    placeholders in your SQL statement and then define the parameter values for the query with
-    <code>bind(params)</code>. For example:
+    为防止 SQL 注入攻击，建议对所有来自用户输入的表达式值使用命名参数。可以在 SQL 语句中使用命名 <code>{`{:paramName}`}</code>
+    占位符，然后通过 <code>bind(params)</code> 方法为查询定义参数值。例如：
 </p>
 <CodeBlock
     language="javascript"
@@ -132,14 +129,12 @@
     `}
 />
 
-<HeadingLink title="Query builder" />
+<HeadingLink title="查询构建器" />
 <p>
-    Instead of writing plain SQLs, you can also compose SQL statements programmatically using the db query
-    builder.
+    除了编写原始 SQL，还可以使用数据库查询构建器以编程方式组合 SQL 语句。
     <br />
-    Every SQL keyword has a corresponding query building method. For example, <code>SELECT</code> corresponds
-    to <code>select()</code>, <code>FROM</code> corresponds to <code>from()</code>,
-    <code>WHERE</code> corresponds to <code>where()</code>, and so on.
+    每个 SQL 关键字都有对应的查询构建方法。例如，<code>SELECT</code> 对应 <code>select()</code>，<code>FROM</code> 对应 <code>from()</code>，
+    <code>WHERE</code> 对应 <code>where()</code>，等等。
 </p>
 <CodeBlock
     language="javascript"
@@ -161,12 +156,11 @@
 
 <HeadingLink title="select(), andSelect(), distinct()" tag="h5" />
 <p>
-    The <code>select(...cols)</code> method initializes a <code>SELECT</code> query builder. It accepts a list
-    of the column names to be selected.
+    <code>select(...cols)</code> 方法用于初始化 <code>SELECT</code> 查询构建器。它接受要选择的列名列表。
     <br />
-    To add additional columns to an existing select query, you can call <code>andSelect()</code>.
+    要向已有的 select 查询添加额外的列，可以调用 <code>andSelect()</code>。
     <br />
-    To select distinct rows, you can call <code>distinct(true)</code>.
+    如需选择唯一行，可以调用 <code>distinct(true)</code>。
 </p>
 <CodeBlock
     language="javascript"
@@ -181,8 +175,7 @@
 
 <HeadingLink title="from()" tag="h5" />
 <p>
-    The <code>from(...tables)</code> method specifies which tables to select from (plain table names are automatically
-    quoted).
+    <code>from(...tables)</code> 方法指定要从哪些表中查询（普通表名会自动加引号）。
 </p>
 <CodeBlock
     language="javascript"
@@ -196,18 +189,18 @@
 
 <HeadingLink title="join()" tag="h5" />
 <p>
-    The <code>join(type, table, on)</code> method specifies a <code>JOIN</code> clause. It takes 3 parameters:
+    <code>join(type, table, on)</code> 方法用于指定 <code>JOIN</code> 子句。它有 3 个参数：
 </p>
 <ul>
-    <li><code>type</code> - join type string like <code>INNER JOIN</code>, <code>LEFT JOIN</code>, etc.</li>
-    <li><code>table</code> - the name of the table to be joined</li>
-    <li><code>on</code> - optional <code>dbx.Expression</code> as an <code>ON</code> clause</li>
+    <li><code>type</code> - 连接类型字符串，如 <code>INNER JOIN</code>、<code>LEFT JOIN</code> 等。</li>
+    <li><code>table</code> - 要连接的表名</li>
+    <li><code>on</code> - 可选的 <code>dbx.Expression</code>，作为 <code>ON</code> 条件</li>
 </ul>
 <p>
-    For convenience, you can also use the shortcuts <code>innerJoin(table, on)</code>,
-    <code>leftJoin(table, on)</code>,
-    <code>rightJoin(table, on)</code> to specify <code>INNER JOIN</code>, <code>LEFT JOIN</code> and
-    <code>RIGHT JOIN</code>, respectively.
+    为方便起见，也可以使用 <code>innerJoin(table, on)</code>、
+    <code>leftJoin(table, on)</code>、
+    <code>rightJoin(table, on)</code> 这些快捷方法，分别指定 <code>INNER JOIN</code>、<code>LEFT JOIN</code> 和
+    <code>RIGHT JOIN</code>。
 </p>
 <CodeBlock
     language="javascript"
@@ -223,12 +216,11 @@
 
 <HeadingLink title="where(), andWhere(), orWhere()" tag="h5" />
 <p>
-    The <code>where(exp)</code> method specifies the <code>WHERE</code> condition of the query.
+    <code>where(exp)</code> 方法用于指定查询的 <code>WHERE</code> 条件。
     <br />
-    You can also use <code>andWhere(exp)</code> or <code>orWhere(exp)</code> to append additional one or more
-    conditions to an existing <code>WHERE</code> clause.
+    也可以使用 <code>andWhere(exp)</code> 或 <code>orWhere(exp)</code> 向已有的 <code>WHERE</code> 子句追加一个或多个条件。
     <br />
-    Each where condition accepts a single <code>dbx.Expression</code> (see below for full list).
+    每个 where 条件都接受一个 <code>dbx.Expression</code>（详见下方完整列表）。
 </p>
 <CodeBlock
     language="javascript"
@@ -263,14 +255,13 @@
 />
 
 <p>
-    The following <code>dbx.Expression</code> methods are available:
+    可用的 <code>dbx.Expression</code> 方法如下：
 </p>
 <ul>
     <li class="m-b-xs">
         <HeadingLink title="$dbx.exp(raw, optParams)" tag="code" />
         <br />
-        Generates an expression with the specified raw query fragment. Use the <code>optParams</code> to bind
-        parameters to the expression.
+        生成包含指定原始查询片段的表达式。使用 <code>optParams</code> 绑定参数到表达式。
         <CodeBlock
             language="javascript"
             content={`
@@ -282,8 +273,7 @@
     <li class="m-b-xs">
         <HeadingLink title="$dbx.hashExp(pairs)" tag="code" />
         <br />
-        Generates a hash expression from a map whose keys are DB column names which need to be filtered according
-        to the corresponding values.
+        根据键值对生成哈希表达式，键为需要过滤的数据库列名，值为对应的过滤值。
         <CodeBlock
             language="javascript"
             content={`
@@ -300,7 +290,7 @@
     <li class="m-b-xs">
         <HeadingLink title="$dbx.not(exp)" tag="code" />
         <br />
-        Negates a single expression by wrapping it with <code>NOT()</code>.
+        用 <code>NOT()</code> 包裹表达式，实现取反。
         <CodeBlock
             language="javascript"
             content={`
@@ -312,7 +302,7 @@
     <li class="m-b-xs">
         <HeadingLink title="$dbx.and(...exps)" tag="code" />
         <br />
-        Creates a new expression by concatenating the specified ones with <code>AND</code>.
+        用 <code>AND</code> 连接多个表达式，生成新表达式。
         <CodeBlock
             language="javascript"
             content={`
@@ -324,7 +314,7 @@
     <li class="m-b-xs">
         <HeadingLink title="$dbx.or(...exps)" tag="code" />
         <br />
-        Creates a new expression by concatenating the specified ones with <code>OR</code>.
+        用 <code>OR</code> 连接多个表达式，生成新表达式。
         <CodeBlock
             language="javascript"
             content={`
@@ -336,7 +326,7 @@
     <li class="m-b-xs">
         <HeadingLink title="$dbx.in(col, ...values)" tag="code" />
         <br />
-        Generates an <code>IN</code> expression for the specified column and the list of allowed values.
+        为指定列和允许值列表生成 <code>IN</code> 表达式。
         <CodeBlock
             language="javascript"
             content={`
@@ -348,7 +338,7 @@
     <li class="m-b-xs">
         <HeadingLink title="$dbx.notIn(col, ...values)" tag="code" />
         <br />
-        Generates an <code>NOT IN</code> expression for the specified column and the list of allowed values.
+        为指定列和允许值列表生成 <code>NOT IN</code> 表达式。
         <CodeBlock
             language="javascript"
             content={`
@@ -360,13 +350,10 @@
     <li class="m-b-xs">
         <HeadingLink title="$dbx.like(col, ...values)" tag="code" />
         <br />
-        Generates a <code>LIKE</code> expression for the specified column and the possible strings that the
-        column should be like. If multiple values are present, the column should be like
-        <strong>all</strong> of them.
+        为指定列和可能的字符串生成 <code>LIKE</code> 表达式。如果有多个值，列需同时匹配所有值。
         <br />
-        By default, each value will be surrounded by <em>"%"</em> to enable partial matching. Special
-        characters like <em>"%"</em>, <em>"\"</em>, <em>"_"</em> will also be properly escaped. You may call
-        <code>escape(...pairs)</code> and/or <code>match(left, right)</code> to change the default behavior.
+        默认每个值会被 <em>"%"</em> 包裹以实现模糊匹配。特殊字符如 <em>"%"</em>、<em>"\"</em>、<em>"_"</em> 也会被正确转义。可调用
+        <code>escape(...pairs)</code> 和/或 <code>match(left, right)</code> 改变默认行为。
         <CodeBlock
             language="javascript"
             content={`
@@ -381,7 +368,7 @@
     <li class="m-b-xs">
         <HeadingLink title="$dbx.notLike(col, ...values)" tag="code" />
         <br />
-        Generates a <code>NOT LIKE</code> expression in similar manner as <code>like()</code>.
+        以类似 <code>like()</code> 的方式生成 <code>NOT LIKE</code> 表达式。
         <CodeBlock
             language="javascript"
             content={`
@@ -396,8 +383,7 @@
     <li class="m-b-xs">
         <HeadingLink title="$dbx.orLike(col, ...values)" tag="code" />
         <br />
-        This is similar to <code>like()</code> except that the column must be one of the provided values, aka.
-        multiple values are concatenated with <code>OR</code> instead of <code>AND</code>.
+        与 <code>like()</code> 类似，但多个值之间用 <code>OR</code> 连接。
         <CodeBlock
             language="javascript"
             content={`
@@ -412,8 +398,7 @@
     <li class="m-b-xs">
         <HeadingLink title="$dbx.orNotLike(col, ...values)" tag="code" />
         <br />
-        This is similar to <code>notLike()</code> except that the column must not be one of the provided
-        values, aka. multiple values are concatenated with <code>OR</code> instead of <code>AND</code>.
+        与 <code>notLike()</code> 类似，但多个值之间用 <code>OR</code> 连接。
         <CodeBlock
             language="javascript"
             content={`
@@ -428,7 +413,7 @@
     <li class="m-b-xs">
         <HeadingLink title="$dbx.exists(exp)" tag="code" />
         <br />
-        Prefix with <code>EXISTS</code> the specified expression (usually a subquery).
+        用 <code>EXISTS</code> 前缀指定表达式（通常为子查询）。
         <CodeBlock
             language="javascript"
             content={`
@@ -440,7 +425,7 @@
     <li class="m-b-xs">
         <HeadingLink title="$dbx.notExists(exp)" tag="code" />
         <br />
-        Prefix with <code>NOT EXISTS</code> the specified expression (usually a subquery).
+        用 <code>NOT EXISTS</code> 前缀指定表达式（通常为子查询）。
         <CodeBlock
             language="javascript"
             content={`
@@ -452,7 +437,7 @@
     <li class="m-b-xs">
         <HeadingLink title="$dbx.between(col, from, to)" tag="code" />
         <br />
-        Generates a <code>BETWEEN</code> expression with the specified range.
+        用指定范围生成 <code>BETWEEN</code> 表达式。
         <CodeBlock
             language="javascript"
             content={`
@@ -464,7 +449,7 @@
     <li class="m-b-xs">
         <HeadingLink title="$dbx.notBetween(col, from, to)" tag="code" />
         <br />
-        Generates a <code>NOT BETWEEN</code> expression with the specified range.
+        用指定范围生成 <code>NOT BETWEEN</code> 表达式。
         <CodeBlock
             language="javascript"
             content={`
@@ -477,12 +462,11 @@
 
 <HeadingLink title="orderBy(), andOrderBy()" tag="h5" />
 <p>
-    The <code>orderBy(...cols)</code> specifies the <code>ORDER BY</code> clause of the query.
+    <code>orderBy(...cols)</code> 用于指定查询的 <code>ORDER BY</code> 子句。
     <br />
-    A column name can contain <em>"ASC"</em> or <em>"DESC"</em> to indicate its ordering direction.
+    列名中可以包含 <em>"ASC"</em> 或 <em>"DESC"</em>，以指示排序方向。
     <br />
-    You can also use <code>andOrderBy(...cols)</code> to append additional columns to an existing
-    <code>ORDER BY</code> clause.
+    也可以使用 <code>andOrderBy(...cols)</code> 向已有的 <code>ORDER BY</code> 子句追加更多列。
 </p>
 <CodeBlock
     language="javascript"
@@ -498,10 +482,9 @@
 
 <HeadingLink title="groupBy(), andGroupBy()" tag="h5" />
 <p>
-    The <code>groupBy(...cols)</code> specifies the <code>GROUP BY</code> clause of the query.
+    <code>groupBy(...cols)</code> 用于指定查询的 <code>GROUP BY</code> 子句。
     <br />
-    You can also use <code>andGroupBy(...cols)</code> to append additional columns to an existing
-    <code>GROUP BY</code> clause.
+    也可以使用 <code>andGroupBy(...cols)</code> 向已有的 <code>GROUP BY</code> 子句追加更多列。
 </p>
 <CodeBlock
     language="javascript"
@@ -516,14 +499,11 @@
 
 <HeadingLink title="having(), andHaving(), orHaving()" tag="h5" />
 <p>
-    The <code>having(exp)</code> specifies the <code>HAVING</code> clause of the query.
+    <code>having(exp)</code> 用于指定查询的 <code>HAVING</code> 子句。
     <br />
-    Similarly to
-    <code>where(exp)</code>, it accept a single <code>dbx.Expression</code> (see all available expressions
-    listed above).
+    与 <code>where(exp)</code> 类似，接受一个 <code>dbx.Expression</code>（可用表达式见上方列表）。
     <br />
-    You can also use <code>andHaving(exp)</code> or <code>orHaving(exp)</code> to append additional one or
-    more conditions to an existing <code>HAVING</code> clause.
+    也可以使用 <code>andHaving(exp)</code> 或 <code>orHaving(exp)</code> 向已有的 <code>HAVING</code> 子句追加一个或多个条件。
 </p>
 <CodeBlock
     language="javascript"
@@ -539,7 +519,7 @@
 
 <HeadingLink title="limit()" tag="h5" />
 <p>
-    The <code>limit(number)</code> method specifies the <code>LIMIT</code> clause of the query.
+    <code>limit(number)</code> 方法用于指定查询的 <code>LIMIT</code> 子句。
 </p>
 <CodeBlock
     language="javascript"
@@ -554,8 +534,7 @@
 
 <HeadingLink title="offset()" tag="h5" />
 <p>
-    The <code>offset(number)</code> method specifies the <code>OFFSET</code> clause of the query. Usually used
-    together with <code>limit(number)</code>.
+    <code>offset(number)</code> 方法用于指定查询的 <code>OFFSET</code> 子句。通常与 <code>limit(number)</code> 一起使用。
 </p>
 <CodeBlock
     language="javascript"
@@ -569,7 +548,7 @@
     `}
 />
 
-<HeadingLink title="Transaction" />
+<HeadingLink title="事务" />
 <TransactionInfoJS />
 <CodeBlock
     language="javascript"

@@ -1,36 +1,36 @@
 export const introductionLinks = [
     {
         href: "/docs",
-        title: "Introduction",
+        title: "简介",
         icon: "ri-home-2-line",
         children: [
             {
                 href: "/docs/how-to-use",
-                title: "How to use PocketBase",
+                title: "如何使用 PocketBase",
             },
             {
                 href: "/docs/collections",
-                title: "Collections",
+                title: "集合",
             },
             {
                 href: "/docs/api-rules-and-filters",
-                title: "API rules and filters",
+                title: "API 规则与过滤器",
             },
             {
                 href: "/docs/authentication",
-                title: "Authentication",
+                title: "认证",
             },
             {
                 href: "/docs/files-handling",
-                title: "Files upload and handling",
+                title: "文件上传与处理",
             },
             {
                 href: "/docs/working-with-relations",
-                title: "Working with relations",
+                title: "关系操作",
             },
             {
                 href: "/docs/use-as-framework",
-                title: "Extending PocketBase",
+                title: "扩展 PocketBase",
             },
         ]
     },
@@ -38,7 +38,7 @@ export const introductionLinks = [
 
 export const webApiLinks = [
     {
-        title: "Web APIs reference",
+        title: "Web API 参考",
         href: "/docs/api-records",
         icon: "ri-file-list-2-line",
         children: [
@@ -48,35 +48,35 @@ export const webApiLinks = [
             },
             {
                 href: "/docs/api-realtime",
-                title: "API Realtime",
+                title: "API 实时",
             },
             {
                 href: "/docs/api-files",
-                title: "API Files",
+                title: "API 文件",
             },
             {
                 href: "/docs/api-collections",
-                title: "API Collections",
+                title: "API 集合",
             },
             {
                 href: "/docs/api-settings",
-                title: "API Settings",
+                title: "API 设置",
             },
             {
                 href: "/docs/api-logs",
-                title: "API Logs",
+                title: "API 日志",
             },
             {
                 href: "/docs/api-crons",
-                title: "API Crons",
+                title: "API 定时任务",
             },
             {
                 href: "/docs/api-backups",
-                title: "API Backups",
+                title: "API 备份",
             },
             {
                 href: "/docs/api-health",
-                title: "API Health",
+                title: "API 健康检查",
             },
         ],
     },
@@ -85,7 +85,7 @@ export const webApiLinks = [
 export const goingToProductionLinks = [
     {
         href: "/docs/going-to-production",
-        title: "Going to production",
+        title: "上线部署",
         icon: "ri-check-double-line",
     },
 ];
@@ -93,139 +93,139 @@ export const goingToProductionLinks = [
 export const goLinks = [
     {
         href: "/docs/go-overview",
-        title: "Overview",
+        title: "概述",
     },
     {
         href: "/docs/go-event-hooks",
-        title: "Event hooks",
+        title: "事件钩子",
     },
     {
         href: "/docs/go-routing",
-        title: "Routing",
+        title: "路由",
     },
     {
         href: "/docs/go-database",
-        title: "Database",
+        title: "数据库",
     },
     {
         href: "/docs/go-records",
-        title: "Record operations",
+        title: "Record 操作",
     },
     {
         href: "/docs/go-collections",
-        title: "Collection operations",
+        title: "Collection 操作",
     },
     {
         href: "/docs/go-migrations",
-        title: "Migrations",
+        title: "迁移",
     },
     {
         href: "/docs/go-jobs-scheduling",
-        title: "Jobs scheduling",
+        title: "任务调度",
     },
     {
         href: "/docs/go-sending-emails",
-        title: "Sending emails",
+        title: "发送邮件",
     },
     {
         href: "/docs/go-rendering-templates",
-        title: "Rendering templates",
+        title: "模板渲染",
     },
     {
         href: "/docs/go-console-commands",
-        title: "Console commands",
+        title: "控制台命令",
     },
     {
         href: "/docs/go-realtime",
-        title: "Realtime messaging",
+        title: "实时消息",
     },
     {
         href: "/docs/go-filesystem",
-        title: "Filesystem",
+        title: "文件系统",
     },
     {
         href: "/docs/go-logging",
-        title: "Logging",
+        title: "日志",
     },
     {
         href: "/docs/go-testing",
-        title: "Testing",
+        title: "测试",
     },
     {
         href: "/docs/go-miscellaneous",
-        title: "Miscellaneous",
+        title: "其他",
     },
     {
         href: "/docs/go-record-proxy",
-        title: "Record proxy",
+        title: "Record 代理",
     },
 ];
 
 export const jsLinks = [
     {
         href: "/docs/js-overview",
-        title: "Overview",
+        title: "概述",
     },
     {
         href: "/docs/js-event-hooks",
-        title: "Event hooks",
+        title: "事件钩子",
     },
     {
         href: "/docs/js-routing",
-        title: "Routing",
+        title: "路由",
     },
     {
         href: "/docs/js-database",
-        title: "Database",
+        title: "数据库",
     },
     {
         href: "/docs/js-records",
-        title: "Record operations",
+        title: "Record 操作",
     },
     {
         href: "/docs/js-collections",
-        title: "Collection operations",
+        title: "Collection 操作",
     },
     {
         href: "/docs/js-migrations",
-        title: "Migrations",
+        title: "迁移",
     },
     {
         href: "/docs/js-jobs-scheduling",
-        title: "Jobs scheduling",
+        title: "任务调度",
     },
     {
         href: "/docs/js-sending-emails",
-        title: "Sending emails",
+        title: "发送邮件",
     },
     {
         href: "/docs/js-rendering-templates",
-        title: "Rendering templates",
+        title: "模板渲染",
     },
     {
         href: "/docs/js-console-commands",
-        title: "Console commands",
+        title: "控制台命令",
     },
     {
         href: "/docs/js-sending-http-requests",
-        title: "Sending HTTP requests",
+        title: "发送 HTTP 请求",
     },
     {
         href: "/docs/js-realtime",
-        title: "Realtime messaging",
+        title: "实时消息",
     },
     {
         href: "/docs/js-filesystem",
-        title: "Filesystem",
+        title: "文件系统",
     },
     {
         href: "/docs/js-logging",
-        title: "Logging",
+        title: "日志",
     },
     {
         href:   "/jsvm/index.html",
         target: "_blank",
-        title:  "Types reference",
+        title:  "类型参考",
     },
 ];
 

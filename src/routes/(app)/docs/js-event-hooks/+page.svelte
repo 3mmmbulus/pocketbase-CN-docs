@@ -16,11 +16,10 @@
 </script>
 
 <p>
-    You can extend the default PocketBase behavior with custom server-side code using the exposed JavaScript
-    app event hooks.
+    你可以使用公开的 JavaScript app 事件钩子，通过自定义服务端代码扩展默认的 PocketBase 行为。
 </p>
 <p>
-    Throwing an error or not calling <code>e.next()</code> inside a handler function stops the hook execution chain.
+    在处理函数中抛出错误或未调用 <code>e.next()</code> 会停止钩子执行链。
 </p>
 <div class="alert alert-info m-t-sm m-b-sm">
     <div class="icon">
@@ -28,8 +27,7 @@
     </div>
     <div class="content">
         <p>
-            All hook handler functions share the same <code>{`function(e){}`}</code> signature and expect the
-            user to call <code>e.next()</code> if they want to proceed with the execution chain.
+            所有钩子处理函数都具有相同的 <code>{`function(e){}`}</code> 签名，并且需要用户调用 <code>e.next()</code> 以继续执行链。
         </p>
     </div>
 </div>

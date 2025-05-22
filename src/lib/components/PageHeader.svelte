@@ -24,7 +24,7 @@
                 <span />
                 <i class="ri-menu-3-fill" />
                 <Toggler class="dropdown dropdown-lg dropdown-right dropdown-nowrap responsive-menu-dropdown">
-                    <a href="/faq" class="dropdown-item" data-sveltekit-preload-data>FAQ</a>
+                    <a href="/faq" class="dropdown-item" data-sveltekit-preload-data>常见问题</a>
                     <a
                         href={import.meta.env.PB_DISCUSSIONS_URL}
                         class="dropdown-item"
@@ -41,7 +41,7 @@
             </button>
 
             <nav class="main-menu">
-                <a href="/faq" class="btn btn-secondary" data-sveltekit-preload-data>FAQ</a>
+                <a href="/faq" class="btn btn-secondary" data-sveltekit-preload-data>常见问题</a>
                 <a
                     href={import.meta.env.PB_REPO_URL}
                     class="btn btn-circle btn-secondary"

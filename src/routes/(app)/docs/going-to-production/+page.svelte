@@ -7,21 +7,19 @@
 
 <Toc />
 
-<HeadingLink title="Deployment strategies" />
+<HeadingLink title="部署策略" />
 
-<HeadingLink title="Minimal setup" tag="h5" />
+<HeadingLink title="最小化部署" tag="h5" />
 <p>
-    One of the best PocketBase features is that it's completely portable. This mean that it doesn't require
-    any external dependency and
-    <strong>could be deployed by just uploading the executable on your server</strong>.
+    PocketBase 最棒的特性之一就是它完全可移植。这意味着它不需要任何外部依赖，
+    <strong>只需将可执行文件上传到你的服务器即可部署</strong>。
 </p>
 <p>
-    Here is an example for starting a production HTTPS server (auto managed TLS with Let's Encrypt) on clean
-    Ubuntu 22.04 installation.
+    下面是一个在全新 Ubuntu 22.04 系统上启动生产环境 HTTPS 服务器（自动管理 TLS 和 Let's Encrypt）的示例。
 </p>
 <ol>
     <li value="0">
-        <p>Consider the following app directory structure:</p>
+        <p>假设你的应用目录结构如下：</p>
         <CodeBlock
             language="html"
             content={`
@@ -34,9 +32,8 @@
     </li>
     <li>
         <p>
-            Upload the binary and anything else required by your application to your remote server, for
-            example using
-            <strong>rsync</strong>:
+            上传二进制文件及应用所需的其他内容到你的远程服务器，例如使用
+            <strong>rsync</strong>：
         </p>
         <CodeBlock
             content={`
@@ -45,7 +42,7 @@
         />
     </li>
     <li>
-        <p>Start a SSH session with your server:</p>
+        <p>通过 SSH 连接到你的服务器：</p>
         <CodeBlock
             content={`
                 ssh root@YOUR_SERVER_IP
@@ -53,7 +50,7 @@
         />
     </li>
     <li>
-        <p>Start the executable (specifying a domain name will issue a Let's encrypt certificate for it)</p>
+        <p>启动可执行文件（指定域名会为其申请 Let's Encrypt 证书）</p>
         <CodeBlock
             content={`
               [root@dev ~]$ /root/pb/pocketbase serve yourdomain.com
@@ -61,14 +58,12 @@
         />
         <blockquote>
             <p>
-                Notice that in the above example we are logged in as <strong>root</strong> which allow us to
-                bind to the
-                <strong>privileged 80 and 443 ports</strong>.
+                注意，上述示例中我们以 <strong>root</strong> 用户登录，这样可以绑定
+                <strong>特权端口 80 和 443</strong>。
                 <br />
-                For <strong>non-root</strong> users usually you'll need special privileges to be able to do
-                that. You have several options depending on your OS - <code>authbind</code>,
-                <code>setcap</code>,
-                <code>iptables</code>, <code>sysctl</code>, etc. Here is an example using <code>setcap</code>:
+                对于 <strong>非 root</strong> 用户，通常需要特殊权限才能绑定这些端口。根据你的操作系统有多种方式可选，如 <code>authbind</code>、
+                <code>setcap</code>、
+                <code>iptables</code>、<code>sysctl</code> 等。以下是使用 <code>setcap</code> 的示例：
             </p>
             <CodeBlock
                 content={`
@@ -78,13 +73,13 @@
         </blockquote>
     </li>
     <li>
-        <p>(Optional) Systemd service</p>
+        <p>（可选）Systemd 服务</p>
         <p>
-            You can skip step 3 and create a <strong>Systemd service</strong>
-            to allow your application to start/restart on its own.
+            你可以跳过第 3 步，直接创建一个 <strong>Systemd 服务</strong>
+            让你的应用可以自动启动/重启。
             <br />
-            Here is an example service file (usually created in
-            <code>/lib/systemd/system/pocketbase.service</code>):
+            下面是一个服务文件示例（通常创建在
+            <code>/lib/systemd/system/pocketbase.service</code>）：
         </p>
         <CodeBlock
             content={`
@@ -108,7 +103,7 @@
             `}
         />
         <p>
-            After that we just have to enable it and start the service using <code>systemctl</code>:
+            然后只需通过 <code>systemctl</code> 启用并启动服务：
         </p>
         <CodeBlock
             content={`
@@ -118,9 +113,8 @@
         />
         <blockquote>
             <p>
-                You can find a link to the Web UI installer in the <code>/root/pb/std.log</code>, but
-                alternatively you can also create the first superuser explicitly via the
-                <code>superuser</code> PocketBase command:
+                你可以在 <code>/root/pb/std.log</code> 中找到 Web UI 安装器的链接，
+                也可以通过 PocketBase 的 <code>superuser</code> 命令手动创建第一个超级用户：
             </p>
             <CodeBlock
                 content={`
@@ -131,20 +125,18 @@
     </li>
 </ol>
 
-<HeadingLink title="Using reverse proxy" tag="h5" />
+<HeadingLink title="使用反向代理" tag="h5" />
 <p>
-    If you plan hosting multiple applications on a single server or need finer network controls, you can
-    always put PocketBase behind a reverse proxy such as
-    <em>NGINX</em>, <em>Apache</em>, <em>Caddy</em>, etc.
+    如果你计划在同一台服务器上托管多个应用，或需要更精细的网络控制，可以将 PocketBase 放在
+    <em>NGINX</em>、<em>Apache</em>、<em>Caddy</em> 等反向代理之后。
     <br />
     <em>
-        Just note that when using a reverse proxy you may need to setup the "User IP proxy headers" in the
-        PocketBase settings so that the application can extract and log the actual visitor/client IP (the
-        headers are usually <code>X-Real-IP</code>, <code>X-Forwarded-For</code>).
+        注意：使用反向代理时，可能需要在 PocketBase 设置中配置“用户 IP 代理头”，
+        以便应用能获取并记录真实访问者/客户端 IP（通常为 <code>X-Real-IP</code>、<code>X-Forwarded-For</code>）。
     </em>
 </p>
 <p>
-    Here is a minimal <em>NGINX</em> example configuration:
+    下面是一个最小化 <em>NGINX</em> 配置示例：
 </p>
 <CodeBlock
     language="html"
@@ -174,7 +166,7 @@
     `}
 />
 <p>
-    Corresponding <em>Caddy</em> configuration is:
+    对应的 <em>Caddy</em> 配置如下：
 </p>
 <CodeBlock
     language="html"
@@ -191,11 +183,10 @@
     }
     `}
 />
-<HeadingLink title="Using Docker" tag="h5" />
+<HeadingLink title="使用 Docker" tag="h5" />
 <p>
-    Some hosts (e.g. <a href="https://fly.io" target="_blank" rel="noopener noreferrer">fly.io</a>) use Docker
-    for deployments. PocketBase doesn't have an official Docker image, but you could use the below minimal
-    Dockerfile as an example:
+    部分主机（如 <a href="https://fly.io" target="_blank" rel="noopener noreferrer">fly.io</a>）使用 Docker 部署。
+    PocketBase 没有官方 Docker 镜像，但你可以参考下面的最小化 Dockerfile 示例：
 </p>
 <CodeBlock
     language="html"
@@ -229,41 +220,38 @@
     `}
 />
 <p class="txt-bold">
-    To persist your data you need to mount a volume at <code>/pb/pb_data</code>.
+    若要持久化你的数据，需要将卷挂载到 <code>/pb/pb_data</code>。
 </p>
 <p class="txt-hint">
     <em>
-        For a full example you could check the
+        完整示例可参考
         <a
             href="https://github.com/pocketbase/pocketbase/discussions/537"
             target="_blank"
             rel="noopener noreferrer"
         >
-            "Host for free on Fly.io"
+            “在 Fly.io 免费托管”
         </a>
-        guide.
+        指南。
     </em>
 </p>
 
-<HeadingLink title="Backup and Restore" />
+<HeadingLink title="备份与恢复" />
 <p>
-    To backup/restore your application it is enough to manually copy/replace your <code>pb_data</code>
-    directory
-    <em>(for transactional safety make sure that the application is not running)</em>.
+    备份/恢复你的应用只需手动复制/替换 <code>pb_data</code> 目录
+    <em>（为保证事务安全，请确保应用未运行）</em>。
 </p>
 <p>
-    To make things slightly easier, PocketBase v0.16+ comes with built-in backups and restore APIs that could
-    be accessed from the Dashboard (
+    为了更方便，PocketBase v0.16+ 内置了备份与恢复 API，可在仪表盘中访问
     <em>Settings</em>
     {`>`} <em>Backups</em>
-    ):
+    ：
 </p>
 <img src="/images/screenshots/backups.png" alt="Backups settings screenshot" class="screenshot m-b-xs" />
 <p>
-    Backups can be stored locally (default) or in a S3 compatible storage (<em
-        >it is recommended to use a separate bucket only for the backups</em
-    >). The generated backup represents a full snapshot as ZIP archive of your <code>pb_data</code> directory (including
-    the locally stored uploaded files but excluding any local backups or files uploaded to S3).
+    备份可本地存储（默认）或存储到兼容 S3 的存储中（<em
+        >建议为备份单独使用一个 bucket</em
+    >）。生成的备份是 <code>pb_data</code> 目录的完整快照 ZIP 压缩包（包含本地上传文件，但不包含本地备份或上传到 S3 的文件）。
 </p>
 <div class="alert alert-warning m-b-xs">
     <div class="icon">
@@ -271,64 +259,62 @@
     </div>
     <div class="content">
         <p class="txt-bold">
-            During the backup's ZIP generation the application will be temporary set in read-only mode.
+            生成备份 ZIP 时，应用会临时进入只读模式。
         </p>
         <p>
-            Depending on the size of your <code>pb_data</code> this could be a very slow operation and it is
-            advised in case of large <code>pb_data</code> (e.g. 2GB+) to consider a different backup strategy
+            根据 <code>pb_data</code> 的大小，这可能是一个非常耗时的操作。对于较大的 <code>pb_data</code>（如 2GB+），建议采用其他备份策略
             <em class="txt-sm">
-                (see an example
+                （可参考
                 <a
                     href="https://github.com/pocketbase/pocketbase/discussions/4254#backups"
                     target="_blank"
-                    rel="noopener noreferrer">backup.sh script</a
+                    rel="noopener noreferrer">backup.sh 脚本</a
                 >
-                that combines <code>sqlite3 .backup</code> + <code>rsync</code>)
-            </em>.
+                ，结合 <code>sqlite3 .backup</code> + <code>rsync</code>）
+            </em>。
         </p>
     </div>
 </div>
 
-<HeadingLink title="Recommendations" />
+<HeadingLink title="推荐设置" />
 
 <header class="highlighted-title bg-danger-alt m-t-0">
-    <span class="label label-primary">highly recommended</span>
-    <HeadingLink title="Use SMTP mail server" tag="h5" />
+    <span class="label label-primary">强烈推荐</span>
+    <HeadingLink title="使用 SMTP 邮件服务器" tag="h5" />
 </header>
 <p>
-    By default, PocketBase uses the internal Unix <code>sendmail</code> command for sending emails.
+    默认情况下，PocketBase 使用 Unix 内置 <code>sendmail</code> 命令发送邮件。
     <br />
-    While it's OK for development, it's not very useful for production, because your emails most likely will get
-    marked as spam or even fail to deliver.
+    这在开发环境下没问题，但在生产环境中很可能导致邮件被判为垃圾邮件或无法送达。
 </p>
 <p>
-    To avoid deliverability issues, consider using a local SMTP server or an external mail service like
-    <a href="https://www.mailersend.com/" target="_blank" rel="noreferrer noopener">MailerSend</a>,
-    <a href="https://www.brevo.com/" target="_blank" rel="noreferrer noopener">Brevo</a>,
-    <a href="https://sendgrid.com/" target="_blank" rel="noreferrer noopener">SendGrid</a>,
-    <a href="https://www.mailgun.com/" target="_blank" rel="noreferrer noopener">Mailgun</a>,
-    <a href="https://aws.amazon.com/ses/" target="_blank" rel="noreferrer noopener">AWS SES</a>, etc.
+    为避免投递问题，建议使用本地 SMTP 服务器或外部邮件服务，如
+    <a href="https://www.mailersend.com/" target="_blank" rel="noreferrer noopener">MailerSend</a>、
+    <a href="https://www.brevo.com/" target="_blank" rel="noreferrer noopener">Brevo</a>、
+    <a href="https://sendgrid.com/" target="_blank" rel="noreferrer noopener">SendGrid</a>、
+    <a href="https://www.mailgun.com/" target="_blank" rel="noreferrer noopener">Mailgun</a>、
+    <a href="https://aws.amazon.com/ses/" target="_blank" rel="noreferrer noopener">AWS SES</a> 等。
 </p>
 <p>
-    Once you've decided on a mail service, you could configure the PocketBase SMTP settings from the
+    选定邮件服务后，可在
     <em>
-        {`Dashboard > Settings > Mail settings`}
-    </em>:
+        {`仪表盘 > 设置 > 邮件设置`}
+    </em>
+    中配置 PocketBase SMTP 设置：
 </p>
 <img src="/images/screenshots/smtp-settings.png" alt="SMTP settings screenshot" class="screenshot m-b-xs" />
 
 <header class="highlighted-title bg-danger-alt">
-    <span class="label label-primary">highly recommended</span>
-    <HeadingLink title="Enable MFA for superusers" tag="h5" />
+    <span class="label label-primary">强烈推荐</span>
+    <HeadingLink title="为超级用户启用 MFA" tag="h5" />
 </header>
 <p>
-    As an additional layer of security you can enable the MFA and OTP options for the <code>_superusers</code>
-    collection, which will enforce an additional one-time password (email code) requirement when authenticating
-    as superuser.
+    作为额外的安全层，你可以为 <code>_superusers</code> 集合启用 MFA 和 OTP 选项，
+    这样超级用户登录时会强制要求一次性密码（邮件验证码）。
 </p>
 <p>
-    In case of email deliverability issues, you can also generate an OTP manually using the
-    <code>./pocketbase superuser otp yoursuperuser@example.com</code> command.
+    如果邮件收不到验证码，也可以通过命令
+    <code>./pocketbase superuser otp yoursuperuser@example.com</code> 手动生成 OTP。
 </p>
 <img
     src="/images/screenshots/superusers_mfa.png"
@@ -337,22 +323,21 @@
 />
 
 <header class="highlighted-title bg-danger-alt">
-    <span class="label label-primary">highly recommended</span>
-    <HeadingLink title="Enable rate limiter" tag="h5" />
+    <span class="label label-primary">强烈推荐</span>
+    <HeadingLink title="启用限流器" tag="h5" />
 </header>
 <p>
-    To minimize the risk of API abuse (e.g. excessive auth or record create requests) it is recommended to
-    setup a rate limiter.
+    为降低 API 滥用风险（如过多的认证或记录创建请求），建议配置限流器。
 </p>
 <p>
-    PocketBase v0.23.0+ comes with a simple builtin rate limiter that should cover most of the cases but you
-    are also free to use any external one via reverse proxy if you need more advanced options.
+    PocketBase v0.23.0+ 内置了简单的限流器，已能满足大多数场景。如需更高级功能，也可通过反向代理使用外部限流器。
 </p>
 <p>
-    You can configure the builtin rate limiter from the
+    你可以在
     <em>
-        {`Dashboard > Settings > Application`}:
+        {`仪表盘 > 设置 > 应用`}
     </em>
+    中配置内置限流器：
 </p>
 <img
     src="/images/screenshots/rate-limit-settings.png"
@@ -361,77 +346,65 @@
 />
 
 <header class="highlighted-title bg-warning-alt">
-    <span class="label label-primary">optional</span>
-    <HeadingLink title="Increase the open file descriptors limit" tag="h5" />
+    <span class="label label-primary">可选</span>
+    <HeadingLink title="提升文件描述符限制" tag="h5" />
 </header>
 <p class="txt-hint txt-bold">
-    The below instructions are for Linux but other operating systems have similar mechanism.
+    以下说明适用于 Linux，其他操作系统也有类似机制。
 </p>
 <p>
-    Unix uses <em>"file descriptors"</em> also for network connections and most systems have a default limit
-    of ~ 1024.
+    Unix 也会将 <em>“文件描述符”</em> 用于网络连接，大多数系统默认限制约为 1024。
     <br />
-    If your application has a lot of concurrent realtime connections, it is possible that at some point you would
-    get an error such as: <code>Too many open files</code>.
+    如果你的应用有大量并发实时连接，可能会遇到 <code>Too many open files</code> 错误。
 </p>
 <p>
-    One way to mitigate this is to check your current account resource limits by running
-    <code>ulimit -a</code> and find the parameter you want to change. For example, if you want to increase the
-    open files limit (<em>-n</em>), you could run
-    <code>ulimit -n 4096</code> before starting PocketBase.
+    一种缓解方式是通过 <code>ulimit -a</code> 查看当前账户资源限制，并找到你想要修改的参数。例如要提升文件数限制（<em>-n</em>），可在启动 PocketBase 前运行
+    <code>ulimit -n 4096</code>。
 </p>
 
 <header class="highlighted-title bg-warning-alt">
-    <span class="label label-primary">optional</span>
-    <HeadingLink title="Set GOMEMLIMIT" tag="h5" />
+    <span class="label label-primary">可选</span>
+    <HeadingLink title="设置 GOMEMLIMIT" tag="h5" />
 </header>
 <p>
-    If you are running in a memory constrained environment, defining the
+    如果你运行在内存受限环境下，设置
     <a href="https://pkg.go.dev/runtime#hdr-Environment_Variables" target="_blank" rel="noopener">
         <code>GOMEMLIMIT</code>
     </a>
-    environment variable could help preventing out-of-memory (OOM) termination of your process. It is a "soft limit"
-    meaning that the memory usage could still exceed it in some situations, but it instructs the GC to be more
-    "aggressive" and run more often if needed. For example: <code>GOMEMLIMIT=512MiB</code>.
+    环境变量可以帮助防止进程因内存不足（OOM）被终止。它是“软限制”，在某些情况下内存使用仍可能超过，但会让 GC 更“积极”地运行。例如：<code>GOMEMLIMIT=512MiB</code>。
 </p>
 <p>
-    If after <code>GOMEMLIMIT</code> you are still experiencing OOM errors, you can try to enable swap
-    partitioning (if not already) or open a
-    <a href={import.meta.env.PB_DISCUSSIONS_URL} target="_blank" rel="noopener">Q&A discussion</a>
-    with some steps to reproduce the error in case it is something that we can improve in PocketBase.
+    如果设置 <code>GOMEMLIMIT</code> 后仍遇到 OOM 错误，可以尝试启用 swap 分区（如尚未启用），或在
+    <a href={import.meta.env.PB_DISCUSSIONS_URL} target="_blank" rel="noopener">Q&A 讨论区</a>
+    发帖，附上复现步骤，以便我们改进 PocketBase。
 </p>
 
 <header class="highlighted-title bg-warning-alt">
-    <span class="label label-primary">optional</span>
-    <HeadingLink title="Enable settings encryption" tag="h5" />
+    <span class="label label-primary">可选</span>
+    <HeadingLink title="启用设置加密" tag="h5" />
 </header>
-<p class="txt-bold txt-hint">It is fine to ignore the below if you are not sure whether you need it.</p>
+<p class="txt-bold txt-hint">如果你不确定是否需要，可以忽略以下内容。</p>
 <p>
-    By default, PocketBase stores the applications settings in the database as plain JSON text, including the
-    SMTP password and S3 storage credentials.
+    默认情况下，PocketBase 会以明文 JSON 文本形式将应用设置存储在数据库中，包括 SMTP 密码和 S3 存储凭据。
 </p>
 <p>
-    While this is not a security issue on its own (PocketBase applications live entirely on a single server
-    and its expected only authorized users to have access to your server and application data), in some
-    situations it may be a good idea to store the settings encrypted in case someone get their hands on your
-    database file (e.g. from an external stored backup).
+    虽然这本身不是安全问题（PocketBase 应用完全运行在单台服务器上，且仅授权用户可访问你的服务器和应用数据），但在某些情况下，如果有人获取了你的数据库文件（如外部备份），加密存储设置会更安全。
 </p>
-<p>To store your PocketBase settings encrypted:</p>
+<p>如需加密存储 PocketBase 设置：</p>
 <ol>
     <li class="m-b-10">
-        Create a new environment variable and <strong>set a random 32 characters</strong> string as its value.
+        新建一个环境变量，并<strong>设置为随机的 32 位字符串</strong>。
         <br />
         <span class="txt-hint">
-            e.g. add
+            例如在 shell 配置文件中添加
             <code>export PB_ENCRYPTION_KEY="{CommonHelper.randomString(32)}"</code>
-            in your shell profile file
         </span>
     </li>
     <li>
-        Start the application with <code>--encryptionEnv=YOUR_ENV_VAR</code> flag.
+        启动应用时加上 <code>--encryptionEnv=YOUR_ENV_VAR</code> 参数。
         <br />
         <span class="txt-hint">
-            e.g. <code>pocketbase serve --encryptionEnv=PB_ENCRYPTION_KEY</code>
+            例如 <code>pocketbase serve --encryptionEnv=PB_ENCRYPTION_KEY</code>
         </span>
     </li>
 </ol>

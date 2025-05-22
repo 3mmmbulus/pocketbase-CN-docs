@@ -5,15 +5,16 @@
 <tr>
     <td>expand</td>
     <td>
-        <span class="label">String</span>
+        <span class="label">字符串</span>
     </td>
     <td>
-        Auto expand record relations. Ex.:
+        自动展开记录关联。例如：
         <CodeBlock content={`?expand=relField1,relField2.subRelField`} />
-        Supports up to 6-levels depth nested relations expansion. <br />
-        The expanded relations will be appended to the record under the
-        <code>expand</code> property (e.g. <code>{`"expand": {"relField1": {...}, ...}`}</code>).
+        支持最多 6 层嵌套关联展开。<br />
+        展开的关联内容将附加到记录的
+        <code>expand</code> 属性下（例如 
+        <code>{`"expand": {"relField1": {...}, ...}`}</code>）。
         <br />
-        Only the relations to which the request user has permissions to <strong>view</strong> will be expanded.
+        只有请求用户有<strong>查看</strong>权限的关联才会被展开。
     </td>
 </tr>

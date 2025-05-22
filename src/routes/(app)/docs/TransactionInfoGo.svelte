@@ -1,5 +1,5 @@
 <p>
-    To execute multiple queries in a transaction you can use
+    要在一个事务中执行多个查询，可以使用
     <a
         href="{import.meta.env.PB_GODOC_URL}/core#BaseApp.RunInTransaction"
         target="_blank"
@@ -7,14 +7,13 @@
     >
         <code>app.RunInTransaction(fn)</code>
     </a>
-    .
+    。
 </p>
 <p>
-    The DB operations are persisted only if the transaction returns <code>nil</code>.
+    只有当事务返回 <code>nil</code> 时，数据库操作才会被持久化。
 </p>
 <p>
-    It is safe to nest <code>RunInTransaction</code> calls as long as you use the callback's
-    <code>txApp</code> argument.
+    只要使用回调的 <code>txApp</code> 参数，嵌套调用 <code>RunInTransaction</code> 是安全的。
 </p>
 <div class="alert alert-info m-b-xs">
     <div class="icon">
@@ -22,13 +21,10 @@
     </div>
     <div class="content">
         <p>
-            Inside the transaction function always use its <code>txApp</code> argument and not the original
-            <code>app</code> instance because we allow only a single writer/transaction at a time and it could
-            result in a deadlock.
+            在事务函数内部，请始终使用其 <code>txApp</code> 参数，而不是原始的 <code>app</code> 实例，因为我们只允许同时有一个写入者/事务，否则可能导致死锁。
         </p>
         <p>
-            To avoid performance issues, try to minimize slow/long running tasks such as sending emails,
-            connecting to external services, etc. as part of the transaction.
+            为避免性能问题，请尽量减少在事务中执行如发送邮件、连接外部服务等耗时或长时间运行的任务。
         </p>
     </div>
 </div>

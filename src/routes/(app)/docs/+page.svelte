@@ -23,29 +23,25 @@
     </div>
     <div class="content">
         <p>
-            Please keep in mind that PocketBase is still under active development and full backward
-            compatibility is not guaranteed before reaching v1.0.0. PocketBase is NOT recommended for
-            production critical applications yet, unless you are fine with reading the
+            请注意，PocketBase 仍在积极开发中，在达到 v1.0.0 之前不保证完全向后兼容。PocketBase 暂不推荐用于生产关键应用，除非你愿意阅读
             <a
                 href="{import.meta.env.PB_REPO_URL}/blob/master/CHANGELOG.md"
                 class="txt-bold"
                 target="_blank"
                 rel="noopener noreferrer"
             >
-                changelog
+                更新日志
             </a>
-            and applying some manual migration steps from time to time.
+            并不时手动进行迁移操作。
         </p>
     </div>
 </div>
 
 <p>
-    PocketBase is an open source backend consisting of embedded database (SQLite) with realtime subscriptions,
-    built-in auth management, convenient dashboard UI and simple REST-ish API. It can be used both as Go
-    framework and as standalone application.
+    PocketBase 是一个开源后端，内置嵌入式数据库（SQLite）、实时订阅、内置身份验证管理、便捷的仪表盘 UI 以及简单的 REST-ish API。它既可作为 Go 框架使用，也可作为独立应用运行。
 </p>
 
-<p>The easiest way to get started is to download the prebuilt minimal PocketBase executable:</p>
+<p>最简单的入门方式是下载预编译的 PocketBase 最小可执行文件：</p>
 
 <div class="tabs compact tabs-architecture m-b-sm">
     <div class="tabs-header left">
@@ -78,9 +74,9 @@
                             rel="noreferrer noopener"
                         >
                             <i class="ri-qq-fill" />
-                            <span class="txt">Download {import.meta.env.PB_VERSION} for Linux x64</span>
+                            <span class="txt">下载 {import.meta.env.PB_VERSION} Linux x64 版本</span>
                         </a>
-                        <small class="txt-hint">(~{import.meta.env.PB_LINUX_AMD_SIZE}MB zip)</small>
+                        <small class="txt-hint">（约 {import.meta.env.PB_LINUX_AMD_SIZE}MB zip）</small>
                     </div>
                 </li>
                 <li>
@@ -92,9 +88,9 @@
                             rel="noreferrer noopener"
                         >
                             <i class="ri-windows-fill" />
-                            <span class="txt">Download {import.meta.env.PB_VERSION} for Windows x64</span>
+                            <span class="txt">下载 {import.meta.env.PB_VERSION} Windows x64 版本</span>
                         </a>
-                        <small class="txt-hint">(~{import.meta.env.PB_WINDOWS_AMD_SIZE}MB zip)</small>
+                        <small class="txt-hint">（约 {import.meta.env.PB_WINDOWS_AMD_SIZE}MB zip）</small>
                     </div>
                 </li>
                 <li>
@@ -106,9 +102,9 @@
                             rel="noreferrer noopener"
                         >
                             <i class="ri-apple-fill" />
-                            <span class="txt">Download {import.meta.env.PB_VERSION} for macOS x64</span>
+                            <span class="txt">下载 {import.meta.env.PB_VERSION} macOS x64 版本</span>
                         </a>
-                        <small class="txt-hint">(~{import.meta.env.PB_MAC_AMD_SIZE}MB zip)</small>
+                        <small class="txt-hint">（约 {import.meta.env.PB_MAC_AMD_SIZE}MB zip）</small>
                     </div>
                 </li>
             </ul>
@@ -124,9 +120,9 @@
                             rel="noreferrer noopener"
                         >
                             <i class="ri-qq-fill" />
-                            <span class="txt">Download {import.meta.env.PB_VERSION} for Linux ARM64</span>
+                            <span class="txt">下载 {import.meta.env.PB_VERSION} Linux ARM64 版本</span>
                         </a>
-                        <small class="txt-hint">(~{import.meta.env.PB_LINUX_ARM_SIZE}MB zip)</small>
+                        <small class="txt-hint">（约 {import.meta.env.PB_LINUX_ARM_SIZE}MB zip）</small>
                     </div>
                 </li>
                 <li>
@@ -138,9 +134,9 @@
                             rel="noreferrer noopener"
                         >
                             <i class="ri-windows-fill" />
-                            <span class="txt">Download {import.meta.env.PB_VERSION} for Windows ARM64</span>
+                            <span class="txt">下载 {import.meta.env.PB_VERSION} Windows ARM64 版本</span>
                         </a>
-                        <small class="txt-hint">(~{import.meta.env.PB_WINDOWS_ARM_SIZE}MB zip)</small>
+                        <small class="txt-hint">（约 {import.meta.env.PB_WINDOWS_ARM_SIZE}MB zip）</small>
                     </div>
                 </li>
                 <li>
@@ -152,9 +148,9 @@
                             rel="noreferrer noopener"
                         >
                             <i class="ri-apple-fill" />
-                            <span class="txt">Download {import.meta.env.PB_VERSION} for macOS ARM64</span>
+                            <span class="txt">下载 {import.meta.env.PB_VERSION} macOS ARM64 版本</span>
                         </a>
-                        <small class="txt-hint">(~{import.meta.env.PB_MAC_ARM_SIZE}MB zip)</small>
+                        <small class="txt-hint">（约 {import.meta.env.PB_MAC_ARM_SIZE}MB zip）</small>
                     </div>
                 </li>
             </ul>
@@ -163,29 +159,28 @@
 </div>
 
 <p class="txt-sm txt-hint">
-    See the
+    更多平台和详细信息请参见
     <a href={import.meta.env.PB_GITHUB_RELEASES_URL} target="_blank" rel="noreferrer noopener">
-        GitHub Releases page
+        GitHub Releases 页面
     </a>
-    for other platforms and more details.
 </p>
 
 <hr />
 
 <p>
-    Once you've extracted the archive, you could start the application by running
-    <code><strong>./pocketbase serve</strong></code> in the extracted directory.
+    解压后，你可以在解压目录下运行
+    <code><strong>./pocketbase serve</strong></code> 启动应用。
 </p>
 <p>
-    <strong>And that's it!</strong>
-    The first time it will generate an installer link that should be automatically opened in the browser to setup
-    your first superuser account
+    <strong>就是这么简单！</strong>
+    第一次启动时会生成一个安装链接，并自动在浏览器中打开，用于设置你的第一个超级用户账号
     <small class="txt-hint">
-        (you can also create the first superuser manually via
-        <code>./pocketbase superuser create EMAIL PASS</code>)
-    </small>.
+        （你也可以通过
+        <code>./pocketbase superuser create EMAIL PASS</code>
+        手动创建第一个超级用户）
+    </small>。
 </p>
-<p>The started web server has the following default routes:</p>
+<p>启动后的 Web 服务器默认有以下路由：</p>
 <div class="alert m-t-10 m-b-xs">
     <div class="content">
         <ul>
@@ -194,15 +189,14 @@
                 <a href="http://127.0.0.1:8090" target="_blank">
                     <code>http://127.0.0.1:8090</code>
                 </a>
-                - if <code>pb_public</code> directory exists, serves the static content from it (html, css, images,
-                etc.)
+                - 如果存在 <code>pb_public</code> 目录，则会从中提供静态内容（html、css、图片等）
             </li>
             <li class="m-b-5">
                 <!-- svelte-ignore security-anchor-rel-noreferrer -->
                 <a href="http://127.0.0.1:8090/_/" target="_blank">
                     <code>http://127.0.0.1:8090/_/</code>
                 </a>
-                - superusers dashboard
+                - 超级用户仪表盘
             </li>
             <li>
                 <!-- svelte-ignore security-anchor-rel-noreferrer -->
@@ -214,26 +208,25 @@
         </ul>
     </div>
 </div>
-<p>The prebuilt PocketBase executable will create and manage 2 new directories alongside the executable:</p>
+<p>预编译的 PocketBase 可执行文件会在可执行文件所在目录下创建和管理两个新目录：</p>
 <ul>
     <li>
-        <code>pb_data</code> - stores your application data, uploaded files, etc. (usually should be added in
-        <code>.gitignore</code>).
+        <code>pb_data</code> - 存储你的应用数据、上传的文件等（通常应加入 <code>.gitignore</code>）。
     </li>
     <li>
-        <code>pb_migrations</code> - contains JS migration files with your collection changes (can be safely
-        committed in your repository).
+        <code>pb_migrations</code> - 包含你的 collection 变更的 JS 迁移文件（可安全提交到仓库）。
         <br />
         <div class="txt-hint m-b-xs">
-            You can even write custom migration scripts. For more info check the
-            <a href="/docs/js-migrations">JS migrations docs</a>.
+            你甚至可以编写自定义迁移脚本。更多信息请查看
+            <a href="/docs/js-migrations">JS 迁移文档</a>。
         </div>
     </li>
 </ul>
 <p>
-    You could find all available commands and their options by running
-    <code>./pocketbase --help</code> or
+    你可以通过运行
+    <code>./pocketbase --help</code> 或
     <code>./pocketbase [command] --help</code>
+    查看所有可用命令及其选项
 </p>
 
 <style>

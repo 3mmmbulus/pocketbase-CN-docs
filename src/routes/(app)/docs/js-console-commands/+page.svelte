@@ -3,12 +3,11 @@
 </script>
 
 <p>
-    You can register custom console commands using
-    <code>app.rootCmd.addCommand(cmd)</code>, where <code>cmd</code> is a
-    <a href="/jsvm/classes/Command.html" target="_blank" rel="noopener noreferrer">Command</a> instance.
+    你可以使用 <code>app.rootCmd.addCommand(cmd)</code> 注册自定义控制台命令，其中 <code>cmd</code> 是一个
+    <a href="/jsvm/classes/Command.html" target="_blank" rel="noopener noreferrer">Command</a> 实例。
 </p>
 
-<p>Here is an example:</p>
+<p>示例：</p>
 <CodeBlock
     language="go"
     content={`
@@ -21,7 +20,7 @@
     `}
 />
 
-<p>To run the command you can execute:</p>
+<p>要运行该命令，你可以执行：</p>
 <CodeBlock
     language="html"
     content={`
@@ -35,9 +34,7 @@
     </div>
     <div class="content">
         <p>
-            Keep in mind that the console commands execute in their own separate app process and run
-            independently from the main <code>serve</code> command (aka. hook events between different processes
-            are not shared with one another).
+            请注意，控制台命令会在各自独立的应用进程中执行，并且与主 <code>serve</code> 命令相互独立（即不同进程之间的 hook 事件不会相互共享）。
         </p>
     </div>
 </div>
