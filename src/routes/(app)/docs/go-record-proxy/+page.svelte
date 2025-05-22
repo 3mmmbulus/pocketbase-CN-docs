@@ -3,24 +3,19 @@
 </script>
 
 <p>
-    The available <a href="/docs/go-records"><code>core.Record</code> and its helpers</a>
-    are usually the recommended way to interact with your data, but in case you want a typed access to your record
-    fields you can create a helper struct that embeds
+    推荐使用 <a href="/docs/go-records"><code>core.Record</code> 及其辅助方法</a> 与数据进行交互，但如果你希望以类型化方式访问记录字段，可以创建一个嵌入了
     <a href="{import.meta.env.PB_GODOC_URL}/core#BaseRecordProxy" target="_blank" rel="noopener noreferrer">
         <code>core.BaseRecordProxy</code>
     </a>
-    <em>(which implements the <code>core.RecordProxy</code> interface)</em> and define your collection fields as
-    getters and setters.
+    的辅助结构体
+    <em>（它实现了 <code>core.RecordProxy</code> 接口）</em>，并将你的集合字段定义为 getter 和 setter 方法。
 </p>
 
 <p>
-    By implementing the <code>core.RecordProxy</code> interface you can use your custom struct as part of a
-    <code>RecordQuery</code> result like a regular record model. In addition, every DB change through the proxy
-    struct will trigger the corresponding record validations and hooks. This ensures that other parts of your app,
-    including 3rd party plugins, that don't know or use your custom struct will still work as expected.
+    通过实现 <code>core.RecordProxy</code> 接口，你可以像常规记录模型一样在 <code>RecordQuery</code> 结果中使用自定义结构体。此外，通过代理结构体进行的每一次数据库变更都会触发相应的记录校验和钩子。这确保了应用的其他部分（包括不了解或未使用你自定义结构体的第三方插件）依然能正常工作。
 </p>
 
-<p>Below is a sample <code>Article</code> record proxy implementation:</p>
+<p>下面是一个 <code>Article</code> 记录代理的示例实现：</p>
 <CodeBlock
     language="go"
     content={`
@@ -66,8 +61,7 @@
 />
 
 <p>
-    Accessing and modifying the proxy records is the same as for the regular records. Continuing with the
-    above <code>Article</code> example:
+    访问和修改代理记录的方式与普通记录相同。继续以上 <code>Article</code> 示例：
 </p>
 <CodeBlock
     language="go"
@@ -108,8 +102,7 @@
 />
 
 <p>
-    If you have an existing <code>*core.Record</code> value you can also load it into your proxy using the
-    <code>SetProxyRecord</code> method:
+    如果你已有一个 <code>*core.Record</code> 值，也可以通过 <code>SetProxyRecord</code> 方法加载到你的代理结构体中：
 </p>
 
 <CodeBlock
