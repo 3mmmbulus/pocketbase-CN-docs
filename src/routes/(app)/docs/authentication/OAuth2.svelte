@@ -16,22 +16,23 @@
     </div>
     <div class="content">
         <p>
-            开始之前，你需要在第三方提供商的后台创建一个 OAuth2 应用，以获取
-            <strong>Client Id</strong> 和 <strong>Client Secret</strong>，并注册一个重定向 URL
+            Before starting, you'll need to create an OAuth2 app in the provider's dashboard in order to get a
+            <strong>Client Id</strong> and <strong>Client Secret</strong>, and register a redirect URL
             <i
                 class="ri-question-line link-hint"
                 use:tooltip={`For the "All in one" flow it should be \nhttps://yourdomain.com/api/oauth2-redirect.` +
                     `\n\n` +
                     `For the "Manual code exchange" flow, the redirect URL is your own custom endpoint.`}
-            />。
+            />.
         </p>
         <p>
-            获得 <strong>Client Id</strong> 和 <strong>Client Secret</strong> 后，你可以在 PocketBase 认证集合选项中启用并配置该提供商（<em class="txt-sm"
+            Once you have obtained the <strong>Client Id</strong> and <strong>Client Secret</strong>, you can
+            enable and configure the provider from your PocketBase auth collection options (<em class="txt-sm"
                 >PocketBase {">"} Collections {">"}
                 {"{YOUR_COLLECTION}"}
                 {">"} Edit collection (settings cogwheel) {">"} Options
                 {">"} OAuth2</em
-            >）。
+            >).
         </p>
     </div>
 </div>
@@ -43,29 +44,30 @@
             class:active={activeTab === TAB_ALL_IN_ONE}
             on:click={() => (activeTab = TAB_ALL_IN_ONE)}
         >
-            一体化流程（<em>推荐</em>）
+            All in one (<em>recommended</em>)
         </button>
         <button
             class="tab-item active"
             class:active={activeTab === TAB_MANUAL_CODE}
             on:click={() => (activeTab = TAB_MANUAL_CODE)}
         >
-            手动 code 交换
+            Manual code exchange
         </button>
     </div>
     <div class="tabs-content">
         <div class="tab-item" class:active={activeTab === TAB_ALL_IN_ONE}>
             <p>
-                此方法在一次调用中完成所有操作，无需自定义重定向、deeplink 或页面刷新。
+                This method handles everything within a single call without having to define custom redirects,
+                deeplinks or even page reload.
             </p>
             <p>
                 <strong>
-                    创建 OAuth2 应用时，回调/重定向 URL 必须使用
+                    When creating your OAuth2 app, for a callback/redirect URL you have to use the
                     <code class="txt-bold">https://yourdomain.com/api/oauth2-redirect</code>
                 </strong>
-                （<em>
-                    本地测试时可用 <code>http://127.0.0.1:8090/api/oauth2-redirect</code>
-                </em>）。
+                (<em>
+                    or when testing locally - <code>http://127.0.0.1:8090/api/oauth2-redirect</code>
+                </em>).
             </p>
 
             <div class="clearfix m-b-xs" />
@@ -127,27 +129,27 @@
             />
         </div>
         <div class="tab-item" class:active={activeTab === TAB_MANUAL_CODE}>
-            <p>手动使用 OAuth2 code 认证时，你需要准备 2 个端点：</p>
+            <p>When authenticating manually with OAuth2 code you'll need 2 endpoints:</p>
             <ul>
-                <li>用于展示“使用...登录”链接的页面</li>
+                <li>somewhere to show the "Login with ..." links</li>
                 <li>
-                    用于处理第三方重定向并交换 code 为 token 的页面
+                    somewhere to handle the provider's redirect in order to exchange the auth code for token
                 </li>
             </ul>
-            <p>以下是一个简单的网页示例：</p>
+            <p>Here is a simple web example:</p>
             <ol>
                 <li class="m-b-xs">
                     <p>
-                        <strong>链接页面</strong>
-                        （如 https://127.0.0.1:8090，服务 <code>pb_public/index.html</code>）：
+                        <strong>Links page</strong>
+                        (e.g. https://127.0.0.1:8090 serving <code>pb_public/index.html</code>):
                     </p>
                     <CodeBlock language="html" content={indexExample} />
                 </li>
                 <li class="m-b-xs">
                     <p>
-                        <strong>重定向处理页面</strong>
-                        （如 https://127.0.0.1:8090/redirect.html，服务
-                        <code>pb_public/redirect.html</code>）：
+                        <strong>Redirect handler page</strong>
+                        (e.g. https://127.0.0.1:8090/redirect.html serving
+                        <code>pb_public/redirect.html</code>):
                     </p>
                     <CodeBlock language="html" content={redirectExample} />
                 </li>
@@ -159,7 +161,11 @@
                 </div>
                 <div class="content">
                     <p>
-                        使用 Apple 登录时，如果采用“手动 code 交换”流程，重定向处理页面必须支持 <code>POST</code> 请求，以便接收 Apple 用户的姓名和邮箱。如果只需要 Apple 用户 id，可以保持重定向处理页面为 <code>GET</code>，但需将 Apple 授权 url 中的 <code>response_mode=form_post</code> 替换为 <code>response_mode=query</code>。
+                        When using the "Manual code exchange" flow for sign-in with Apple your redirect
+                        handler must accept <code>POST</code> requests in order to receive the name and the
+                        email of the Apple user. If you just need the Apple user id, you can keep the redirect
+                        handler <code>GET</code> but you'll need to replace in the Apple authorization url
+                        <code>response_mode=form_post</code> with <code>response_mode=query</code>.
                     </p>
                 </div>
             </div>

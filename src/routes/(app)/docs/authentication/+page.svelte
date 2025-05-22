@@ -7,21 +7,27 @@
 
 <Toc />
 
-<HeadingLink title="概述" />
+<HeadingLink title="Overview" />
 <p>
-    只要客户端在请求中携带有效的 <code>Authorization:YOUR_AUTH_TOKEN</code> 头部，即视为已认证。
+    A single client is considered authenticated as long as it sends valid
+    <code>Authorization:YOUR_AUTH_TOKEN</code> header with the request.
 </p>
 <p>
-    PocketBase 的 Web API 完全是无状态的，没有传统意义上的会话（即使 token 也不会存储在数据库中）。
+    The PocketBase Web APIs are fully stateless and there are no sessions in the traditional sense (even the
+    tokens are not stored in the database).
 </p>
 <p>
-    由于没有会话且服务器不存储 token，因此也没有登出接口。要“登出”用户，只需在本地状态中忽略该 token（比如使用 SDK 时调用 <code>pb.authStore.clear()</code>）。
+    Because there are no sessions and we don't store the tokens on the server there is also no logout
+    endpoint. To "logout" a user you can simply disregard the token from your local state (aka.
+    <code>pb.authStore.clear()</code> if you use the SDKs).
 </p>
 <p>
-    认证 token 可以通过特定的认证集合 Web API 生成，也可以通过 Go/JS 以编程方式生成。
+    The auth token could be generated either through the specific auth collection Web APIs or programmatically
+    via Go/JS.
 </p>
 <p>
-    所有允许的认证集合方法都可以在对应的认证集合选项中单独配置。
+    All allowed auth collection methods can be configured individually from the specific auth collection
+    options.
 </p>
 
 <div class="alert alert-info m-t-sm m-b-sm">
@@ -30,29 +36,31 @@
     </div>
     <div class="content">
         <p>
-            请注意，PocketBase 管理员（即 <code>_superusers</code>）与普通认证集合记录类似，但有两点不同：
+            Note that PocketBase admins (aka. <code>_superusers</code>) are similar to the regular auth
+            collection records with 2 caveats:
         </p>
         <ul>
-            <li><code>_superusers</code> 集合不支持 OAuth2 作为认证方式</li>
-            <li>超级用户可以访问和修改所有内容（集合 API 规则会被忽略）</li>
+            <li>OAuth2 is not supported as auth method for the <code>_superusers</code> collection</li>
+            <li>Superusers can access and modify anything (collection API rules are ignored)</li>
         </ul>
     </div>
 </div>
 
-<HeadingLink title="密码认证" />
+<HeadingLink title="Authenticate with password" />
 <div class="content m-b-xs">
     <p>
-        要使用密码认证，必须启用 <em>Identity/Password</em> 认证集合选项
+        To authenticate with password you must enable the <em>Identity/Password</em> auth collection option
         <em>
-            （详见
+            (see also
             <a href="/docs/api-records/#auth-with-password" target="_blank" class="txt-sm"
-                >Web API 参考
+                >Web API reference
             </a>
-            ）
-        </em>。
+            )
+        </em>.
     </p>
     <p>
-        默认的身份字段是 <code>email</code>，但你也可以配置其他唯一字段如“username”（该字段必须有唯一索引）。
+        The default identity field is the <code>email</code> but you can configure any other unique field like
+        "username" (it must have a UNIQUE index).
     </p>
 </div>
 <!-- prettier-ignore -->
@@ -93,28 +101,32 @@
     `}
 />
 
-<HeadingLink title="OTP 认证" />
+<HeadingLink title="Authenticate with OTP" />
 <div class="content m-b-xs">
     <p>
-        要使用邮箱验证码认证，必须启用 <em>一次性密码（OTP）</em>
-        认证集合选项
+        To authenticate with email code you must enable the <em>One-time password (OTP)</em>
+        auth collection option
         <em>
-            （详见
-            <a href="/docs/api-records/#auth-with-otp" target="_blank" class="txt-sm">Web API 参考 </a>
-            ）
-        </em>。
+            (see also
+            <a href="/docs/api-records/#auth-with-otp" target="_blank" class="txt-sm">Web API reference </a>
+            )
+        </em>.
     </p>
     <p>
-        通常流程是用户手动输入收到的邮箱验证码，你也可以在集合选项中调整默认邮件模板，并添加包含 OTP 及其 id 作为查询参数的 url
+        The usual flow is the user typing manually the received password from their email but you can also
+        adjust the default email template from the collection options and add a url containing the OTP and its
+        id as query parameters
         <em>
-            （你可以使用 <code>{`{OTP}`}</code> 和 <code>{`{OTP_ID}`}</code> 占位符）
-        </em>。
+            (you have access to <code>{`{OTP}`}</code> and <code>{`{OTP_ID}`}</code> placeholders)
+        </em>.
     </p>
     <p>
-        注意：请求 OTP 时，即使提供的邮箱不存在，也会返回 <code>otpId</code>，以实现简单的枚举保护（不会创建或发送任何内容）。
+        Note that when requesting an OTP we return an <code>otpId</code> even if a user with the provided email
+        doesn't exist as a very rudimentary enumeration protection (it doesn't create or send anything).
     </p>
     <p>
-        成功验证 OTP 后，相关用户邮箱会被自动标记为“已验证”。
+        On successful OTP validation, by default the related user email will be automatically marked as
+        "verified".
     </p>
 </div>
 <div class="alert alert-warning m-b-sm">
@@ -123,10 +135,13 @@
     </div>
     <div class="content">
         <p>
-            请注意，单独使用 OTP 作为认证方式可能比其他方式更不安全，因为生成的验证码通常为 0-9 数字，存在被猜测或枚举的风险（尤其是配置较长有效期时）。
+            Keep in mind that OTP as a standalone authentication method could be less secure compared to the
+            other methods because the generated password is usually 0-9 digits and there is a risk of it being
+            guessed or enumerated (especially when a longer duration time is configured).
         </p>
         <p>
-            对于安全性要求较高的应用，建议将 OTP 与其他认证方式及 <a href="#multi-factor-authentication">多因素认证</a> 选项结合使用。
+            For security critical applications OTP is recommended to be used in combination with the other
+            auth methods and the <a href="#multi-factor-authentication">Multi-factor authentication</a> option.
         </p>
     </div>
 </div>
@@ -179,33 +194,36 @@
     `}
 />
 
-<HeadingLink title="OAuth2 认证" />
+<HeadingLink title="Authenticate with OAuth2" />
 <p>
-    你也可以通过 OAuth2 提供商（如 Google、GitHub、Microsoft 等）认证用户。具体集成示例见下方。
+    You can also authenticate your users with an OAuth2 provider (Google, GitHub, Microsoft, etc.). See the
+    section below for example integrations.
 </p>
 <OAuth2 />
 
-<HeadingLink title="多因素认证" />
+<HeadingLink title="Multi-factor authentication" />
 <div class="content m-b-xs">
-    <p>PocketBase v0.23+ 引入了可选的多因素认证（MFA）。</p>
+    <p>PocketBase v0.23+ introduced optional Multi-factor authentication (MFA).</p>
     <p>
-        启用后，用户需通过上述任意两种不同认证方式进行认证（顺序不限）。
+        If enabled, it requires the user to authenticate with any 2 different auth methods from above (the
+        order doesn't matter).
         <br />
-        典型流程如下：
+        The expected flow is:
     </p>
     <ol>
-        <li>用户通过“认证方式 A”认证。</li>
+        <li>User authenticates with "Auth method A".</li>
         <li>
-            成功后，返回 401 响应，JSON 体为 <code>{`{"mfaId": "..."}`}</code>（MFA“会话”存储在 <code>_mfas</code> 系统集合中）。
+            On success, a 401 response is sent with <code>{`{"mfaId": "..."}`}</code> as JSON body (the MFA
+            "session" is stored in the <code>_mfas</code> system collection).
         </li>
         <li>
-            用户按常规方式通过“认证方式 B”认证，
-            <strong>但需在请求体或查询参数中添加上一步的 <code>mfaId</code></strong
-            >。
+            User authenticates with "Auth method B" as usual
+            <strong>but adds the <code>mfaId</code> from the previous step as body or query parameter</strong
+            >.
         </li>
-        <li>成功后，返回常规认证响应，即 token + 认证记录数据。</li>
+        <li>On success, a regular auth response is returned, aka. token + auth record data.</li>
     </ol>
-    <p>以下为邮箱/密码 + OTP 认证示例：</p>
+    <p>Below is an example for email/password + OTP authentication:</p>
 </div>
 <CodeTabs
     js={`
@@ -252,16 +270,17 @@
     `}
 />
 
-<HeadingLink title="用户模拟登录" />
+<HeadingLink title="Users impersonation" />
 <div class="content m-b-xs">
     <p>
-        超级用户可以通过
-        <a href="/docs/api-records#impersonate">模拟登录接口</a>
-        生成 token 并以任意用户身份认证。
+        Superusers have the option to generate tokens and authenticate as anyone else via the
+        <a href="/docs/api-records#impersonate">Impersonate endpoint</a>
+        .
     </p>
-    <p>生成的模拟登录 token 可自定义有效期，但不可刷新！</p>
+    <p>The generated impersonate auth tokens can have custom duration but are not refreshable!</p>
     <p>
-        为方便起见，官方 SDK 会创建并返回一个独立客户端，该实例仅在内存中保存 token 状态，即只在模拟登录客户端实例存活期间有效。
+        For convenience the official SDKs creates and returns a standalone client that keeps the token state
+        in memory, aka. only for the duration of the impersonate client instance.
     </p>
 </div>
 <CodeTabs
@@ -309,20 +328,21 @@
     `}
 />
 
-<HeadingLink title="API 密钥" />
+<HeadingLink title="API keys" />
 <div class="content m-b-xs">
     <p>
-        虽然 PocketBase 没有传统意义上的“API 密钥”，但由于支持用户模拟登录，对于此类场景你可以使用生成的不可刷新的
-        <code>_superusers</code> 模拟登录 token。
+        While PocketBase doesn't have "API keys" in the traditional sense, as a side effect of the support for
+        users impersonation, for such cases you can use instead the generated non-refreshable
+        <code>_superusers</code> impersonate auth token.
         <br />
-        你可以通过上述模拟登录 API 或在
-        <em>Dashboard &gt; Collections &gt; _superusers &gt; {`{select superuser}`} &gt; “Impersonate” 下拉选项</em
-        >生成该 token：
+        You can generate such token via the above impersonate API or from the
+        <em>Dashboard > Collections > _superusers > {`{select superuser}`} > "Impersonate" dropdown option</em
+        >:
     </p>
 </div>
 <img
     src="/images/screenshots/impersonate.png"
-    alt="_superusers 模拟登录弹窗截图"
+    alt="Screenshot of the _superusers impersonate popup"
     class="screenshot"
 />
 <div class="alert alert-danger m-t-xs m-b-xs">
@@ -331,39 +351,44 @@
     </div>
     <div class="content">
         <p>
-            由于安全风险（超级用户可执行、访问和修改所有内容），请极其谨慎地使用生成的 <code>_superusers</code> token，仅用于内部
-            <strong>服务器间</strong> 通信。
+            Because of the security implications (superusers can execute, access and modify anything), use the
+            generated <code>_superusers</code> tokens with extreme care and only for internal
+            <strong>server-to-server</strong> communication.
         </p>
         <p>
-            若需使已发放的 token 失效，请更改对应超级用户账号密码
-            （如需重置所有超级用户的 token，可在 <code>_superusers</code> 集合选项中更改共享认证 token 密钥）。
+            To invalidate already issued tokens, you need to change the individual superuser account password
+            (or if you want to reset the tokens for all superusers - change the shared auth token secret from
+            the <code>_superusers</code> collection options).
         </p>
     </div>
 </div>
 
-<HeadingLink title="认证 token 校验" />
+<HeadingLink title="Auth token verification" />
 <p>
-    PocketBase 没有专门的 token 校验接口，但如果你想在第三方应用中校验现有认证 token，可以发送
+    PocketBase doesn't have a dedicated token verification endpoint, but if you want to verify an existing
+    auth token from a 3rd party app you can send an
     <a href="/docs/api-records/#auth-refresh">Auth refresh</a>
-    请求，即 <code>pb.collection("users").authRefresh()</code>。
+    call, aka. <code>pb.collection("users").authRefresh()</code>.
 </p>
-<p>token 有效时会返回带有刷新 <code>exp</code> 字段和最新用户数据的新 token。</p>
-<p>否则会返回错误响应。</p>
+<p>On valid token - it returns a new token with refreshed <code>exp</code> claim and the latest user data.</p>
+<p>Otherwise - returns an error response.</p>
 <p>
-    注意，调用 <code>authRefresh</code> 不会使之前发放的 token 失效，如果不需要可以安全地忽略新 token（如前所述，PocketBase 不会在服务器端存储 token）。
+    Note that calling <code>authRefresh</code> doesn't invalidate previously issued tokens and you can safely disregard
+    the new one if you don't need it (as mentioned in the beginning - PocketBase doesn't store the tokens on the
+    server).
 </p>
 <p>
-    性能方面，生成 JWT 所用的 <code>HS256</code> 算法几乎不会带来额外开销，响应时间基本与调用
+    Performance wise, the used <code>HS256</code> algorithm for generating the JWT has very little to no
+    impact and it is essentially the same in terms of response time as calling
     <code>getOne("USER_ID")</code>
     <em>
-        （详见
+        (see
         <a
             href="https://github.com/pocketbase/benchmarks/blob/master/results/hetzner_cax11.md#user-auth-refresh"
             target="_blank"
             rel="noopener noreferrer"
         >
-            性能测试
-        </a>）
-    </em>
-    相同。
+            benchmarks
+        </a>)
+    </em>.
 </p>

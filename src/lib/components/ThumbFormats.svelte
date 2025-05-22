@@ -1,4 +1,4 @@
-<p>The following thumb formats are currently supported:</p>
+<p>当前支持以下缩略图格式：</p>
 <ul>
     <li>
         <strong>WxH</strong>

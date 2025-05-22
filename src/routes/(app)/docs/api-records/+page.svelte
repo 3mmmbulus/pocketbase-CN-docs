@@ -16,6 +16,7 @@
     import EmailChange from "./EmailChange.svelte";
     import Impersonate from "./Impersonate.svelte";
 </script>
+<h2 id="auth-with-password">Auth with password</h2>
 
 <HeadingLink title="CRUD actions" />
 <div class="accordions">

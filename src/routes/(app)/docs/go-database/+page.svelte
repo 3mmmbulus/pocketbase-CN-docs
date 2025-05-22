@@ -9,16 +9,17 @@
     <a href="{import.meta.env.PB_GODOC_URL}/core#App" target="_blank" rel="noopener noreferrer">
         <code>core.App</code>
     </a>
-    是与数据库交互的主要接口。
+    is the main interface to interact with the database.
 </p>
 <p>
-    <code>App.DB()</code> 返回一个 <code>dbx.Builder</code>，可执行各种 SQL 语句，包括原始查询。
+    <code>App.DB()</code> returns a <code>dbx.Builder</code> that could run all kind of SQL statements, including
+    raw queries.
 </p>
 <p>
-    下方列出了大多数常见的数据库操作，更多信息可参考
+    Most of the common DB operations are listed below, but you can find further information in the
     <a href="https://pkg.go.dev/github.com/pocketbase/dbx" target="_blank" rel="noopener noreferrer">
         dbx package godoc
-    </a>。
+    </a>.
 </p>
 <div class="alert alert-info">
     <div class="icon">
@@ -26,24 +27,25 @@
     </div>
     <div class="content">
         <p>
-            如需了解如何以编程方式操作 Record 和 Collection 模型的更多细节和示例，也可参阅 <a href="/docs/go-collections">集合操作</a>
-            和
-            <a href="/docs/go-records">记录操作</a> 章节。
+            For more details and examples how to interact with Record and Collection models programmatically
+            you could also check <a href="/docs/go-collections">Collection operations</a>
+            and
+            <a href="/docs/go-records">Record operations</a> sections.
         </p>
     </div>
 </div>
 
 <Toc />
 
-<HeadingLink title="执行查询" />
+<HeadingLink title="Executing queries" />
 <p>
-    执行数据库查询时，可以从 <code>NewQuery("...")</code> 语句开始，然后调用以下方法之一：
+    To execute DB queries you can start with the <code>NewQuery("...")</code> statement and then call one of:
 </p>
 <ul>
     <li>
         <p>
             <HeadingLink title="Execute()" tag="code" />
-            - 用于不返回数据的查询语句：
+            - for any query statement that is not meant to retrieve data:
         </p>
         <CodeBlock
             language="go"
@@ -57,7 +59,7 @@
     <li>
         <p>
             <HeadingLink id="execute-one" title="One()" tag="code" />
-            - 将单行数据填充到结构体中：
+            - to populate a single row into a struct:
         </p>
         <!-- prettier-ignore -->
         <CodeBlock
@@ -81,7 +83,7 @@
     <li>
         <p>
             <HeadingLink id="execute-all" title="All()" tag="code" />
-            - 将多行数据填充到结构体切片中：
+            - to populate multiple rows into a slice of structs:
         </p>
         <!-- prettier-ignore -->
         <CodeBlock
@@ -104,10 +106,12 @@
     </li>
 </ul>
 
-<HeadingLink title="参数绑定" />
+<HeadingLink title="Binding parameters" />
 <p>
-    为防止 SQL 注入攻击，建议对所有来自用户输入的表达式值使用命名参数。可在 SQL 语句中使用命名 <code>{`{:paramName}`}</code>
-    占位符，然后通过 <code>Bind(params)</code> 为查询定义参数值。例如：
+    To prevent SQL injection attacks, you should use named parameters for any expression value that comes from
+    user input. This could be done using the named <code>{`{:paramName}`}</code>
+    placeholders in your SQL statement and then define the parameter values for the query with
+    <code>Bind(params)</code>. For example:
 </p>
 <!-- prettier-ignore -->
 <CodeBlock
@@ -130,12 +134,14 @@
     `}
 />
 
-<HeadingLink title="查询构造器" />
+<HeadingLink title="Query builder" />
 <p>
-    除了直接编写 SQL，还可以使用 db 查询构造器以编程方式组合 SQL 语句。
+    Instead of writing plain SQLs, you can also compose SQL statements programmatically using the db query
+    builder.
     <br />
-    每个 SQL 关键字都有对应的构造方法。例如 <code>SELECT</code> 对应 <code>Select()</code>，<code>FROM</code> 对应 <code>From()</code>，
-    <code>WHERE</code> 对应 <code>Where()</code>，等等。
+    Every SQL keyword has a corresponding query building method. For example, <code>SELECT</code> corresponds
+    to <code>Select()</code>, <code>FROM</code> corresponds to <code>From()</code>,
+    <code>WHERE</code> corresponds to <code>Where()</code>, and so on.
 </p>
 <!-- prettier-ignore -->
 <CodeBlock
@@ -158,11 +164,12 @@
 
 <HeadingLink title="Select(), AndSelect(), Distinct()" tag="h5" />
 <p>
-    <code>Select(...cols)</code> 方法用于初始化 <code>SELECT</code> 查询构造器，参数为要查询的列名列表。
+    The <code>Select(...cols)</code> method initializes a <code>SELECT</code> query builder. It accepts a list
+    of the column names to be selected.
     <br />
-    如需为已有查询添加更多列，可调用 <code>AndSelect()</code>。
+    To add additional columns to an existing select query, you can call <code>AndSelect()</code>.
     <br />
-    如需查询去重行，可调用 <code>Distinct(true)</code>。
+    To select distinct rows, you can call <code>Distinct(true)</code>.
 </p>
 <CodeBlock
     language="go"
@@ -177,7 +184,8 @@
 
 <HeadingLink title="From()" tag="h5" />
 <p>
-    <code>From(...tables)</code> 方法指定要查询的表名（普通表名会自动加引号）。
+    The <code>From(...tables)</code> method specifies which tables to select from (plain table names are automatically
+    quoted).
 </p>
 <CodeBlock
     language="go"
@@ -191,17 +199,18 @@
 
 <HeadingLink title="Join()" tag="h5" />
 <p>
-    <code>Join(type, table, on)</code> 方法用于指定 <code>JOIN</code> 子句。它有 3 个参数：
+    The <code>Join(type, table, on)</code> method specifies a <code>JOIN</code> clause. It takes 3 parameters:
 </p>
 <ul>
-    <li><code>type</code> - 连接类型字符串，如 <code>INNER JOIN</code>、<code>LEFT JOIN</code> 等</li>
-    <li><code>table</code> - 要连接的表名</li>
-    <li><code>on</code> - 可选的 <code>dbx.Expression</code>，作为 <code>ON</code> 条件</li>
+    <li><code>type</code> - join type string like <code>INNER JOIN</code>, <code>LEFT JOIN</code>, etc.</li>
+    <li><code>table</code> - the name of the table to be joined</li>
+    <li><code>on</code> - optional <code>dbx.Expression</code> as an <code>ON</code> clause</li>
 </ul>
 <p>
-    为方便起见，也可使用 <code>InnerJoin(table, on)</code>、<code>LeftJoin(table, on)</code>、
-    <code>RightJoin(table, on)</code> 快捷方法，分别指定 <code>INNER JOIN</code>、<code>LEFT JOIN</code> 和
-    <code>RIGHT JOIN</code>。
+    For convenience, you can also use the shortcuts <code>InnerJoin(table, on)</code>,
+    <code>LeftJoin(table, on)</code>,
+    <code>RightJoin(table, on)</code> to specify <code>INNER JOIN</code>, <code>LEFT JOIN</code> and
+    <code>RIGHT JOIN</code>, respectively.
 </p>
 <CodeBlock
     language="go"
@@ -217,11 +226,12 @@
 
 <HeadingLink title="Where(), AndWhere(), OrWhere()" tag="h5" />
 <p>
-    <code>Where(exp)</code> 方法指定查询的 <code>WHERE</code> 条件。
+    The <code>Where(exp)</code> method specifies the <code>WHERE</code> condition of the query.
     <br />
-    也可以使用 <code>AndWhere(exp)</code> 或 <code>OrWhere(exp)</code> 为已有 <code>WHERE</code> 子句追加一个或多个条件。
+    You can also use <code>AndWhere(exp)</code> or <code>OrWhere(exp)</code> to append additional one or more
+    conditions to an existing <code>WHERE</code> clause.
     <br />
-    每个 where 条件都接受一个 <code>dbx.Expression</code>（见下方完整列表）。
+    Each where condition accepts a single <code>dbx.Expression</code> (see below for full list).
 </p>
 <CodeBlock
     language="go"
@@ -256,13 +266,14 @@
 />
 
 <p>
-    可用的 <code>dbx.Expression</code> 方法如下：
+    The following <code>dbx.Expression</code> methods are available:
 </p>
 <ul>
     <li>
         <HeadingLink title="dbx.NewExp(raw, optParams)" tag="code" />
         <br />
-        生成带有指定原始查询片段的表达式。可通过 <code>optParams</code> 绑定 <code>dbx.Params</code>。
+        Generates an expression with the specified raw query fragment. Use the <code>optParams</code> to bind
+        <code>dbx.Params</code> to the expression.
         <CodeBlock
             language="go"
             content={`
@@ -274,7 +285,8 @@
     <li>
         <HeadingLink title={`dbx.HashExp{k:v}`} tag="code" />
         <br />
-        从 map 生成哈希表达式，map 的键为需要过滤的数据库列名，值为对应的过滤值。
+        Generates a hash expression from a map whose keys are DB column names which need to be filtered according
+        to the corresponding values.
         <CodeBlock
             language="go"
             content={`
@@ -291,7 +303,7 @@
     <li>
         <HeadingLink title="dbx.Not(exp)" tag="code" />
         <br />
-        用 <code>NOT()</code> 包裹表达式，实现单个表达式取反。
+        Negates a single expression by wrapping it with <code>NOT()</code>.
         <CodeBlock
             language="go"
             content={`
@@ -303,7 +315,7 @@
     <li>
         <HeadingLink title="dbx.And(...exps)" tag="code" />
         <br />
-        用 <code>AND</code> 拼接多个表达式，生成新表达式。
+        Creates a new expression by concatenating the specified ones with <code>AND</code>.
         <CodeBlock
             language="go"
             content={`
@@ -318,7 +330,7 @@
     <li>
         <HeadingLink title="dbx.Or(...exps)" tag="code" />
         <br />
-        用 <code>OR</code> 拼接多个表达式，生成新表达式。
+        Creates a new expression by concatenating the specified ones with <code>OR</code>.
         <CodeBlock
             language="go"
             content={`
@@ -333,7 +345,7 @@
     <li>
         <HeadingLink title="dbx.In(col, ...values)" tag="code" />
         <br />
-        为指定列和允许值列表生成 <code>IN</code> 表达式。
+        Generates an <code>IN</code> expression for the specified column and the list of allowed values.
         <CodeBlock
             language="go"
             content={`
@@ -345,7 +357,7 @@
     <li>
         <HeadingLink title="dbx.NotIn(col, ...values)" tag="code" />
         <br />
-        为指定列和允许值列表生成 <code>NOT IN</code> 表达式。
+        Generates an <code>NOT IN</code> expression for the specified column and the list of allowed values.
         <CodeBlock
             language="go"
             content={`
@@ -357,9 +369,13 @@
     <li>
         <HeadingLink title="dbx.Like(col, ...values)" tag="code" />
         <br />
-        为指定列和可能的字符串生成 <code>LIKE</code> 表达式。如果有多个值，列需同时匹配<strong>所有</strong>值。
+        Generates a <code>LIKE</code> expression for the specified column and the possible strings that the
+        column should be like. If multiple values are present, the column should be like
+        <strong>all</strong> of them.
         <br />
-        默认每个值会被 <em>"%"</em> 包裹以实现模糊匹配。特殊字符如 <em>"%"</em>、<em>"\"</em>、<em>"_"</em> 也会被正确转义。可通过 <code>Escape(...pairs)</code> 和/或 <code>Match(left, right)</code> 修改默认行为。
+        By default, each value will be surrounded by <em>"%"</em> to enable partial matching. Special
+        characters like <em>"%"</em>, <em>"\"</em>, <em>"_"</em> will also be properly escaped. You may call
+        <code>Escape(...pairs)</code> and/or <code>Match(left, right)</code> to change the default behavior.
         <CodeBlock
             language="go"
             content={`
@@ -374,7 +390,7 @@
     <li>
         <HeadingLink title="dbx.NotLike(col, ...values)" tag="code" />
         <br />
-        类似 <code>Like()</code>，生成 <code>NOT LIKE</code> 表达式。
+        Generates a <code>NOT LIKE</code> expression in similar manner as <code>Like()</code>.
         <CodeBlock
             language="go"
             content={`
@@ -389,7 +405,8 @@
     <li>
         <HeadingLink title="dbx.OrLike(col, ...values)" tag="code" />
         <br />
-        类似 <code>Like()</code>，但多个值之间用 <code>OR</code> 拼接。
+        This is similar to <code>Like()</code> except that the column must be one of the provided values, aka.
+        multiple values are concatenated with <code>OR</code> instead of <code>AND</code>.
         <CodeBlock
             language="go"
             content={`
@@ -404,7 +421,8 @@
     <li>
         <HeadingLink title="dbx.OrNotLike(col, ...values)" tag="code" />
         <br />
-        类似 <code>NotLike()</code>，但多个值之间用 <code>OR</code> 拼接。
+        This is similar to <code>NotLike()</code> except that the column must not be one of the provided
+        values, aka. multiple values are concatenated with <code>OR</code> instead of <code>AND</code>.
         <CodeBlock
             language="go"
             content={`
@@ -419,7 +437,7 @@
     <li>
         <HeadingLink title="dbx.Exists(exp)" tag="code" />
         <br />
-        用 <code>EXISTS</code> 前缀指定表达式（通常为子查询）。
+        Prefix with <code>EXISTS</code> the specified expression (usually a subquery).
         <CodeBlock
             language="go"
             content={`
@@ -431,7 +449,7 @@
     <li>
         <HeadingLink title="dbx.NotExists(exp)" tag="code" />
         <br />
-        用 <code>NOT EXISTS</code> 前缀指定表达式（通常为子查询）。
+        Prefix with <code>NOT EXISTS</code> the specified expression (usually a subquery).
         <CodeBlock
             language="go"
             content={`
@@ -443,7 +461,7 @@
     <li>
         <HeadingLink title="dbx.Between(col, from, to)" tag="code" />
         <br />
-        生成指定范围的 <code>BETWEEN</code> 表达式。
+        Generates a <code>BETWEEN</code> expression with the specified range.
         <CodeBlock
             language="go"
             content={`
@@ -455,7 +473,7 @@
     <li>
         <HeadingLink title="dbx.NotBetween(col, from, to)" tag="code" />
         <br />
-        生成指定范围的 <code>NOT BETWEEN</code> 表达式。
+        Generates a <code>NOT BETWEEN</code> expression with the specified range.
         <CodeBlock
             language="go"
             content={`
@@ -468,11 +486,12 @@
 
 <HeadingLink title="OrderBy(), AndOrderBy()" tag="h5" />
 <p>
-    <code>OrderBy(...cols)</code> 指定查询的 <code>ORDER BY</code> 子句。
+    The <code>OrderBy(...cols)</code> specifies the <code>ORDER BY</code> clause of the query.
     <br />
-    列名可包含 <em>"ASC"</em> 或 <em>"DESC"</em> 以指定排序方向。
+    A column name can contain <em>"ASC"</em> or <em>"DESC"</em> to indicate its ordering direction.
     <br />
-    也可使用 <code>AndOrderBy(...cols)</code> 为已有 <code>ORDER BY</code> 子句追加更多列。
+    You can also use <code>AndOrderBy(...cols)</code> to append additional columns to an existing
+    <code>ORDER BY</code> clause.
 </p>
 <CodeBlock
     language="go"
@@ -488,9 +507,10 @@
 
 <HeadingLink title="GroupBy(), AndGroupBy()" tag="h5" />
 <p>
-    <code>GroupBy(...cols)</code> 指定查询的 <code>GROUP BY</code> 子句。
+    The <code>GroupBy(...cols)</code> specifies the <code>GROUP BY</code> clause of the query.
     <br />
-    也可使用 <code>AndGroupBy(...cols)</code> 为已有 <code>GROUP BY</code> 子句追加更多列。
+    You can also use <code>AndGroupBy(...cols)</code> to append additional columns to an existing
+    <code>GROUP BY</code> clause.
 </p>
 <CodeBlock
     language="go"
@@ -505,11 +525,14 @@
 
 <HeadingLink title="Having(), AndHaving(), OrHaving()" tag="h5" />
 <p>
-    <code>Having(exp)</code> 指定查询的 <code>HAVING</code> 子句。
+    The <code>Having(exp)</code> specifies the <code>HAVING</code> clause of the query.
     <br />
-    与 <code>Where(exp)</code> 类似，接受一个 <code>dbx.Expression</code>（见上方所有可用表达式）。
+    Similarly to
+    <code>Where(exp)</code>, it accept a single <code>dbx.Expression</code> (see all available expressions
+    listed above).
     <br />
-    也可使用 <code>AndHaving(exp)</code> 或 <code>OrHaving(exp)</code> 为已有 <code>HAVING</code> 子句追加一个或多个条件。
+    You can also use <code>AndHaving(exp)</code> or <code>OrHaving(exp)</code> to append additional one or
+    more conditions to an existing <code>HAVING</code> clause.
 </p>
 <CodeBlock
     language="go"
@@ -525,7 +548,7 @@
 
 <HeadingLink title="Limit()" tag="h5" />
 <p>
-    <code>Limit(number)</code> 方法指定查询的 <code>LIMIT</code> 子句。
+    The <code>Limit(number)</code> method specifies the <code>LIMIT</code> clause of the query.
 </p>
 <CodeBlock
     language="go"
@@ -540,7 +563,8 @@
 
 <HeadingLink title="Offset()" tag="h5" />
 <p>
-    <code>Offset(number)</code> 方法指定查询的 <code>OFFSET</code> 子句，通常与 <code>Limit(number)</code> 一起使用。
+    The <code>Offset(number)</code> method specifies the <code>OFFSET</code> clause of the query. Usually used
+    together with <code>Limit(number)</code>.
 </p>
 <CodeBlock
     language="go"
@@ -554,7 +578,7 @@
     `}
 />
 
-<HeadingLink title="事务" />
+<HeadingLink title="Transaction" />
 <TransactionInfoGo />
 <CodeBlock
     language="go"
@@ -580,5 +604,3 @@
         })
     `}
 />
-```
-</copilot-edited-file>
