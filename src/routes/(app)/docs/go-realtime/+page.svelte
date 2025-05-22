@@ -4,16 +4,15 @@
 </script>
 
 <p>
-    By default PocketBase sends realtime events only for Record create/update/delete operations (<em
-        >and for the OAuth2 auth redirect</em
-    >), but you are free to send custom realtime messages to the connected clients via the
+    默认情况下，PocketBase 只会为 Record 的创建、更新、删除操作（<em>以及 OAuth2 授权重定向</em>）发送实时事件，但你也可以通过
     <a
         href="{import.meta.env.PB_GODOC_URL}/core#BaseApp.SubscriptionsBroker"
         target="_blank"
         rel="noopener noreferrer"
     >
         <code>app.SubscriptionsBroker()</code>
-    </a> instance.
+    </a>
+    实例向已连接的客户端发送自定义实时消息。
 </p>
 <p>
     <a
@@ -23,7 +22,7 @@
     >
         <code>app.SubscriptionsBroker().Clients()</code>
     </a>
-    returns all connected
+    会返回所有已连接的
     <a
         href="{import.meta.env.PB_GODOC_URL}/tools/subscriptions#Client"
         target="_blank"
@@ -31,7 +30,7 @@
     >
         <code>subscriptions.Client</code>
     </a>
-    indexed by their unique connection id.
+    ，以唯一连接 id 进行索引。
 </p>
 <p>
     <a
@@ -41,16 +40,15 @@
     >
         <code>app.SubscriptionsBroker().ChunkedClients(size)</code>
     </a>
-    is similar but return the result as a chunked slice allowing you to split the iteration across several goroutines
-    (usually combined with
+    类似，但会以分块切片的形式返回结果，便于你在多个 goroutine 中分批处理
+    （通常结合
     <a href="https://pkg.go.dev/golang.org/x/sync/errgroup" target="_blank" rel="noopener noreferrer">
         <code>errgroup</code>
     </a>
-    ).
+    使用）。
 </p>
 <p>
-    The current auth record associated with a client could be accessed through
-    <code>client.Get(apis.RealtimeClientAuthKey)</code>
+    可以通过 <code>client.Get(apis.RealtimeClientAuthKey)</code> 获取与客户端关联的当前认证记录。
 </p>
 <div class="alert alert-info m-t-xs m-b-xs">
     <div class="icon">
@@ -58,15 +56,12 @@
     </div>
     <div class="content">
         <p>
-            Note that a single authenticated user could have more than one active realtime connection (aka.
-            multiple clients). This could happen for example when opening the same app in different tabs,
-            browsers, devices, etc.
+            注意：单个已认证用户可能拥有多个活跃的实时连接（即多个客户端）。例如在不同标签页、浏览器、设备等同时打开同一个应用时会出现这种情况。
         </p>
     </div>
 </div>
 <p>
-    Below you can find a minimal code sample that sends a JSON payload to all clients subscribed to the
-    "example" topic:
+    下方是一个最简代码示例，演示如何向订阅了 "example" 主题的所有客户端发送 JSON 数据包：
 </p>
 <CodeBlock
     language="go"
@@ -89,7 +84,7 @@
             for _, chunk := range chunks {
                 group.Go(func() error {
                     for _, client := range chunk {
-                        if !client.HasSubscription(subscription) {
+                        if (!client.HasSubscription(subscription)) {
                             continue
                         }
 
@@ -110,7 +105,7 @@
     `}
 />
 
-<p>From the client-side, users can listen to the custom subscription topic by doing something like:</p>
+<p>在客户端，用户可以通过如下方式监听自定义订阅主题：</p>
 <CodeTabs
     js={`
         import PocketBase from 'pocketbase';
