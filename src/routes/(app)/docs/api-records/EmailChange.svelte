@@ -5,19 +5,18 @@
     import EmailChangeConfirmApi from "./EmailChangeConfirmApi.svelte";
 
     const apiTabs = [
-        { title: "Request email change", component: EmailChangeRequestApi },
-        { title: "Confirm email change", component: EmailChangeConfirmApi },
+        { title: "请求邮箱变更", component: EmailChangeRequestApi },
+        { title: "确认邮箱变更", component: EmailChangeConfirmApi },
     ];
 
     let activeApiTab = 0;
 </script>
 
-<Accordion single title="Email change">
+<Accordion single title="邮箱变更">
     <div class="content m-b-sm">
-        <p>Sends auth record email change request.</p>
+        <p>发送认证记录邮箱变更请求。</p>
         <p>
-            On successful email change all previously issued auth tokens for the specific record will be
-            automatically invalidated.
+            邮箱变更成功后，该记录之前签发的所有认证令牌将会自动失效。
         </p>
     </div>
     <CodeTabs
@@ -33,10 +32,10 @@
             await pb.collection('users').requestEmailChange('new@example.com');
 
             // ---
-            // (optional) in your custom confirmation page:
+            // （可选）在你的自定义确认页面中：
             // ---
 
-            // note: after this call all previously issued auth tokens are invalidated
+            // 注意：此调用后之前签发的所有认证令牌都会失效
             await pb.collection('users').confirmEmailChange('EMAIL_CHANGE_TOKEN', 'YOUR_PASSWORD');
         `}
         dart={`
@@ -53,15 +52,15 @@
             ...
 
             // ---
-            // (optional) in your custom confirmation page:
+            // （可选）在你的自定义确认页面中：
             // ---
 
-            // note: after this call all previously issued auth tokens are invalidated
+            // 注意：此调用后之前签发的所有认证令牌都会失效
             await pb.collection('users').confirmEmailChange('EMAIL_CHANGE_TOKEN', 'YOUR_PASSWORD');
         `}
     />
 
-    <h6 class="m-b-xs">API details</h6>
+    <h6 class="m-b-xs">API 详情</h6>
     <div class="tabs">
         <div class="tabs-header compact">
             {#each apiTabs as tab, i}

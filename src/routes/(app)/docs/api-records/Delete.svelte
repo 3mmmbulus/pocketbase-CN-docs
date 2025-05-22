@@ -43,15 +43,14 @@
     let responseTab = responses[0].code;
 </script>
 
-<Accordion single title="Delete record">
+<Accordion single title="删除记录">
     <div class="content m-b-sm">
-        <p>Deletes a single collection <em>Record</em> by its ID.</p>
+        <p>根据 ID 删除单条集合<em>记录</em>。</p>
         <p>
-            Depending on the collection's <code>deleteRule</code> value, the access to this action may or may not
-            have been restricted.
+            是否允许执行此操作取决于集合的 <code>deleteRule</code> 配置。
         </p>
         <p class="txt-hint">
-            <em> You could find individual generated records API documentation from the Dashboard. </em>
+            <em>你可以在仪表盘中查看每个集合自动生成的记录 API 文档。</em>
         </p>
     </div>
 
@@ -76,7 +75,7 @@
         `}
     />
 
-    <h6 class="m-b-xs">API details</h6>
+    <h6 class="m-b-xs">API 详情</h6>
     <div class="api-route alert alert-danger">
         <strong class="label label-primary">DELETE</strong>
         <div class="content">
@@ -84,13 +83,13 @@
         </div>
     </div>
 
-    <div class="section-title">Path parameters</div>
+    <div class="section-title">路径参数</div>
     <table class="table-compact table-border m-b-base">
         <thead>
             <tr>
-                <th>Param</th>
-                <th>Type</th>
-                <th width="50%">Description</th>
+                <th>参数</th>
+                <th>类型</th>
+                <th width="50%">说明</th>
             </tr>
         </thead>
         <tbody>
@@ -99,19 +98,19 @@
                 <td>
                     <span class="label">String</span>
                 </td>
-                <td>ID or name of the record's collection.</td>
+                <td>记录所属集合的 ID 或名称。</td>
             </tr>
             <tr>
                 <td>recordId</td>
                 <td>
                     <span class="label">String</span>
                 </td>
-                <td>ID of the record to delete.</td>
+                <td>要删除的记录 ID。</td>
             </tr>
         </tbody>
     </table>
 
-    <div class="section-title">Responses</div>
+    <div class="section-title">响应</div>
     <div class="tabs">
         <div class="tabs-header compact combined left">
             {#each responses as response (response.code)}

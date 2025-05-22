@@ -50,15 +50,15 @@
     let responseTab = responses[0].code;
 </script>
 
-<p>The Realtime API is implemented via Server-Sent Events (SSE). Generally, it consists of 2 operations:</p>
+<p>Realtime API 通过 Server-Sent Events (SSE) 实现。通常包含 2 个操作：</p>
 <ol>
-    <li>establish SSE connection</li>
-    <li>submit client subscriptions</li>
+    <li>建立 SSE 连接</li>
+    <li>提交客户端订阅</li>
 </ol>
 
 <p>
-    SSE events are sent for <strong>create</strong>, <strong>update</strong>
-    and <strong>delete</strong> record operations.
+    SSE 事件会在 <strong>create</strong>、<strong>update</strong>
+    和 <strong>delete</strong> 记录操作时发送。
 </p>
 <div class="alert alert-info m-t-10 m-b-sm">
     <div class="icon">
@@ -66,17 +66,15 @@
     </div>
     <div class="content">
         <p>
-            <strong>You could subscribe to a single record or to an entire collection.</strong>
+            <strong>你可以订阅单条记录或整个集合。</strong>
         </p>
         <p>
-            When you subscribe to a <strong>single record</strong>, the collection's
-            <strong>ViewRule</strong> will be used to determine whether the subscriber has access to receive the
-            event message.
+            当你订阅<strong>单条记录</strong>时，将使用集合的
+            <strong>ViewRule</strong> 判断订阅者是否有权限接收事件消息。
         </p>
         <p>
-            When you subscribe to an <strong>entire collection</strong>, the collection's
-            <strong>ListRule</strong> will be used to determine whether the subscriber has access to receive the
-            event message.
+            当你订阅<strong>整个集合</strong>时，将使用集合的
+            <strong>ListRule</strong> 判断订阅者是否有权限接收事件消息。
         </p>
     </div>
 </div>
@@ -89,18 +87,15 @@
         </div>
 
         <p>
-            Establishes a new SSE connection and immediately sends a <code>PB_CONNECT</code> SSE event with the
-            created client ID.
+            建立新的 SSE 连接，并立即发送带有创建的 client ID 的 <code>PB_CONNECT</code> SSE 事件。
         </p>
         <p class="txt-hint">
-            <strong>NB!</strong> The user/superuser authorization happens during the first
+            <strong>注意！</strong> 用户/超级用户授权会在首次
             <a href="/docs/api-realtime#set-subscriptions">Set subscriptions</a>
-            call.
+            调用时进行。
         </p>
         <p>
-            If the connected client doesn't receive any new messages for 5 minutes, the server will send a
-            disconnect signal (this is to prevent forgotten/leaked connections). The connection will be
-            automatically reestablished if the client is still active (e.g. the browser tab is still open).
+            如果已连接的客户端 5 分钟内未收到任何新消息，服务器会发送断开信号（用于防止遗忘/泄漏的连接）。如果客户端仍然活跃（如浏览器标签页未关闭），连接会自动重新建立。
         </p>
     </Accordion>
 
@@ -111,39 +106,38 @@
         </div>
 
         <div class="content m-b-sm">
-            <p>Sets new active client's subscriptions (and auto unsubscribes from the previous ones).</p>
+            <p>设置新的活跃客户端订阅（并自动取消之前的订阅）。</p>
             <p>
-                If <code>Authorization</code> header is set, will authorize the client SSE connection with the
-                associated user or superuser.
+                如果设置了 <code>Authorization</code> 头，将使用关联的用户或超级用户为客户端 SSE 连接授权。
             </p>
         </div>
 
-        <div class="section-title">Body Parameters</div>
+        <div class="section-title">请求体参数</div>
         <table class="table-compact table-border">
             <thead>
                 <tr>
-                    <th>Param</th>
-                    <th>Type</th>
-                    <th width="50%">Description</th>
+                    <th>参数</th>
+                    <th>类型</th>
+                    <th width="50%">说明</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td>
                         <div class="inline-flex">
-                            <span class="label label-success">Required</span>
+                            <span class="label label-success">必填</span>
                             <span>clientId</span>
                         </div>
                     </td>
                     <td>
                         <span class="label">String</span>
                     </td>
-                    <td>ID of the SSE client connection.</td>
+                    <td>SSE 客户端连接的 ID。</td>
                 </tr>
                 <tr>
                     <td>
                         <div class="inline-flex">
-                            <span class="label label-warning">Optional</span>
+                            <span class="label label-warning">可选</span>
                             <span>subscriptions</span>
                         </div>
                     </td>
@@ -152,32 +146,31 @@
                     </td>
                     <td>
                         <p>
-                            The new client subscriptions to set in the format:
+                            要设置的新客户端订阅，格式为：
                             <br />
-                            <code>COLLECTION_ID_OR_NAME</code> or
-                            <code>COLLECTION_ID_OR_NAME/RECORD_ID</code>.
+                            <code>COLLECTION_ID_OR_NAME</code> 或
+                            <code>COLLECTION_ID_OR_NAME/RECORD_ID</code>。
                         </p>
                         <p>
-                            You can also attach optional query and header parameters as serialized json to a
-                            single topic using the <code>options</code>
-                            query parameter, e.g.:
+                            你还可以通过 <code>options</code>
+                            查询参数为单个 topic 附加可选的查询和 header 参数（序列化为 json），例如：
                             <CodeBlock
                                 content={`
                             COLLECTION_ID_OR_NAME/RECORD_ID?options={"query": {"abc": "123"}, "headers": {"x-token": "..."}}
                             `}
                             />
                         </p>
-                        <p>Leave empty to unsubscribe from everything.</p>
+                        <p>留空则取消所有订阅。</p>
                     </td>
                 </tr>
             </tbody>
         </table>
         <small class="block txt-hint m-t-10 m-b-base">
-            Body parameters could be sent as <em>JSON</em> or
-            <em>multipart/form-data</em>.
+            请求体参数可通过 <em>JSON</em> 或
+            <em>multipart/form-data</em> 发送。
         </small>
 
-        <div class="section-title">Responses</div>
+        <div class="section-title">响应</div>
         <div class="tabs">
             <div class="tabs-header compact left">
                 {#each responses as response (response.code)}
@@ -202,8 +195,8 @@
 </div>
 
 <p class="txt-bold">
-    All of this is seamlessly handled by the SDKs using just the <code>subscribe</code> and
-    <code>unsubscribe</code> methods:
+    以上所有操作，SDK 只需通过 <code>subscribe</code> 和
+    <code>unsubscribe</code> 方法即可无缝处理：
 </p>
 <CodeTabs
     js={`

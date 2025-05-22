@@ -59,15 +59,14 @@
     let responseTab = responses[0].code;
 </script>
 
-<Accordion single title="Create record">
+<Accordion single title="创建记录">
     <div class="content m-b-sm">
-        <p>Creates a new collection <em>Record</em>.</p>
+        <p>创建一个新的集合<em>记录</em>。</p>
         <p>
-            Depending on the collection's <code>createRule</code> value, the access to this action may or may not
-            have been restricted.
+            是否允许执行此操作取决于集合的 <code>createRule</code> 配置。
         </p>
         <p class="txt-hint">
-            <em> You could find individual generated records API documentation from the Dashboard. </em>
+            <em>你可以在仪表盘中查看每个集合自动生成的记录 API 文档。</em>
         </p>
     </div>
 
@@ -96,19 +95,19 @@
         `}
     />
 
-    <h6 class="m-b-xs">API details</h6>
+    <h6 class="m-b-xs">API 详情</h6>
     <div class="api-route alert alert-success">
         <strong class="label label-primary">POST</strong>
         <div class="content">/api/collections/<code>collectionIdOrName</code>/records</div>
     </div>
 
-    <div class="section-title">Path parameters</div>
+    <div class="section-title">路径参数</div>
     <table class="table-compact table-border m-b-base">
         <thead>
             <tr>
-                <th>Param</th>
-                <th>Type</th>
-                <th width="50%">Description</th>
+                <th>参数</th>
+                <th>类型</th>
+                <th width="50%">说明</th>
             </tr>
         </thead>
         <tbody>
@@ -117,25 +116,25 @@
                 <td>
                     <span class="label">String</span>
                 </td>
-                <td>ID or name of the record's collection.</td>
+                <td>记录所属集合的 ID 或名称。</td>
             </tr>
         </tbody>
     </table>
 
-    <div class="section-title">Body Parameters</div>
+    <div class="section-title">请求体参数</div>
     <table class="table-compact table-border">
         <thead>
             <tr>
-                <th>Param</th>
-                <th>Type</th>
-                <th width="50%">Description</th>
+                <th>参数</th>
+                <th>类型</th>
+                <th width="50%">说明</th>
             </tr>
         </thead>
         <tbody>
             <tr>
                 <td>
                     <div class="inline-flex">
-                        <span class="label label-warning">Optional</span>
+                        <span class="label label-warning">可选</span>
                         <span>id</span>
                     </div>
                 </td>
@@ -143,64 +142,64 @@
                     <span class="label">String</span>
                 </td>
                 <td>
-                    <strong>15 characters string</strong> to store as record ID.
+                    <strong>15 位字符串</strong>，用于作为记录 ID 存储。
                     <br />
-                    If not set, it will be auto generated.
+                    如果未设置，则自动生成。
                 </td>
             </tr>
 
             <tr>
-                <td colspan="3" class="txt-hint">Schema fields</td>
+                <td colspan="3" class="txt-hint">集合字段</td>
             </tr>
             <tr>
                 <td colspan="3">
-                    <strong>Any field from the collection's schema.</strong>
+                    <strong>集合 schema 中的任意字段。</strong>
                 </td>
             </tr>
 
             <tr>
-                <td colspan="3" class="txt-hint">Additional auth record fields</td>
+                <td colspan="3" class="txt-hint">额外认证记录字段</td>
             </tr>
             <tr>
                 <td>
                     <div class="inline-flex">
-                        <span class="label label-success">Required</span>
+                        <span class="label label-success">必填</span>
                         <span>password</span>
                     </div>
                 </td>
                 <td>
                     <span class="label">String</span>
                 </td>
-                <td>Auth record password.</td>
+                <td>认证记录密码。</td>
             </tr>
             <tr>
                 <td>
                     <div class="inline-flex">
-                        <span class="label label-success">Required</span>
+                        <span class="label label-success">必填</span>
                         <span>passwordConfirm</span>
                     </div>
                 </td>
                 <td>
                     <span class="label">String</span>
                 </td>
-                <td>Auth record password confirmation.</td>
+                <td>认证记录密码确认。</td>
             </tr>
         </tbody>
     </table>
     <small class="block txt-hint m-t-10 m-b-base">
-        Body parameters could be sent as <em>JSON</em> or
-        <em>multipart/form-data</em>.
+        请求体参数可通过 <em>JSON</em> 或
+        <em>multipart/form-data</em> 发送。
         <br />
-        File upload is supported only through <em>multipart/form-data</em>.
+        文件上传仅支持 <em>multipart/form-data</em>。
     </small>
 
-    <div class="section-title">Query parameters</div>
+    <div class="section-title">查询参数</div>
     <table class="table-compact table-border m-b-lg">
         <thead>
             <tr>
-                <th>Param</th>
-                <th>Type</th>
-                <th width="60%">Description</th>
+                <th>参数</th>
+                <th>类型</th>
+                <th width="60%">说明</th>
             </tr>
         </thead>
         <tbody>
@@ -209,7 +208,7 @@
         </tbody>
     </table>
 
-    <div class="section-title">Responses</div>
+    <div class="section-title">响应</div>
     <div class="tabs">
         <div class="tabs-header compact combined left">
             {#each responses as response (response.code)}

@@ -57,10 +57,10 @@
     let responseTab = responses[0].code;
 </script>
 
-<Accordion single title="List backups">
+<Accordion single title="备份列表">
     <div class="content m-b-sm">
-        <p>Returns list with all available backup files.</p>
-        <p>Only superusers can perform this action.</p>
+        <p>返回所有可用备份文件的列表。</p>
+        <p>仅超级用户可以执行此操作。</p>
     </div>
 
     <CodeTabs
@@ -88,19 +88,19 @@
         `}
     />
 
-    <h6 class="m-b-xs">API details</h6>
+    <h6 class="m-b-xs">API 详情</h6>
     <div class="api-route alert alert-info">
         <strong class="label label-primary">GET</strong>
         <div class="content">/api/backups</div>
     </div>
 
-    <div class="section-title">Query parameters</div>
+    <div class="section-title">查询参数</div>
     <table class="table-compact table-border m-b-base">
         <thead>
             <tr>
-                <th>Param</th>
-                <th>Type</th>
-                <th width="50%">Description</th>
+                <th>参数</th>
+                <th>类型</th>
+                <th width="50%">说明</th>
             </tr>
         </thead>
         <tbody>
@@ -108,7 +108,7 @@
         </tbody>
     </table>
 
-    <div class="section-title">Responses</div>
+    <div class="section-title">响应</div>
     <div class="tabs">
         <div class="tabs-header compact combined left">
             {#each responses as response (response.code)}

@@ -335,10 +335,10 @@
     let responseTab = responses[0].code;
 </script>
 
-<Accordion single title="List collections">
+<Accordion single title="集合列表">
     <div class="content m-b-sm">
-        <p>Returns a paginated Collections list.</p>
-        <p>Only superusers can perform this action.</p>
+        <p>返回分页的集合列表。</p>
+        <p>仅超级用户可执行此操作。</p>
     </div>
 
     <CodeTabs
@@ -386,20 +386,20 @@
         `}
     />
 
-    <h6 class="m-b-xs">API details</h6>
+    <h6 class="m-b-xs">API 详情</h6>
     <div class="api-route alert alert-info">
         <strong class="label label-primary">GET</strong>
         <div class="content">/api/collections</div>
-        <small class="txt-hint auth-header">Requires <code>Authorization:TOKEN</code></small>
+        <small class="txt-hint auth-header">需要 <code>Authorization:TOKEN</code></small>
     </div>
 
-    <div class="section-title">Query parameters</div>
+    <div class="section-title">查询参数</div>
     <table class="table-compact table-border m-b-base">
         <thead>
             <tr>
-                <th>Param</th>
-                <th>Type</th>
-                <th width="50%">Description</th>
+                <th>参数</th>
+                <th>类型</th>
+                <th width="50%">说明</th>
             </tr>
         </thead>
         <tbody>
@@ -408,14 +408,14 @@
                 <td>
                     <span class="label">Number</span>
                 </td>
-                <td>The page (aka. offset) of the paginated list (<em>default to 1</em>).</td>
+                <td>分页列表的页码（默认值为 1）。</td>
             </tr>
             <tr>
                 <td id="query-perPage">perPage</td>
                 <td>
                     <span class="label">Number</span>
                 </td>
-                <td>The max returned collections per page (<em>default to 30</em>).</td>
+                <td>每页返回的最大集合数（默认值为 30）。</td>
             </tr>
             <tr>
                 <td id="query-sort">sort</td>
@@ -424,21 +424,20 @@
                 </td>
                 <td>
                     <div class="content">
-                        <p>Specify the <em>ORDER BY</em> fields.</p>
+                        <p>指定 <em>ORDER BY</em> 字段。</p>
                         <p>
-                            Add <code>-</code> / <code>+</code> (default) in front of the attribute for DESC /
-                            ASC order, e.g.:
+                            在属性前加 <code>-</code> / <code>+</code>（默认）表示降序 / 升序，例如：
                         </p>
                         <CodeBlock
                             content={`
-                                // DESC by created and ASC by id
+                                // 按 created 降序，id 升序
                                 ?sort=-created,id
                             `}
                         />
                         <p>
-                            <strong>Supported collection sort fields:</strong> <br />
-                            <code>@random</code>, <code>id</code>, <code>created</code>,
-                            <code>updated</code>, <code>name</code>, <code>type</code>,
+                            <strong>支持的集合排序字段：</strong> <br />
+                            <code>@random</code>、<code>id</code>、<code>created</code>、
+                            <code>updated</code>、<code>name</code>、<code>type</code>、
                             <code>system</code>
                         </p>
                     </div>
@@ -451,16 +450,16 @@
                 </td>
                 <td>
                     <div class="content">
-                        <p>Filter expression to filter/search the returned collections list, e.g.:</p>
+                        <p>用于筛选/搜索返回集合列表的过滤表达式，例如：</p>
                         <CodeBlock
                             content={`
                                 ?filter=(name~'abc' && created>'2022-01-01')
                             `}
                         />
                         <p>
-                            <strong>Supported collection filter fields:</strong> <br />
-                            <code>id</code>, <code>created</code>, <code>updated</code>,
-                            <code>name</code>, <code>type</code>, <code>system</code>
+                            <strong>支持的集合过滤字段：</strong> <br />
+                            <code>id</code>、<code>created</code>、<code>updated</code>、
+                            <code>name</code>、<code>type</code>、<code>system</code>
                         </p>
                         <FilterSyntax />
                     </div>
@@ -471,7 +470,7 @@
         </tbody>
     </table>
 
-    <div class="section-title">Responses</div>
+    <div class="section-title">响应示例</div>
     <div class="tabs">
         <div class="tabs-header compact combined left">
             {#each responses as response (response.code)}

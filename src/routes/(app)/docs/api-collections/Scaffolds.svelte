@@ -247,13 +247,13 @@
     let responseTab = responses[0].code;
 </script>
 
-<Accordion single title="Scaffolds">
+<Accordion single title="集合模板">
     <div class="content m-b-sm">
         <p>
-            Returns an object will all of the collection types and their default fields
-            <em>(used primarily in the Dashboard UI)</em>.
+            返回包含所有集合类型及其默认字段的对象
+            <em>（主要用于管理后台界面）</em>。
         </p>
-        <p>Only superusers can perform this action.</p>
+        <p>只有超级用户可以执行此操作。</p>
     </div>
 
     <CodeTabs
@@ -281,15 +281,15 @@
         `}
     />
 
-    <h6 class="m-b-xs">API details</h6>
+    <h6 class="m-b-xs">API 详情</h6>
 
     <div class="api-route alert alert-info">
         <strong class="label label-primary">GET</strong>
         <div class="content">/api/collections/meta/scaffolds</div>
-        <small class="txt-hint auth-header">Requires <code>Authorization:TOKEN</code></small>
+        <small class="txt-hint auth-header">需要 <code>Authorization:TOKEN</code></small>
     </div>
 
-    <div class="section-title">Responses</div>
+    <div class="section-title">响应</div>
     <div class="tabs">
         <div class="tabs-header compact combined left">
             {#each responses as response (response.code)}

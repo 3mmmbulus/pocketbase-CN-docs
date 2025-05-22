@@ -43,13 +43,13 @@
     let responseTab = responses[0].code;
 </script>
 
-<Accordion single title="Create backup">
+<Accordion single title="创建备份">
     <div class="content m-b-sm">
-        <p>Creates a new app data backup.</p>
+        <p>创建一个新的应用数据备份。</p>
         <p>
-            This action will return an error if there is another backup/restore operation already in progress.
+            如果已有其他备份/恢复操作正在进行，此操作将返回错误。
         </p>
-        <p>Only superusers can perform this action.</p>
+        <p>仅超级用户可以执行此操作。</p>
     </div>
 
     <CodeTabs
@@ -77,27 +77,27 @@
         `}
     />
 
-    <h6 class="m-b-xs">API details</h6>
+    <h6 class="m-b-xs">API 详情</h6>
     <div class="api-route alert alert-success">
         <strong class="label label-primary">POST</strong>
         <div class="content">/api/backups</div>
-        <small class="txt-hint auth-header">Requires <code>Authorization:TOKEN</code></small>
+        <small class="txt-hint auth-header">需要 <code>Authorization:TOKEN</code></small>
     </div>
 
-    <div class="section-title">Body Parameters</div>
+    <div class="section-title">请求体参数</div>
     <table class="table-compact table-border">
         <thead>
             <tr>
-                <th>Param</th>
-                <th>Type</th>
-                <th width="50%">Description</th>
+                <th>参数</th>
+                <th>类型</th>
+                <th width="50%">说明</th>
             </tr>
         </thead>
         <tbody>
             <tr>
                 <td>
                     <div class="inline-flex">
-                        <span class="label label-warning">Optional</span>
+                        <span class="label label-warning">可选</span>
                         <span>name</span>
                     </div>
                 </td>
@@ -105,21 +105,21 @@
                     <span class="label">String</span>
                 </td>
                 <td>
-                    The base name of the backup file to create.
+                    要创建的备份文件基础名称。
                     <br />
-                    Must be in the format <code>[a-z0-9_-].zip</code>
+                    必须符合格式 <code>[a-z0-9_-].zip</code>
                     <br />
-                    If not set, it will be auto generated.
+                    如果未设置，将自动生成。
                 </td>
             </tr>
         </tbody>
     </table>
     <small class="block txt-hint m-t-10 m-b-base">
-        Body parameters could be sent as <em>JSON</em> or
-        <em>multipart/form-data</em>.
+        请求体参数可通过 <em>JSON</em> 或
+        <em>multipart/form-data</em> 发送。
     </small>
 
-    <div class="section-title">Responses</div>
+    <div class="section-title">响应</div>
     <div class="tabs">
         <div class="tabs-header compact combined left">
             {#each responses as response (response.code)}

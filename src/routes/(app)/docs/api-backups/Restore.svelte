@@ -43,13 +43,13 @@
     let responseTab = responses[0].code;
 </script>
 
-<Accordion single title="Restore backup">
+<Accordion single title="恢复备份">
     <div class="content m-b-sm">
-        <p>Restore a single backup by its name and restarts the current running PocketBase process.</p>
+        <p>通过名称恢复单个备份，并重启当前运行的 PocketBase 进程。</p>
         <p>
-            This action will return an error if there is another backup/restore operation already in progress.
+            如果已有其他备份/恢复操作正在进行，此操作将返回错误。
         </p>
-        <p>Only superusers can perform this action.</p>
+        <p>仅超级用户可以执行此操作。</p>
     </div>
 
     <CodeTabs
@@ -77,20 +77,20 @@
         `}
     />
 
-    <h6 class="m-b-xs">API details</h6>
+    <h6 class="m-b-xs">API 详情</h6>
     <div class="api-route alert alert-success">
         <strong class="label label-primary">POST</strong>
         <div class="content">/api/backups/<code>key</code>/restore</div>
-        <small class="txt-hint auth-header">Requires <code>Authorization:TOKEN</code></small>
+        <small class="txt-hint auth-header">需要 <code>Authorization:TOKEN</code></small>
     </div>
 
-    <div class="section-title">Path parameters</div>
+    <div class="section-title">路径参数</div>
     <table class="table-compact table-border m-b-base">
         <thead>
             <tr>
-                <th>Param</th>
-                <th>Type</th>
-                <th width="50%">Description</th>
+                <th>参数</th>
+                <th>类型</th>
+                <th width="50%">说明</th>
             </tr>
         </thead>
         <tbody>
@@ -99,12 +99,12 @@
                 <td>
                     <span class="label">String</span>
                 </td>
-                <td>The key of the backup file to restore.</td>
+                <td>要恢复的备份文件 key。</td>
             </tr>
         </tbody>
     </table>
 
-    <div class="section-title">Responses</div>
+    <div class="section-title">响应</div>
     <div class="tabs">
         <div class="tabs-header compact combined left">
             {#each responses as response (response.code)}

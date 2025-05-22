@@ -112,10 +112,10 @@
     let responseTab = responses[0].code;
 </script>
 
-<Accordion single title="Create collection">
+<Accordion single title="创建集合">
     <div class="content m-b-sm">
-        <p>Creates a new Collection.</p>
-        <p>Only superusers can perform this action.</p>
+        <p>创建一个新的 Collection。</p>
+        <p>仅超级用户可执行此操作。</p>
     </div>
 
     <CodeTabs
@@ -233,16 +233,16 @@
         `}
     />
 
-    <h6 class="m-b-xs">API details</h6>
+    <h6 class="m-b-xs">API 详情</h6>
     <div class="api-route alert alert-success">
         <strong class="label label-primary">POST</strong>
         <div class="content">/api/collections</div>
-        <small class="txt-hint auth-header">Requires <code>Authorization:TOKEN</code></small>
+        <small class="txt-hint auth-header">需要 <code>Authorization:TOKEN</code></small>
     </div>
 
-    <div class="section-title">Body Parameters</div>
+    <div class="section-title">请求体参数</div>
     <p class="txt-hint">
-        Body parameters could be sent as <em>JSON</em> or <em>multipart/form-data</em>.
+        请求体参数可通过 <em>JSON</em> 或 <em>multipart/form-data</em> 发送。
     </p>
     <CodeBlock
         content={`
@@ -397,13 +397,13 @@
     `}
     />
 
-    <div class="section-title">Query parameters</div>
+    <div class="section-title">查询参数</div>
     <table class="table-compact table-border m-b-base">
         <thead>
             <tr>
-                <th>Param</th>
-                <th>Type</th>
-                <th width="50%">Description</th>
+                <th>参数</th>
+                <th>类型</th>
+                <th width="50%">说明</th>
             </tr>
         </thead>
         <tbody>
@@ -411,7 +411,7 @@
         </tbody>
     </table>
 
-    <div class="section-title">Responses</div>
+    <div class="section-title">响应示例</div>
     <div class="tabs">
         <div class="tabs-header compact combined left">
             {#each responses as response (response.code)}

@@ -43,9 +43,9 @@
     let responseTab = responses[0].code;
 </script>
 
-<Accordion single title="List auth methods">
+<Accordion single title="列出认证方式">
     <div class="content m-b-sm">
-        <p>Returns a public list with the allowed collection authentication methods.</p>
+        <p>返回允许的集合认证方式的公开列表。</p>
     </div>
 
     <CodeTabs
@@ -69,19 +69,19 @@
         `}
     />
 
-    <h6 class="m-b-xs">API details</h6>
+    <h6 class="m-b-xs">API 详情</h6>
     <div class="api-route alert alert-info">
         <strong class="label label-primary">GET</strong>
         <div class="content">/api/collections/<code>collectionIdOrName</code>/auth-methods</div>
     </div>
 
-    <div class="section-title">Path parameters</div>
+    <div class="section-title">路径参数</div>
     <table class="table-compact table-border m-b-base">
         <thead>
             <tr>
-                <th>Param</th>
-                <th>Type</th>
-                <th width="50%">Description</th>
+                <th>参数</th>
+                <th>类型</th>
+                <th width="50%">说明</th>
             </tr>
         </thead>
         <tbody>
@@ -90,18 +90,18 @@
                 <td>
                     <span class="label">String</span>
                 </td>
-                <td>ID or name of the auth collection.</td>
+                <td>认证集合的 ID 或名称。</td>
             </tr>
         </tbody>
     </table>
 
-    <div class="section-title">Query parameters</div>
+    <div class="section-title">查询参数</div>
     <table class="table-compact table-border m-b-base">
         <thead>
             <tr>
-                <th>Param</th>
-                <th>Type</th>
-                <th width="50%">Description</th>
+                <th>参数</th>
+                <th>类型</th>
+                <th width="50%">说明</th>
             </tr>
         </thead>
         <tbody>
@@ -109,7 +109,7 @@
         </tbody>
     </table>
 
-    <div class="section-title">Responses</div>
+    <div class="section-title">响应</div>
     <div class="tabs">
         <div class="tabs-header compact combined left">
             {#each responses as response (response.code)}

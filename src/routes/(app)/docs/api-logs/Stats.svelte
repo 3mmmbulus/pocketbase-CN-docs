@@ -60,10 +60,10 @@
     let responseTab = responses[0].code;
 </script>
 
-<Accordion single title="Logs statistics">
+<Accordion single title="日志统计">
     <div class="content m-b-sm">
-        <p>Returns hourly aggregated logs statistics.</p>
-        <p>Only superusers can perform this action.</p>
+        <p>返回按小时聚合的日志统计数据。</p>
+        <p>仅超级用户可执行此操作。</p>
     </div>
 
     <CodeTabs
@@ -95,20 +95,20 @@
         `}
     />
 
-    <h6 class="m-b-xs">API details</h6>
+    <h6 class="m-b-xs">API 详情</h6>
     <div class="api-route alert alert-info">
         <strong class="label label-primary">GET</strong>
         <div class="content">/api/logs/stats</div>
-        <small class="txt-hint auth-header">Requires <code>Authorization:TOKEN</code></small>
+        <small class="txt-hint auth-header">需要 <code>Authorization:TOKEN</code></small>
     </div>
 
-    <div class="section-title">Query parameters</div>
+    <div class="section-title">查询参数</div>
     <table class="table-compact table-border m-b-base">
         <thead>
             <tr>
-                <th>Param</th>
-                <th>Type</th>
-                <th width="50%">Description</th>
+                <th>参数</th>
+                <th>类型</th>
+                <th width="50%">说明</th>
             </tr>
         </thead>
         <tbody>
@@ -119,17 +119,17 @@
                 </td>
                 <td>
                     <div class="content">
-                        <p>Filter expression to filter/search the logs, e.g.:</p>
+                        <p>用于筛选/搜索日志的过滤表达式，例如：</p>
                         <CodeBlock
                             content={`
                                 ?filter=(data.url~'test.com' && level>0)
                             `}
                         />
                         <p>
-                            <strong>Supported log filter fields:</strong> <br />
-                            <code>rowid</code>, <code>id</code>, <code>created</code>,
-                            <code>updated</code>, <code>level</code>, <code>message</code> and any
-                            <code>data.*</code> attribute.
+                            <strong>支持的日志过滤字段：</strong> <br />
+                            <code>rowid</code>、<code>id</code>、<code>created</code>、
+                            <code>updated</code>、<code>level</code>、<code>message</code> 以及任意
+                            <code>data.*</code> 属性。
                         </p>
                         <FilterSyntax />
                     </div>
@@ -139,7 +139,7 @@
         </tbody>
     </table>
 
-    <div class="section-title">Responses</div>
+    <div class="section-title">响应示例</div>
     <div class="tabs">
         <div class="tabs-header compact combined left">
             {#each responses as response (response.code)}

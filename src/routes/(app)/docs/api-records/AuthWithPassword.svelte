@@ -46,11 +46,10 @@
     let responseTab = responses[0].code;
 </script>
 
-<Accordion single title="Auth with password">
+<Accordion single title="密码认证">
     <div class="content m-b-sm">
         <p>
-            Authenticate a single auth record by combination of a password and a unique identity field (e.g.
-            email).
+            通过密码和唯一身份字段（如邮箱）组合认证单个认证记录。
         </p>
     </div>
 
@@ -97,19 +96,19 @@
         `}
     />
 
-    <h6 class="m-b-xs">API details</h6>
+    <h6 class="m-b-xs">API 详情</h6>
     <div class="api-route alert alert-success">
         <strong class="label label-primary">POST</strong>
         <div class="content">/api/collections/<code>collectionIdOrName</code>/auth-with-password</div>
     </div>
 
-    <div class="section-title">Path parameters</div>
+    <div class="section-title">路径参数</div>
     <table class="table-compact table-border m-b-base">
         <thead>
             <tr>
-                <th>Param</th>
-                <th>Type</th>
-                <th width="50%">Description</th>
+                <th>参数</th>
+                <th>类型</th>
+                <th width="50%">说明</th>
             </tr>
         </thead>
         <tbody>
@@ -118,71 +117,71 @@
                 <td>
                     <span class="label">String</span>
                 </td>
-                <td>ID or name of the auth collection.</td>
+                <td>认证集合的 ID 或名称。</td>
             </tr>
         </tbody>
     </table>
 
-    <div class="section-title">Body Parameters</div>
+    <div class="section-title">请求体参数</div>
     <table class="table-compact table-border">
         <thead>
             <tr>
-                <th>Param</th>
-                <th>Type</th>
-                <th width="50%">Description</th>
+                <th>参数</th>
+                <th>类型</th>
+                <th width="50%">说明</th>
             </tr>
         </thead>
         <tbody>
             <tr>
                 <td>
                     <div class="inline-flex">
-                        <span class="label label-success">Required</span>
+                        <span class="label label-success">必填</span>
                         <span class="txt">identity</span>
                     </div>
                 </td>
                 <td>
                     <span class="label">String</span>
                 </td>
-                <td>Auth record username or email address.</td>
+                <td>认证记录的用户名或邮箱地址。</td>
             </tr>
             <tr>
                 <td>
                     <div class="inline-flex">
-                        <span class="label label-success">Required</span>
+                        <span class="label label-success">必填</span>
                         <span class="txt">password</span>
                     </div>
                 </td>
                 <td>
                     <span class="label">String</span>
                 </td>
-                <td>Auth record password.</td>
+                <td>认证记录的密码。</td>
             </tr>
             <tr>
                 <td>
                     <div class="inline-flex">
-                        <span class="label label-warning">Optional</span>
+                        <span class="label label-warning">可选</span>
                         <span class="txt">identityField</span>
                     </div>
                 </td>
                 <td>
                     <span class="label">String</span>
                 </td>
-                <td>A specific identity field to use (by default fallbacks to the first matching one).</td>
+                <td>要使用的特定身份字段（默认使用第一个匹配项）。</td>
             </tr>
         </tbody>
     </table>
     <small class="block txt-hint m-t-10 m-b-base">
-        Body parameters could be sent as <em>JSON</em> or
-        <em>multipart/form-data</em>.
+        请求体参数可通过 <em>JSON</em> 或
+        <em>multipart/form-data</em> 发送。
     </small>
 
-    <div class="section-title">Query parameters</div>
+    <div class="section-title">查询参数</div>
     <table class="table-compact table-border m-b-base">
         <thead>
             <tr>
-                <th>Param</th>
-                <th>Type</th>
-                <th width="60%">Description</th>
+                <th>参数</th>
+                <th>类型</th>
+                <th width="60%">说明</th>
             </tr>
         </thead>
         <tbody>
@@ -191,7 +190,7 @@
         </tbody>
     </table>
 
-    <div class="section-title">Responses</div>
+    <div class="section-title">响应</div>
     <div class="tabs">
         <div class="tabs-header compact combined left">
             {#each responses as response (response.code)}

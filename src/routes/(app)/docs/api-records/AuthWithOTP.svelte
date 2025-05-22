@@ -5,19 +5,18 @@
     import AuthWithOTPAuthApi from "./AuthWithOTPAuthApi.svelte";
 
     const apiTabs = [
-        { title: "OTP Request", component: AuthWithOTPRequestApi },
-        { title: "OTP Auth", component: AuthWithOTPAuthApi },
+        { title: "OTP 请求", component: AuthWithOTPRequestApi },
+        { title: "OTP 验证", component: AuthWithOTPAuthApi },
     ];
 
     let activeApiTab = 0;
 </script>
 
-<Accordion single title="Auth with OTP">
+<Accordion single title="OTP 认证">
     <div class="content m-b-sm">
-        <p>Authenticate a single auth record with an one-time password (OTP).</p>
+        <p>使用一次性密码（OTP）认证单个认证记录。</p>
         <p>
-            Note that when requesting an OTP we return an <code>otpId</code> even if a user with the provided email
-            doesn't exist as a very basic enumeration protection.
+            注意：当请求 OTP 时，即使提供的邮箱用户不存在，我们也会返回一个 <code>otpId</code>，以实现基础的枚举保护。
         </p>
     </div>
     <CodeTabs
@@ -69,7 +68,7 @@
         `}
     />
 
-    <h6 class="m-b-xs">API details</h6>
+    <h6 class="m-b-xs">API 详情</h6>
     <div class="tabs">
         <div class="tabs-header compact">
             {#each apiTabs as tab, i}

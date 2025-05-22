@@ -52,13 +52,13 @@
     </div>
 </div>
 
-<div class="section-title">Path parameters</div>
+<div class="section-title">路径参数</div>
 <table class="table-compact table-border m-b-base">
     <thead>
         <tr>
-            <th>Param</th>
-            <th>Type</th>
-            <th width="50%">Description</th>
+            <th>参数</th>
+            <th>类型</th>
+            <th width="50%">说明</th>
         </tr>
     </thead>
     <tbody>
@@ -67,55 +67,55 @@
             <td>
                 <span class="label">String</span>
             </td>
-            <td>ID or name of the auth collection.</td>
+            <td>认证集合的 ID 或名称。</td>
         </tr>
     </tbody>
 </table>
 
-<div class="section-title">Body Parameters</div>
+<div class="section-title">请求体参数</div>
 <table class="table-compact table-border m-b-base">
     <thead>
         <tr>
-            <th>Param</th>
-            <th>Type</th>
-            <th width="50%">Description</th>
+            <th>参数</th>
+            <th>类型</th>
+            <th width="50%">说明</th>
         </tr>
     </thead>
     <tbody>
         <tr>
             <td>
                 <div class="inline-flex">
-                    <span class="label label-success">Required</span>
+                    <span class="label label-success">必填</span>
                     <span>otpId</span>
                 </div>
             </td>
             <td>
                 <span class="label">String</span>
             </td>
-            <td>The id of the OTP request.</td>
+            <td>OTP 请求的 id。</td>
         </tr>
         <tr>
             <td>
                 <div class="inline-flex">
-                    <span class="label label-success">Required</span>
+                    <span class="label label-success">必填</span>
                     <span>password</span>
                 </div>
             </td>
             <td>
                 <span class="label">String</span>
             </td>
-            <td>The one-time password.</td>
+            <td>一次性密码。</td>
         </tr>
     </tbody>
 </table>
 
-<div class="section-title">Query parameters</div>
+<div class="section-title">查询参数</div>
 <table class="table-compact table-border m-b-base">
     <thead>
         <tr>
-            <th>Param</th>
-            <th>Type</th>
-            <th width="60%">Description</th>
+            <th>参数</th>
+            <th>类型</th>
+            <th width="60%">说明</th>
         </tr>
     </thead>
     <tbody>
@@ -124,7 +124,7 @@
     </tbody>
 </table>
 
-<div class="section-title">Responses</div>
+<div class="section-title">响应</div>
 <div class="tabs">
     <div class="tabs-header compact combined left">
         {#each responses as response (response.code)}

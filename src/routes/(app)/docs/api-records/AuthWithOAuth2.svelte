@@ -58,13 +58,13 @@
     let responseTab = responses[0].code;
 </script>
 
-<Accordion single title={"Auth with OAuth2"}>
+<Accordion single title={"OAuth2 认证"}>
     <div class="content m-b-sm">
-        <p>Authenticate with an OAuth2 provider and returns a new auth token and record data.</p>
-        <p>This action usually should be called right after the provider login page redirect.</p>
+        <p>使用 OAuth2 提供商进行认证，并返回新的认证令牌和记录数据。</p>
+        <p>此操作通常应在提供商登录页面重定向后立即调用。</p>
         <p>
-            You could also check the
-            <a href="/docs/authentication#web-oauth2-integration">OAuth2 web integration example</a>.
+            你也可以查看
+            <a href="/docs/authentication#web-oauth2-integration">OAuth2 网页集成示例</a>。
         </p>
     </div>
 
@@ -123,19 +123,19 @@
         `}
     />
 
-    <h6 class="m-b-xs">API details</h6>
+    <h6 class="m-b-xs">API 详情</h6>
     <div class="api-route alert alert-success">
         <strong class="label label-primary">POST</strong>
         <div class="content">/api/collections/<code>collectionIdOrName</code>/auth-with-oauth2</div>
     </div>
 
-    <div class="section-title">Path parameters</div>
+    <div class="section-title">路径参数</div>
     <table class="table-compact table-border m-b-base">
         <thead>
             <tr>
-                <th>Param</th>
-                <th>Type</th>
-                <th width="50%">Description</th>
+                <th>参数</th>
+                <th>类型</th>
+                <th width="50%">说明</th>
             </tr>
         </thead>
         <tbody>
@@ -144,73 +144,73 @@
                 <td>
                     <span class="label">String</span>
                 </td>
-                <td>ID or name of the auth collection.</td>
+                <td>认证集合的 ID 或名称。</td>
             </tr>
         </tbody>
     </table>
 
-    <div class="section-title">Body Parameters</div>
+    <div class="section-title">请求体参数</div>
     <table class="table-compact table-border">
         <thead>
             <tr>
-                <th>Param</th>
-                <th>Type</th>
-                <th width="50%">Description</th>
+                <th>参数</th>
+                <th>类型</th>
+                <th width="50%">说明</th>
             </tr>
         </thead>
         <tbody>
             <tr>
                 <td>
                     <div class="inline-flex">
-                        <span class="label label-success">Required</span>
+                        <span class="label label-success">必填</span>
                         <span class="txt">provider</span>
                     </div>
                 </td>
                 <td>
                     <span class="label">String</span>
                 </td>
-                <td>The name of the OAuth2 client provider (e.g. "google").</td>
+                <td>OAuth2 客户端提供商名称（如 "google"）。</td>
             </tr>
             <tr>
                 <td>
                     <div class="inline-flex">
-                        <span class="label label-success">Required</span>
+                        <span class="label label-success">必填</span>
                         <span class="txt">code</span>
                     </div>
                 </td>
                 <td>
                     <span class="label">String</span>
                 </td>
-                <td>The authorization code returned from the initial request.</td>
+                <td>初始请求返回的授权码。</td>
             </tr>
             <tr>
                 <td>
                     <div class="inline-flex">
-                        <span class="label label-success">Required</span>
+                        <span class="label label-success">必填</span>
                         <span class="txt">codeVerifier</span>
                     </div>
                 </td>
                 <td>
                     <span class="label">String</span>
                 </td>
-                <td>The code verifier sent with the initial request as part of the code_challenge.</td>
+                <td>初始请求中作为 code_challenge 一部分发送的 code verifier。</td>
             </tr>
             <tr>
                 <td>
                     <div class="inline-flex">
-                        <span class="label label-success">Required</span>
+                        <span class="label label-success">必填</span>
                         <span class="txt">redirectUrl</span>
                     </div>
                 </td>
                 <td>
                     <span class="label">String</span>
                 </td>
-                <td>The redirect url sent with the initial request.</td>
+                <td>初始请求中发送的重定向地址。</td>
             </tr>
             <tr>
                 <td valign="top">
                     <div class="inline-flex">
-                        <span class="label label-warning">Optional</span>
+                        <span class="label label-warning">可选</span>
                         <span>createData</span>
                     </div>
                 </td>
@@ -218,14 +218,12 @@
                     <span class="label">Object</span>
                 </td>
                 <td valign="top">
-                    <p>Optional data that will be used when creating the auth record on OAuth2 sign-up.</p>
+                    <p>OAuth2 注册新账号时用于创建认证记录的可选数据。</p>
                     <p>
-                        The created auth record must comply with the same requirements and validations in the
-                        regular <strong>create</strong> action.
+                        创建的认证记录必须满足常规 <strong>create</strong> 操作的相同要求和校验。
                         <br />
                         <em>
-                            The data can only be in <code>json</code>, aka. <code>multipart/form-data</code> and
-                            files upload currently are not supported during OAuth2 sign-ups.
+                            数据只能为 <code>json</code>，即 <code>multipart/form-data</code> 以及文件上传当前在 OAuth2 注册时不支持。
                         </em>
                     </p>
                 </td>
@@ -233,17 +231,17 @@
         </tbody>
     </table>
     <small class="block txt-hint m-t-10 m-b-base">
-        Body parameters could be sent as <em>JSON</em> or
-        <em>multipart/form-data</em>.
+        请求体参数可通过 <em>JSON</em> 或
+        <em>multipart/form-data</em> 发送。
     </small>
 
-    <div class="section-title">Query parameters</div>
+    <div class="section-title">查询参数</div>
     <table class="table-compact table-border m-b-base">
         <thead>
             <tr>
-                <th>Param</th>
-                <th>Type</th>
-                <th width="60%">Description</th>
+                <th>参数</th>
+                <th>类型</th>
+                <th width="60%">说明</th>
             </tr>
         </thead>
         <tbody>
@@ -252,7 +250,7 @@
         </tbody>
     </table>
 
-    <div class="section-title">Responses</div>
+    <div class="section-title">响应</div>
     <div class="tabs">
         <div class="tabs-header compact combined left">
             {#each responses as response (response.code)}

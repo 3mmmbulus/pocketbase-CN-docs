@@ -49,10 +49,10 @@
     let responseTab = responses[0].code;
 </script>
 
-<Accordion single title="Upload backup">
+<Accordion single title="上传备份">
     <div class="content m-b-sm">
-        <p>Uploads an existing backup zip file.</p>
-        <p>Only superusers can perform this action.</p>
+        <p>上传一个已存在的备份 zip 文件。</p>
+        <p>仅超级用户可以执行此操作。</p>
     </div>
 
     <CodeTabs
@@ -80,42 +80,42 @@
         `}
     />
 
-    <h6 class="m-b-xs">API details</h6>
+    <h6 class="m-b-xs">API 详情</h6>
     <div class="api-route alert alert-success">
         <strong class="label label-primary">POST</strong>
         <div class="content">/api/backups/upload</div>
-        <small class="txt-hint auth-header">Requires <code>Authorization:TOKEN</code></small>
+        <small class="txt-hint auth-header">需要 <code>Authorization:TOKEN</code></small>
     </div>
 
-    <div class="section-title">Body Parameters</div>
+    <div class="section-title">请求体参数</div>
     <table class="table-compact table-border">
         <thead>
             <tr>
-                <th>Param</th>
-                <th>Type</th>
-                <th width="50%">Description</th>
+                <th>参数</th>
+                <th>类型</th>
+                <th width="50%">说明</th>
             </tr>
         </thead>
         <tbody>
             <tr>
                 <td>
                     <div class="inline-flex">
-                        <span class="label label-success">Required</span>
+                        <span class="label label-success">必填</span>
                         <span>file</span>
                     </div>
                 </td>
                 <td>
-                    <span class="label">File</span>
+                    <span class="label">文件</span>
                 </td>
-                <td>The zip archive to upload.</td>
+                <td>要上传的 zip 压缩包。</td>
             </tr>
         </tbody>
     </table>
     <small class="block txt-hint m-t-10 m-b-base">
-        Uploading files is supported only via <em>multipart/form-data</em>.
+        仅支持通过 <em>multipart/form-data</em> 上传文件。
     </small>
 
-    <div class="section-title">Responses</div>
+    <div class="section-title">响应</div>
     <div class="tabs">
         <div class="tabs-header compact combined left">
             {#each responses as response (response.code)}

@@ -61,13 +61,12 @@
     let responseTab = responses[0].code;
 </script>
 
-<Accordion single title="Auth refresh">
+<Accordion single title="刷新认证">
     <div class="content m-b-sm">
-        <p>Returns a new auth response (token and user data) for already authenticated auth record.</p>
+        <p>为已认证的认证记录返回新的认证响应（令牌和用户数据）。</p>
         <p>
             <em>
-                This method is usually called by users on page/screen reload to ensure that the previously
-                stored data in <code>pb.authStore</code> is still valid and up-to-date.
+                此方法通常由用户在页面/屏幕刷新时调用，以确保之前存储在 <code>pb.authStore</code> 中的数据仍然有效且为最新。
             </em>
         </p>
     </div>
@@ -103,20 +102,20 @@
         `}
     />
 
-    <h6 class="m-b-xs">API details</h6>
+    <h6 class="m-b-xs">API 详情</h6>
     <div class="api-route alert alert-success">
         <strong class="label label-primary">POST</strong>
         <div class="content">/api/collections/<code>collectionIdOrName</code>/auth-refresh</div>
-        <small class="txt-hint auth-header">Requires <code>Authorization:TOKEN</code></small>
+        <small class="txt-hint auth-header">需要 <code>Authorization:TOKEN</code></small>
     </div>
 
-    <div class="section-title">Path parameters</div>
+    <div class="section-title">路径参数</div>
     <table class="table-compact table-border m-b-base">
         <thead>
             <tr>
-                <th>Param</th>
-                <th>Type</th>
-                <th width="50%">Description</th>
+                <th>参数</th>
+                <th>类型</th>
+                <th width="50%">说明</th>
             </tr>
         </thead>
         <tbody>
@@ -125,18 +124,18 @@
                 <td>
                     <span class="label">String</span>
                 </td>
-                <td>ID or name of the auth collection.</td>
+                <td>认证集合的 ID 或名称。</td>
             </tr>
         </tbody>
     </table>
 
-    <div class="section-title">Query parameters</div>
+    <div class="section-title">查询参数</div>
     <table class="table-compact table-border m-b-base">
         <thead>
             <tr>
-                <th>Param</th>
-                <th>Type</th>
-                <th width="60%">Description</th>
+                <th>参数</th>
+                <th>类型</th>
+                <th width="60%">说明</th>
             </tr>
         </thead>
         <tbody>
@@ -145,7 +144,7 @@
         </tbody>
     </table>
 
-    <div class="section-title">Responses</div>
+    <div class="section-title">响应</div>
     <div class="tabs">
         <div class="tabs-header compact combined left">
             {#each responses as response (response.code)}

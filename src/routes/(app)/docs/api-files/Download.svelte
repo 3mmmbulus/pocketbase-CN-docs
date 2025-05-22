@@ -33,9 +33,9 @@
     ];
 </script>
 
-<Accordion single title="Download / Fetch file">
+<Accordion single title="下载/获取文件">
     <div class="content m-b-base">
-        <p>Downloads a single file resource (aka. the URL address to the file). Example:</p>
+        <p>下载单个文件资源（即文件的 URL 地址）。示例：</p>
         <CodeBlock
             language="html"
             content={`
@@ -44,20 +44,20 @@
         />
     </div>
 
-    <h6 class="m-b-xs">API details</h6>
+    <h6 class="m-b-xs">API 详情</h6>
     <div class="api-route alert alert-info">
         <strong class="label label-primary">GET</strong>
         <!-- prettier-ignore -->
         <div class="content">/api/files/<code>collectionIdOrName</code>/<code>recordId</code>/<code>filename</code></div>
     </div>
 
-    <div class="section-title">Path parameters</div>
+    <div class="section-title">路径参数</div>
     <table class="table-compact table-border m-b-base">
         <thead>
             <tr>
-                <th>Param</th>
-                <th>Type</th>
-                <th width="50%">Description</th>
+                <th>参数</th>
+                <th>类型</th>
+                <th width="50%">说明</th>
             </tr>
         </thead>
         <tbody>
@@ -66,32 +66,32 @@
                 <td>
                     <span class="label">String</span>
                 </td>
-                <td> ID or name of the collection whose record model contains the file resource. </td>
+                <td>包含该文件资源的记录所属集合的 ID 或名称。</td>
             </tr>
             <tr>
                 <td>recordId</td>
                 <td>
                     <span class="label">String</span>
                 </td>
-                <td>ID of the record model that contains the file resource.</td>
+                <td>包含该文件资源的记录 ID。</td>
             </tr>
             <tr>
                 <td>filename</td>
                 <td>
                     <span class="label">String</span>
                 </td>
-                <td>Name of the file resource.</td>
+                <td>文件资源的名称。</td>
             </tr>
         </tbody>
     </table>
 
-    <div class="section-title">Query parameters</div>
+    <div class="section-title">查询参数</div>
     <table class="table-compact table-border m-b-base">
         <thead>
             <tr>
-                <th>Param</th>
-                <th>Type</th>
-                <th width="60%">Description</th>
+                <th>参数</th>
+                <th>类型</th>
+                <th width="60%">说明</th>
             </tr>
         </thead>
         <tbody>
@@ -101,10 +101,9 @@
                     <span class="label">String</span>
                 </td>
                 <td valign="top">
-                    Get the thumb of the requested file.
+                    获取请求文件的缩略图。
                     <ThumbFormats />
-                    If the thumb size is not defined in the file schema field options or the file resource is not
-                    an image (jpg, png, gif, webp), then the original file resource is returned unmodified.
+                    如果文件字段选项中未定义缩略图尺寸，或文件资源不是图片（jpg, png, gif, webp），则返回原始文件资源。
                 </td>
             </tr>
             <tr>
@@ -113,11 +112,11 @@
                     <span class="label">String</span>
                 </td>
                 <td valign="top">
-                    Optional <strong>file token</strong> for granting access to
-                    <strong>protected file(s)</strong>.
+                    可选的 <strong>文件 token</strong>，用于访问
+                    <strong>受保护文件</strong>。
                     <br />
-                    For an example, you can check
-                    <a href="/docs/files-handling/#protected-files">"Files upload and handling"</a>.
+                    示例可参考
+                    <a href="/docs/files-handling/#protected-files">“文件上传与处理”</a>。
                 </td>
             </tr>
             <tr>
@@ -126,15 +125,13 @@
                     <span class="label">Boolean</span>
                 </td>
                 <td valign="top">
-                    If it is set to a truthy value (<em>1</em>, <em>t</em>, <em>true</em>) the file will be
-                    served with <code>Content-Disposition: attachment</code> header instructing the browser to
-                    ignore the file preview for pdf, images, videos, etc. and to directly download the file.
+                    如果设置为真值（<em>1</em>、<em>t</em>、<em>true</em>），则文件将以 <code>Content-Disposition: attachment</code> 头返回，浏览器会直接下载文件而不是预览（如 pdf、图片、视频等）。
                 </td>
             </tr>
         </tbody>
     </table>
 
-    <div class="section-title">Responses</div>
+    <div class="section-title">响应</div>
     <div class="tabs">
         <div class="tabs-header compact combined left">
             {#each responses as response (response.code)}
