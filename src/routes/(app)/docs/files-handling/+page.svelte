@@ -7,14 +7,13 @@
 
 <Toc />
 
-<HeadingLink title="Uploading files" />
+<HeadingLink title="文件上传" />
 <p>
-    To upload files, you must first add a <code>file</code> field to your collection:
+    要上传文件，你需要先在集合中添加一个 <code>file</code> 字段：
 </p>
-<img src="/images/screenshots/file-field.png" alt="File field screenshot" width="465" class="screenshot" />
+<img src="/images/screenshots/file-field.png" alt="文件字段截图" width="465" class="screenshot" />
 <p>
-    Once added, you could create/update a Record and upload "documents" files by sending a
-    <code>multipart/form-data</code> request using the <em>Records create/update APIs</em>.
+    添加后，你可以通过发送 <code>multipart/form-data</code> 请求，使用<em>记录创建/更新 API</em>来创建/更新记录并上传 "documents" 文件。
 </p>
 
 <div class="alert alert-info m-t-xs m-b-xs">
@@ -23,20 +22,16 @@
     </div>
     <div class="content">
         <p>
-            Each uploaded file will be stored with the original filename (sanitized) and suffixed with a
-            random part (usually 10 characters). For example <code>test_52iwbgds7l.png</code>.
+            每个上传的文件都会以原始文件名（已清理）存储，并追加一个随机字符串（通常为 10 个字符）。例如 <code>test_52iwbgds7l.png</code>。
         </p>
         <p>
-            The max allowed size of a single file currently is limited to ~8GB (<small
-                >2<sup>53</sup>-1 bytes</small
-            >).
+            单个文件的最大允许大小目前约为 8GB（<small>2<sup>53</sup>-1 字节</small>）。
         </p>
     </div>
 </div>
 
 <p>
-    Here is an example how to create a new record and upload multiple files to the example "documents"
-    <code>file</code> field using the SDKs:
+    以下是如何使用 SDK 创建新记录并向示例 "documents" <code>file</code> 字段上传多个文件的示例：
 </p>
 <!-- prettier-ignore -->
 <CodeTabs
@@ -112,9 +107,7 @@
 />
 
 <p>
-    If your <code>file</code> field supports uploading multiple files (aka.
-    <strong>Max Files option is >= 2</strong>) you can use the <code>+</code> prefix/suffix field name modifier
-    to respectively prepend/append new files alongside the already uploaded ones. For example:
+    如果你的 <code>file</code> 字段支持上传多个文件（即 <strong>最大文件数选项 &gt;= 2</strong>），你可以使用 <code>+</code> 前缀/后缀字段名修饰符，分别在已上传文件前/后追加新文件。例如：
 </p>
 <!-- prettier-ignore -->
 <CodeTabs
@@ -152,15 +145,12 @@
     `}
 />
 
-<HeadingLink title="Deleting files" />
+<HeadingLink title="文件删除" />
 <p>
-    To delete uploaded file(s), you could either edit the Record from the Dashboard, or use the API and set
-    the file field to a zero-value <br /> (empty string, <code>[]</code>).
+    要删除已上传的文件，可以在管理后台编辑记录，或通过 API 将文件字段设置为零值 <br />（空字符串，<code>[]</code>）。
 </p>
 <p>
-    If you want to <strong>delete individual file(s) from a multiple file upload field</strong>, you could
-    suffix the field name with <code>-</code> and specify the filename(s) you want to delete. Here are some examples
-    using the SDKs:
+    如果你想<strong>从多文件上传字段中删除单个文件</strong>，可以在字段名后加 <code>-</code> 并指定要删除的文件名。以下是使用 SDK 的示例：
 </p>
 <!-- prettier-ignore -->
 <CodeTabs
@@ -201,14 +191,13 @@
 />
 
 <p>
-    The above examples use the JSON object data format, but you could also use <code>FormData</code> instance
-    for <em>multipart/form-data</em> requests. If using
-    <code>FormData</code> set the file field to an empty string.
+    上述示例使用 JSON 对象数据格式，你也可以在 <em>multipart/form-data</em> 请求中使用 <code>FormData</code> 实例。如果使用
+    <code>FormData</code>，将文件字段设为空字符串即可。
 </p>
 
-<HeadingLink title="File URL" />
+<HeadingLink title="文件 URL" />
 <p>
-    Each uploaded file could be accessed by requesting its file url:
+    每个上传的文件都可以通过请求其文件 url 进行访问：
     <br />
     <!-- prettier-ignore -->
     <code class="txt-bold">
@@ -216,25 +205,23 @@
     </code>
 </p>
 <p>
-    If your file field has the <strong>Thumb sizes</strong> option, you can get a thumb of the image file by
-    adding the <code>thumb</code>
-    query parameter to the url like this:
+    如果你的文件字段启用了 <strong>缩略图尺寸</strong> 选项，可以通过在 url 后添加 <code>thumb</code>
+    查询参数获取图片文件的缩略图，例如：
     <!-- prettier-ignore -->
     <code>
         http://127.0.0.1:8090/api/files/<span class="txt-danger">COLLECTION_ID_OR_NAME</span>/<span class="txt-info">RECORD_ID</span>/<span class="txt-success">FILENAME</span><strong>?thumb=100x300</strong>
     </code>
     <br />
-    <em>Currently limited to jpg, png, gif (its first frame) and partially webp (stored as png).</em>
+    <em>目前仅支持 jpg、png、gif（首帧）和部分 webp（以 png 存储）。</em>
 </p>
 
 <ThumbFormats />
 <p class="txt-hint">
-    The original file would be returned, if the requested thumb size is not found or the file is not an image!
+    如果未找到请求的缩略图尺寸或文件不是图片，将返回原始文件！
 </p>
 
 <p>
-    If you already have a Record model instance, the SDKs provide a convenient method to generate a file url
-    by its name.
+    如果你已有 Record 模型实例，SDK 提供了便捷方法可通过文件名生成文件 url。
 </p>
 
 <!-- prettier-ignore -->
@@ -284,20 +271,16 @@
     `}
 />
 <p>
-    Additionally, to instruct the browser to always download the file instead of showing a preview when
-    accessed directly, you can append the <code>?download=1</code> query parameter to the file url.
+    此外，如果希望浏览器在直接访问文件时始终下载而不是预览，可以在文件 url 后添加 <code>?download=1</code> 查询参数。
 </p>
 
-<HeadingLink title="Protected files" />
-<p>By default all files are public accessible if you know their full url.</p>
+<HeadingLink title="受保护文件" />
+<p>默认情况下，只要知道完整 url，所有文件都是公开可访问的。</p>
 <p>
-    For most applications this is fine and reasonably safe because all files have a random part appended to
-    their name, but in some cases you may want an extra security to prevent unauthorized access to sensitive
-    files like ID card or Passport copies, contracts, etc.
+    对于大多数应用来说，这样已经足够安全，因为所有文件名都带有随机字符串。但在某些情况下，你可能希望为身份证、护照复印件、合同等敏感文件增加额外的安全性，防止未授权访问。
 </p>
 <p>
-    To do this you can mark the <code>file</code> field as <em>Protected</em> from its field options in the
-    Dashboard and then request the file with a special <strong>short-lived file token</strong>.
+    你可以在管理后台的字段选项中将 <code>file</code> 字段标记为<em>受保护</em>，然后通过特殊的<strong>短效文件 token</strong>请求文件。
 </p>
 <div class="alert alert-info m-t-xs m-b-sm">
     <div class="icon">
@@ -305,8 +288,7 @@
     </div>
     <div class="content">
         <p>
-            Only requests that satisfy the <strong>View API rule</strong> of the record collection will be able
-            to access or download the protected file(s).
+            只有满足记录集合<strong>View API 规则</strong>的请求才能访问或下载受保护文件。
         </p>
     </div>
 </div>
@@ -348,15 +330,11 @@
     `}
 />
 
-<HeadingLink title="Storage options" />
+<HeadingLink title="存储选项" />
 <p>
-    By default PocketBase stores uploaded files in the <code>pb_data/storage</code> directory on the local file
-    system. For the majority of cases this is usually the recommended storage option because it is very fast, easy
-    to work with and backup.
+    默认情况下，PocketBase 会将上传的文件存储在本地文件系统的 <code>pb_data/storage</code> 目录下。对于大多数场景，这通常是推荐的存储方式，因为速度快、易于管理和备份。
 </p>
 <p>
-    But if you have limited disk space you could switch to an external S3 compatible storage (AWS S3, MinIO,
-    Wasabi, DigitalOcean Spaces, Vultr Object Storage, etc.). The easiest way to setup the connection settings
-    is from the <em>Dashboard</em> > <em>Settings</em> > <em>Files storage</em>:
+    如果你的磁盘空间有限，可以切换到外部 S3 兼容存储（如 AWS S3、MinIO、Wasabi、DigitalOcean Spaces、Vultr 对象存储等）。最简单的连接设置方式是在 <em>Dashboard</em> &gt; <em>Settings</em> &gt; <em>Files storage</em> 中配置：
 </p>
-<img src="/images/screenshots/files-storage.png" alt="Files storage settings screenshot" class="screenshot" />
+<img src="/images/screenshots/files-storage.png" alt="文件存储设置截图" class="screenshot" />

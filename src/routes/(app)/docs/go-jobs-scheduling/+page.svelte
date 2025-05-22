@@ -4,23 +4,21 @@
 </script>
 
 <p>
-    If you have tasks that need to be performed periodically, you could setup crontab-like jobs with the
-    builtin <code>app.Cron()</code>
+    如果你有需要定期执行的任务，可以使用内置的 <code>app.Cron()</code> 设置类似 crontab 的定时任务
     <em>
-        (it returns an app scoped
+        （它返回一个应用级的
         <a href="{import.meta.env.PB_GODOC_URL}/tools/cron#Cron" target="_blank" rel="noopener noreferrer">
             <code>cron.Cron</code>
-        </a> value)
+        </a> 值）
     </em>
-    .
+    。
 </p>
 <p>
-    The jobs scheduler is started automatically on app <code>serve</code>, so all you have to do is register a
-    handler with
+    任务调度器会在应用 <code>serve</code> 时自动启动，你只需通过
     <a href="{import.meta.env.PB_GODOC_URL}/tools/cron#Cron.Add" target="_blank" rel="noopener noreferrer">
         <code>app.Cron().Add(id, cronExpr, handler)</code>
     </a>
-    or
+    或
     <a
         href="{import.meta.env.PB_GODOC_URL}/tools/cron#Cron.MustAdd"
         target="_blank"
@@ -28,19 +26,18 @@
     >
         <code>app.Cron().MustAdd(id, cronExpr, handler)</code>
     </a>
-    (<em>the latter panic if the cron expression is not valid</em>).
+    注册处理函数即可（<em>后者在 cron 表达式无效时会 panic</em>）。
 </p>
 
-<p>Each scheduled job runs in its own goroutine and must have:</p>
+<p>每个定时任务都会在自己的 goroutine 中运行，并且必须包含：</p>
 <ul>
     <li class="m-0">
-        <strong>id</strong> - identifier for the scheduled job; could be used to replace or remove an existing
-        job
+        <strong>id</strong> - 定时任务的标识符；可用于替换或移除已有任务
     </li>
     <li class="m-0">
-        <strong>cron expression</strong> - e.g. <code>0 0 * * *</code> (
+        <strong>cron 表达式</strong> - 例如 <code>0 0 * * *</code>（
         <em>
-            supports numeric list, steps, ranges or
+            支持数字列表、步进、范围或
             <span
                 class="link-hint"
                 use:tooltip={{
@@ -48,16 +45,16 @@
                     delay: 0,
                 }}
             >
-                macros
+                宏
             </span>
-        </em>)
+        </em>）
     </li>
     <li class="m-0">
-        <strong>handler</strong> - the function that will be executed everytime when the job runs
+        <strong>handler</strong> - 每次任务运行时会被执行的函数
     </li>
 </ul>
 
-<p>Here is one minimal example:</p>
+<p>下面是一个最简示例：</p>
 <CodeBlock
     language="go"
     content={`
@@ -86,15 +83,15 @@
 />
 
 <p>
-    To remove already registered cron job you can call
+    若要移除已注册的定时任务，可以调用
     <a href="{import.meta.env.PB_GODOC_URL}/tools/cron#Cron.Remove" target="_blank" rel="noopener noreferrer">
         <code>app.Cron().Remove(id)</code>
     </a>
 </p>
 
 <p>
-    All registered app level cron jobs can be also previewed and triggered from the
-    <em>{"Dashboard > Settings > Crons"}</em> section.
+    所有已注册的应用级定时任务也可以在
+    <em>{"Dashboard > Settings > Crons"}</em> 部分预览和手动触发。
 </p>
 
 <div class="alert alert-warning">
@@ -103,14 +100,10 @@
     </div>
     <div class="content">
         <p>
-            Keep in mind that the <code>app.Cron()</code> is also used for running the system scheduled jobs
-            like the logs cleanup or auto backups (the jobs id is in the format <code>__pb*__</code>) and
-            replacing these system jobs or calling <code>RemoveAll()</code>/<code>Stop()</code> could have unintended
-            side-effects.
+            请注意，<code>app.Cron()</code> 也用于运行系统级定时任务，如日志清理或自动备份（任务 id 格式为 <code>__pb*__</code>），替换这些系统任务或调用 <code>RemoveAll()</code>/<code>Stop()</code> 可能会导致意外后果。
         </p>
         <p>
-            If you want more advanced control you can initialize your own cron instance independent from the
-            application via <code>cron.New()</code>.
+            如果你需要更高级的控制，可以通过 <code>cron.New()</code> 独立于应用初始化自己的 cron 实例。
         </p>
     </div>
 </div>

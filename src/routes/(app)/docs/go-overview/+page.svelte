@@ -7,43 +7,42 @@
 
 <Toc />
 
-<HeadingLink title="Getting started" />
+<HeadingLink title="快速开始" />
 <p>
-    PocketBase can be used as regular Go package that exposes various helpers and hooks to help you implement
-    you own custom portable application.
+    PocketBase 可以作为常规 Go 包使用，提供多种辅助方法和钩子，帮助你实现自定义的可移植应用。
 </p>
 <p>
-    A new PocketBase instance is created via
+    你可以通过
     <a href="{import.meta.env.PB_GODOC_URL}#New" target="_blank" rel="noopener noreferrer">
         <code>pocketbase.New()</code>
     </a>
-    or
+    或
     <a href="{import.meta.env.PB_GODOC_URL}#NewWithConfig" target="_blank" rel="noopener noreferrer">
         <code>pocketbase.NewWithConfig(config)</code>
     </a>
-    .
+    创建一个新的 PocketBase 实例。
 </p>
 <p>
-    Once created you can register your custom business logic via the available
-    <a href="/docs/go-event-hooks/">event hooks</a>
-    and call
+    实例创建后，你可以通过可用的
+    <a href="/docs/go-event-hooks/">事件钩子</a>
+    注册自定义业务逻辑，并调用
     <a href="{import.meta.env.PB_GODOC_URL}#PocketBase.Start" target="_blank" rel="noopener noreferrer">
         <code>app.Start()</code>
     </a>
-    to start the application.
+    启动应用。
 </p>
 
-<p>Below is a minimal example:</p>
+<p>下面是一个最简示例：</p>
 <ol start="0">
     <li>
-        <a href="https://go.dev/doc/install" target="_blank" rel="noreferrer noopener">Install Go 1.23+</a>
+        <a href="https://go.dev/doc/install" target="_blank" rel="noreferrer noopener">安装 Go 1.23+</a>
     </li>
     <li>
         <p>
-            Create a new project directory with <code>main.go</code> file inside it.
+            新建一个项目目录，并在其中创建 <code>main.go</code> 文件。
             <br />
             <small class="txt-hint txt-sm">
-                As a reference, you can also explore the prebuilt executable
+                你也可以参考预构建可执行文件的
                 <a
                     href="{import.meta.env.PB_REPO_URL}/blob/master/examples/base/main.go"
                     target="_blank"
@@ -51,7 +50,7 @@
                 >
                     <code class="txt-sm">example/base/main.go</code>
                 </a>
-                file.
+                文件。
             </small>
         </p>
         <CodeBlock
@@ -85,68 +84,64 @@
             `}
         />
     </li>
-    <li>To init the dependencies, run <code>go mod init myapp && go mod tidy</code>.</li>
-    <li>To start the application, run <code>go run . serve</code>.</li>
+    <li>初始化依赖，运行 <code>go mod init myapp && go mod tidy</code>。</li>
+    <li>启动应用，运行 <code>go run . serve</code>。</li>
     <li>
-        To build a statically linked executable, run <code>go build</code>
-        and then you can start the created executable with
-        <code>./myapp serve</code>.
+        若要构建静态链接的可执行文件，运行 <code>go build</code>
+        ，然后你可以通过
+        <code>./myapp serve</code>
+        启动生成的可执行文件。
     </li>
 </ol>
 
-<HeadingLink title="Custom SQLite driver" />
+<HeadingLink title="自定义 SQLite 驱动" />
 <div class="alert alert-info" id="cgo_note">
     <div class="icon">
         <i class="ri-information-line" />
     </div>
     <div class="content">
         <p>
-            <strong>The general recommendation is to use the builtin SQLite setup</strong> but if you need more
-            advanced configuration or extensions like ICU, FTS5, etc. you'll have to specify a custom driver/build.
+            <strong>一般推荐使用内置的 SQLite 配置</strong>，但如果你需要更高级的配置或扩展（如 ICU、FTS5 等），则需要指定自定义驱动或构建方式。
         </p>
         <p>
-            Note that PocketBase by default doesn't require CGO because it uses the pure Go SQLite port
+            注意，PocketBase 默认不需要 CGO，因为它使用纯 Go 实现的 SQLite
             <a href="https://pkg.go.dev/modernc.org/sqlite" target="_blank" rel="noreferrer noopener">
                 modernc.org/sqlite
-            </a>, but this may not be the case when using a custom SQLite driver!
+            </a>，但如果你使用自定义 SQLite 驱动则可能不是这种情况！
         </p>
     </div>
 </div>
 <p>
-    PocketBase v0.23+ added supported for defining a <code>DBConnect</code> function as app configuration to
-    load custom SQLite builds and drivers compatible with the standard Go <code>database/sql</code>.
+    PocketBase v0.23+ 支持通过 app 配置定义 <code>DBConnect</code> 函数，以加载兼容标准 Go <code>database/sql</code> 的自定义 SQLite 构建和驱动。
 </p>
 <p>
-    <strong>The <code>DBConnect</code> function is called twice</strong> - once for
+    <strong><code>DBConnect</code> 函数会被调用两次</strong> —— 一次用于
     <code>pb_data/data.db</code>
-    (the main database file) and second time for <code>pb_data/auxiliary.db</code> (used for logs and other ephemeral
-    system meta information).
+    （主数据库文件），另一次用于 <code>pb_data/auxiliary.db</code>（用于日志和其他临时系统元信息）。
 </p>
 <p>
-    If you want to load your custom driver conditionally and fallback to the default handler, then you can
-    call
+    如果你希望按条件加载自定义驱动并回退到默认处理器，可以调用
     <a href="{import.meta.env.PB_GODOC_URL}/core#DefaultDBConnect" target="_blank" rel="noreferrer noopener">
         <code>core.DefaultDBConnect</code>
     </a>
-    .
+    。
     <br />
     <em class="txt-sm txt-hint">
-        As a side-note, if you are not planning to use <code class="txt-sm">core.DefaultDBConnect</code>
-        fallback as part of your custom driver registration you can exclude the default pure Go driver with
-        <code class="txt-sm">go build -tags no_default_driver</code> to reduce the binary size a little (~4MB).
+        补充说明：如果你不打算在自定义驱动注册中使用 <code class="txt-sm">core.DefaultDBConnect</code>
+        作为回退，可以通过 <code class="txt-sm">go build -tags no_default_driver</code> 排除默认纯 Go 驱动，以略微减小二进制体积（约 4MB）。
     </em>
 </p>
-<p>Below are some minimal examples with commonly used external SQLite drivers:</p>
+<p>下方是常用外部 SQLite 驱动的最简用法示例：</p>
 
 <div class="accordions m-t-sm">
     <Accordion single title="github.com/mattn/go-sqlite3">
         <p>
             <em>
-                For all available options please refer to the
+                所有可用选项请参考
                 <a href="https://github.com/mattn/go-sqlite3" target="_blank" rel="noopener noreferrer">
                     <code>github.com/mattn/go-sqlite3</code>
                 </a>
-                README.
+                的 README。
             </em>
         </p>
         <!-- prettier-ignore -->
@@ -208,11 +203,11 @@
     <Accordion single title="github.com/ncruces/go-sqlite3">
         <p>
             <em>
-                For all available options please refer to the
+                所有可用选项请参考
                 <a href="https://github.com/ncruces/go-sqlite3" target="_blank" rel="noopener noreferrer">
                     <code>github.com/ncruces/go-sqlite3</code>
                 </a>
-                README.
+                的 README。
             </em>
         </p>
         <CodeBlock
@@ -251,15 +246,15 @@
     <Accordion single title="github.com/tursodatabase/libsql-client-go/libsql">
         <p>
             <em>
-                For all available options please refer to the
+                所有可用选项请参考
                 <a
                     href="https://docs.turso.tech/sdk/go/quickstart#remote-only"
                     target="_blank"
                     rel="noopener noreferrer"
                 >
-                    Turso Go docs
+                    Turso Go 文档
                 </a>
-                .
+                。
             </em>
         </p>
         <CodeBlock

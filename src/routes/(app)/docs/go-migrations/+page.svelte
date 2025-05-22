@@ -5,30 +5,26 @@
 </script>
 
 <p>
-    PocketBase comes with a builtin DB and data migration utility, allowing you to version your DB structure,
-    create collections programmatically, initialize default settings, etc.
+    PocketBase 内置了数据库和数据迁移工具，允许你对数据库结构进行版本管理、以编程方式创建集合、初始化默认设置等。
 </p>
 <p>
-    Because the migrations are regular Go functions, besides applying schema changes, they could be used also
-    to adjust existing data to fit the new schema or any other app specific logic that you want to run only
-    once.
+    由于迁移就是普通的 Go 函数，除了应用结构变更外，你还可以用它来调整已有数据以适配新结构，或执行任何只需运行一次的应用特定逻辑。
 </p>
 <p>
-    And as a bonus, being <code>.go</code> files also ensure that the migrations will be embedded seamlessly in
-    your final executable.
+    另外，迁移文件为 <code>.go</code> 文件，这也确保了它们会无缝嵌入到最终的可执行文件中。
 </p>
 
 <Toc />
 
-<HeadingLink title="Quick setup" />
-<HeadingLink title="0. Register the migrate command" tag="h5" />
+<HeadingLink title="快速上手" />
+<HeadingLink title="0. 注册 migrate 命令" tag="h5" />
 <p>
     <em>
-        You can find all available config options in the
+        所有可用的配置选项可在
         <a href="{import.meta.env.PB_GODOC_URL}/plugins/migratecmd" target="_blank" rel="noopener noreferrer">
             <code>migratecmd</code>
         </a>
-        subpackage.
+        子包中找到。
     </em>
 </p>
 <CodeBlock
@@ -67,9 +63,9 @@
     `}
 />
 
-<HeadingLink title="1. Create new migration" tag="h5" />
+<HeadingLink title="1. 创建新迁移" tag="h5" />
 <p>
-    To create a new blank migration you can run <code>migrate create</code>.
+    要创建一个空白迁移，可以运行 <code>migrate create</code>。
 </p>
 <CodeBlock
     content={`
@@ -106,16 +102,15 @@
     `}
 />
 <p>
-    The above will create a new blank migration file inside the default command <code>migrations</code> directory.
+    上述操作会在默认的 <code>migrations</code> 目录下创建一个新的空白迁移文件。
 </p>
-<p>Each migration file should have a single <code>m.Register(upFunc, downFunc)</code> call.</p>
+<p>每个迁移文件应只包含一次 <code>m.Register(upFunc, downFunc)</code> 调用。</p>
 <p>
-    In the migration file, you are expected to write your "upgrade" code in the <code>upFunc</code> callback.
+    在迁移文件中，你应在 <code>upFunc</code> 回调中编写“升级”代码。
     <br />
-    The <code>downFunc</code> is optional and it should contain the "downgrade" operations to revert the
-    changes made by the <code>upFunc</code>.
+    <code>downFunc</code> 是可选的，应包含用于回滚 <code>upFunc</code> 变更的“降级”操作。
     <br />
-    Both callbacks accept a transactional <code>core.App</code> instance.
+    两个回调都接收一个带事务的 <code>core.App</code> 实例。
 </p>
 
 <div class="alert alert-info m-t-sm m-b-sm">
@@ -124,20 +119,20 @@
     </div>
     <div class="content">
         <p>
-            You can explore the
-            <a href="/docs/go-database">Database guide</a>,
-            <a href="/docs/go-collections">Collection operations</a> and
-            <a href="/docs/go-records">Record operations</a>
-            for more details how to interact with the database. You can also find
-            <a href="#examples">some examples</a> further below in ths guide.
+            你可以查阅
+            <a href="/docs/go-database">数据库指南</a>、
+            <a href="/docs/go-collections">集合操作</a> 和
+            <a href="/docs/go-records">记录操作</a>
+            以了解更多与数据库交互的细节。你还可以在本指南下方找到
+            <a href="#examples">一些示例</a>。
         </p>
     </div>
 </div>
 
-<HeadingLink title="2. Load migrations" tag="h5" />
+<HeadingLink title="2. 加载迁移" tag="h5" />
 <p class="txt-bold">
-    To make your application aware of the registered migrations, you have to import the above
-    <code>migrations</code> package in one of your <code>main</code> package files:
+    为了让你的应用识别已注册的迁移，你需要在某个 <code>main</code> 包文件中导入上述
+    <code>migrations</code> 包：
 </p>
 <CodeBlock
     language="go"
@@ -150,28 +145,24 @@
     `}
 />
 
-<HeadingLink title="3. Run migrations" tag="h5" />
+<HeadingLink title="3. 执行迁移" tag="h5" />
 <p class="txt-bold">
-    New unapplied migrations are automatically executed when the application server starts, aka. on
-    <code>serve</code>.
+    新的未应用迁移会在应用服务器启动时自动执行，即 <code>serve</code> 时。
 </p>
 <p>
-    Alternatively, you can also apply new migrations manually by running <code>migrate up</code>.
+    你也可以通过运行 <code>migrate up</code> 手动应用新迁移。
     <br />
-    To revert the last applied migration(s), you can run <code>migrate down [number]</code>.
+    若要回滚最近应用的迁移，可以运行 <code>migrate down [number]</code>。
     <br />
     <small class="txt-hint">
-        When manually applying or reverting migrations, the <code>serve</code> process needs to be restarted so
-        that it can refresh its cached collections state.
+        手动应用或回滚迁移后，需要重启 <code>serve</code> 进程以刷新缓存的集合状态。
     </small>
 </p>
 
-<HeadingLink title="Collections snapshot" />
+<HeadingLink title="集合快照" />
 <p>
-    The <code>migrate collections</code> command generates a full snapshot of your current collections
-    configuration without having to type it manually. Similar to the <code>migrate create</code> command, this
-    will generate a new migration file in the
-    <code>migrations</code> directory.
+    <code>migrate collections</code> 命令会生成你当前集合配置的完整快照，无需手动输入。与 <code>migrate create</code> 命令类似，这会在
+    <code>migrations</code> 目录下生成一个新的迁移文件。
 </p>
 <CodeBlock
     content={`
@@ -183,34 +174,29 @@
     `}
 />
 <p>
-    By default the collections snapshot is imported in <em>extend</em> mode, meaning that collections and
-    fields that don't exist in the snapshot are preserved. If you want the snapshot to <em>delete</em>
-    missing collections and fields, you can edit the generated file and change the last argument of
-    <code>ImportCollectionsByMarshaledJSON</code> method to <code>true</code>.
+    默认情况下，集合快照以 <em>extend</em> 模式导入，这意味着快照中不存在的集合和字段会被保留。如果你希望快照能<em>删除</em>缺失的集合和字段，可以编辑生成的文件，将
+    <code>ImportCollectionsByMarshaledJSON</code> 方法的最后一个参数改为 <code>true</code>。
 </p>
 
-<HeadingLink title="Migrations history" />
+<HeadingLink title="迁移历史" />
 <p>
-    All applied migration filenames are stored in the internal <code>_migrations</code> table.
+    所有已应用的迁移文件名都会存储在内部 <code>_migrations</code> 表中。
     <br />
-    During local development often you might end up making various collection changes to test different approaches.
+    本地开发时，你可能会多次修改集合以测试不同方案。
     <br />
-    When <code>Automigrate</code> is enabled this could lead in a migration history with unnecessary intermediate
-    steps that may not be wanted in the final migration history.
+    启用 <code>Automigrate</code> 时，这可能导致迁移历史中出现许多不必要的中间步骤，这些步骤在最终迁移历史中可能并不需要。
 </p>
 <p>
-    To avoid the clutter and to prevent applying the intermediate steps in production, you can remove (or
-    squash) the unnecessary migration files manually and then update the local migrations history by running:
+    为了避免混乱并防止在生产环境中应用这些中间步骤，你可以手动删除（或合并）不需要的迁移文件，然后运行以下命令更新本地迁移历史：
 </p>
 <CodeBlock content={`[root@dev app]$ go run . migrate history-sync`} />
 <p>
-    The above command will remove any entry from the <code>_migrations</code> table that doesn't have a related
-    migration file associated with it.
+    上述命令会移除 <code>_migrations</code> 表中没有对应迁移文件的所有条目。
 </p>
 
-<HeadingLink title="Examples" />
+<HeadingLink title="示例" />
 
-<HeadingLink title="Executing raw SQL statements" tag="h5" />
+<HeadingLink title="执行原生 SQL 语句" tag="h5" />
 <CodeBlock
     language="go"
     content={`
@@ -232,7 +218,7 @@
     `}
 />
 
-<HeadingLink title="Initialize default application settings" tag="h5" />
+<HeadingLink title="初始化默认应用设置" tag="h5" />
 <CodeBlock
     language="go"
     content={`
@@ -262,19 +248,19 @@
     `}
 />
 
-<HeadingLink title="Creating initial superuser" tag="h5" />
+<HeadingLink title="创建初始超级用户" tag="h5" />
 <p>
     <em>
-        For all supported record methods, you can refer to
-        <a href="/docs/go-records">Record operations</a>
+        所有支持的记录方法可参考
+        <a href="/docs/go-records">记录操作</a>
     </em>
-    .
+    。
 </p>
 <p>
     <em>
-        You can also create the initial super user using the
+        你也可以通过
         <code>./pocketbase superuser create EMAIL PASS</code>
-        command.
+        命令创建初始超级用户。
     </em>
 </p>
 <CodeBlock
@@ -315,13 +301,13 @@
     `}
 />
 
-<HeadingLink title="Creating collection programmatically" tag="h5" />
+<HeadingLink title="以编程方式创建集合" tag="h5" />
 <p>
     <em>
-        For all supported collection methods, you can refer to
-        <a href="/docs/go-collections">Collection operations</a>
+        所有支持的集合方法可参考
+        <a href="/docs/go-collections">集合操作</a>
     </em>
-    .
+    。
 </p>
 <CodeBlock
     language="go"

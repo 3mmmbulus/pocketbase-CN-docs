@@ -4,13 +4,12 @@
     </div>
     <div class="content">
         <p>
-            For better performance and to minimize blocking on hot paths, logs are written with debounce and
-            on batches:
+            为了获得更好的性能并减少高频路径上的阻塞，日志会以防抖和批量的方式写入：
         </p>
         <ul>
-            <li>3 seconds after the last debounced log write</li>
-            <li>when the batch threshold is reached (currently 200)</li>
-            <li>right before app termination to attempt saving everything from the existing logs queue</li>
+            <li>最后一次防抖日志写入后 3 秒</li>
+            <li>达到批量阈值时（当前为 200）</li>
+            <li>应用终止前，尝试保存日志队列中所有剩余日志</li>
         </ul>
     </div>
 </div>

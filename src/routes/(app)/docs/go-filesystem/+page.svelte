@@ -4,13 +4,14 @@
     import Toc from "@/components/Toc.svelte";
 </script>
 
-<p>PocketBase comes with a thin abstraction between the local filesystem and S3.</p>
+<p>PocketBase 提供了本地文件系统与 S3 之间的轻量级抽象。</p>
 <p>
-    To configure which one will be used you can adjust the storage settings from
-    <em>Dashboard > Settings > Files storage</em> section.
+    你可以在
+    <em>Dashboard > Settings > Files storage</em>
+    部分调整存储设置，以配置使用哪种存储方式。
 </p>
 <p>
-    The filesystem abstraction can be accessed programmatically via the
+    你可以通过
     <a
         href="{import.meta.env.PB_GODOC_URL}/core#BaseApp.NewFilesystem"
         target="_blank"
@@ -18,14 +19,14 @@
     >
         <code>app.NewFilesystem()</code>
     </a>
-    method.
+    方法以编程方式访问文件系统抽象。
 </p>
 <p>
-    Below are listed some of the most common operations but you can find more details in the
+    下方列出了一些最常用的操作，更多细节请参考
     <a href="{import.meta.env.PB_GODOC_URL}/tools/filesystem" target="_blank" rel="noopener noreferrer">
         <code>filesystem</code>
     </a>
-    subpackage.
+    子包。
 </p>
 
 <div class="alert alert-warning">
@@ -34,17 +35,16 @@
     </div>
     <div class="content">
         <p>
-            Always make sure to call <code>Close()</code> at the end for both the created filesystem instance and
-            the retrieved file readers to prevent leaking resources.
+            请务必在结束时调用 <code>Close()</code>，无论是新建的文件系统实例还是获取到的文件读取器，以防止资源泄漏。
         </p>
     </div>
 </div>
 
 <Toc />
 
-<HeadingLink title="Reading files" />
+<HeadingLink title="读取文件" />
 <p>
-    To retrieve the file content of a single stored file you can use
+    若要获取单个已存储文件的内容，可以使用
     <a
         href="{import.meta.env.PB_GODOC_URL}/tools/filesystem#System.GetReader"
         target="_blank"
@@ -52,13 +52,12 @@
     >
         <code>GetReader(key)</code>
     </a>
-    .
+    。
     <br />
-    Note that file keys often contain a <strong>prefix</strong> (aka. the "path" to the file). For record
-    files the full key is
-    <code>collectionId/recordId/filename</code>.
+    注意，文件 key 通常包含<strong>前缀</strong>（即文件的“路径”）。对于记录文件，完整 key 格式为
+    <code>collectionId/recordId/filename</code>。
     <br />
-    To retrieve multiple files matching a specific <em>prefix</em> you can use
+    若要获取匹配特定<em>前缀</em>的多个文件，可以使用
     <a
         href="{import.meta.env.PB_GODOC_URL}/tools/filesystem#System.List"
         target="_blank"
@@ -66,11 +65,12 @@
     >
         <code>List(prefix)</code>
     </a>
-    .
+    。
 </p>
 <p>
-    The below code shows a minimal example how to retrieve a single record file and copy its content into a
-    <code>bytes.Buffer</code>.
+    下方代码展示了如何获取单个记录文件并将其内容复制到
+    <code>bytes.Buffer</code>
+    的最简示例。
 </p>
 <CodeBlock
     language="go"
@@ -106,10 +106,9 @@
     `}
 />
 
-<HeadingLink title="Saving files" />
+<HeadingLink title="保存文件" />
 <p>
-    There are several methods to save <em>(aka. write/upload)</em> files depending on the available file content
-    source:
+    根据可用的文件内容来源，有多种方法可以保存<em>（即写入/上传）</em>文件：
 </p>
 <ul>
     <li>
@@ -141,9 +140,7 @@
     </li>
 </ul>
 <p>
-    Most users rarely will have to use the above methods directly because for collection records the file
-    persistence is handled transparently when saving the record model (it will also perform size and MIME type
-    validation based on the collection <code>file</code> field options). For example:
+    大多数用户很少需要直接使用上述方法，因为对于集合记录，文件持久化在保存记录模型时会自动处理（同时会根据集合 <code>file</code> 字段选项进行大小和 MIME 类型校验）。例如：
 </p>
 <CodeBlock
     language="go"
@@ -170,9 +167,9 @@
     `}
 />
 
-<HeadingLink title="Deleting files" />
+<HeadingLink title="删除文件" />
 <p>
-    Files can be deleted from the storage filesystem using
+    可以使用
     <a
         href="{import.meta.env.PB_GODOC_URL}/tools/filesystem#System.Delete"
         target="_blank"
@@ -180,12 +177,10 @@
     >
         <code>Delete(key)</code>
     </a>
-    .
+    从存储文件系统中删除文件。
 </p>
 <p>
-    Similar to the previous section, most users rarely will have to use the <code>Delete</code> file method directly
-    because for collection records the file deletion is handled transparently when removing the existing filename
-    from the record model (this also ensure that the db entry referencing the file is also removed). For example:
+    与前述类似，大多数用户很少需要直接使用 <code>Delete</code> 方法，因为对于集合记录，删除文件时只需从记录模型中移除已有文件名即可（这也会确保数据库中引用该文件的条目被一并移除）。例如：
 </p>
 <CodeBlock
     language="go"

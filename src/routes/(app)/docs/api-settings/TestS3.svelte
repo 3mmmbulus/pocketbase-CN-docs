@@ -33,10 +33,10 @@
     let responseTab = responses[0].code;
 </script>
 
-<Accordion single title="Test S3 storage connection">
+<Accordion single title="测试 S3 存储连接">
     <div class="content m-b-sm">
-        <p>Performs a S3 storage connection test.</p>
-        <p>Only superusers can perform this action.</p>
+        <p>执行一次 S3 存储连接测试。</p>
+        <p>仅超级用户可以执行此操作。</p>
     </div>
 
     <CodeTabs
@@ -64,27 +64,27 @@
         `}
     />
 
-    <h6 class="m-b-xs">API details</h6>
+    <h6 class="m-b-xs">API 详情</h6>
     <div class="api-route alert alert-success">
         <strong class="label label-primary">POST</strong>
         <div class="content">/api/settings/test/s3</div>
-        <small class="txt-hint auth-header">Requires <code>Authorization:TOKEN</code></small>
+        <small class="txt-hint auth-header">需要 <code>Authorization:TOKEN</code></small>
     </div>
 
-    <div class="section-title">Body Parameters</div>
+    <div class="section-title">请求体参数</div>
     <table class="table-compact table-border">
         <thead>
             <tr>
-                <th>Param</th>
-                <th>Type</th>
-                <th width="50%">Description</th>
+                <th>参数</th>
+                <th>类型</th>
+                <th width="50%">说明</th>
             </tr>
         </thead>
         <tbody>
             <tr>
                 <td>
                     <div class="inline-flex">
-                        <span class="label label-success">Required</span>
+                        <span class="label label-success">必填</span>
                         <span>filesystem</span>
                     </div>
                 </td>
@@ -92,17 +92,17 @@
                     <span class="label">String</span>
                 </td>
                 <td>
-                    The storage filesystem to test (<code>storage</code> or <code>backups</code>).
+                    要测试的存储文件系统（<code>storage</code> 或 <code>backups</code>）。
                 </td>
             </tr>
         </tbody>
     </table>
     <small class="block txt-hint m-t-10 m-b-base">
-        Body parameters could be sent as <em>JSON</em> or
-        <em>multipart/form-data</em>.
+        请求体参数可通过 <em>JSON</em> 或
+        <em>multipart/form-data</em> 方式发送。
     </small>
 
-    <div class="section-title">Responses</div>
+    <div class="section-title">响应</div>
     <div class="tabs">
         <div class="tabs-header compact combined left">
             {#each responses as response (response.code)}

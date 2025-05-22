@@ -3,12 +3,11 @@
 </script>
 
 <p>
-    You can register custom console commands using
-    <code>app.RootCmd.AddCommand(cmd)</code>, where <code>cmd</code> is a
-    <a href="https://pkg.go.dev/github.com/spf13/cobra" target="_blank" rel="noopener noreferrer">cobra</a> command.
+    你可以使用 <code>app.RootCmd.AddCommand(cmd)</code> 注册自定义控制台命令，其中 <code>cmd</code> 是一个
+    <a href="https://pkg.go.dev/github.com/spf13/cobra" target="_blank" rel="noopener noreferrer">cobra</a> 命令。
 </p>
 
-<p>Here is an example:</p>
+<p>以下是一个示例：</p>
 <CodeBlock
     language="go"
     content={`
@@ -38,11 +37,11 @@
     `}
 />
 
-<p>To run the command you can build your Go application and execute:</p>
+<p>要运行该命令，你可以构建你的 Go 应用并执行：</p>
 <CodeBlock
     language="html"
     content={`
-        # or "go run main.go hello"
+        # 或 "go run main.go hello"
         ./myapp hello
     `}
 />
@@ -53,9 +52,7 @@
     </div>
     <div class="content">
         <p>
-            Keep in mind that the console commands execute in their own separate app process and run
-            independently from the main <code>serve</code> command (aka. hook events between different processes
-            are not shared with one another).
+            请注意，控制台命令会在各自独立的应用进程中执行，并与主 <code>serve</code> 命令互不影响（即不同进程间的 hook 事件不会共享）。
         </p>
     </div>
 </div>

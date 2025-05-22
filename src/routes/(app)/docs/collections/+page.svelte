@@ -8,51 +8,47 @@
 
 <Toc />
 
-<HeadingLink title="Overview" />
+<HeadingLink title="概述" />
 <p>
-    <strong>Collections</strong> represent your application data. Under the hood they are backed by plain
-    SQLite tables that are generated automatically with the collection
-    <strong>name</strong> and <strong>fields</strong> (columns).
+    <strong>集合</strong>代表你的应用数据。在底层，它们由普通的 SQLite 表支持，这些表会根据集合的
+    <strong>名称</strong>和<strong>字段</strong>（列）自动生成。
 </p>
 <p>
-    Single entry of a collection is called <strong>record</strong> (a single row in the SQL table).
+    集合中的单条数据称为<strong>记录</strong>（即 SQL 表中的一行）。
 </p>
 <p>
-    You can manage your <strong>collections</strong> from the Dashboard, with the Web APIs using the
-    <a href="/docs/how-to-use/">client-side SDKs</a>
-    (<em>superusers only</em>) or programmatically via the
+    你可以通过管理后台、Web API（使用
+    <a href="/docs/how-to-use/">客户端 SDK</a>
+    （<em>仅超级用户</em>））或通过
     <a href="/docs/go-migrations/">Go</a>/<a href="/docs/js-migrations/">JavaScript</a>
-    migrations.
+    迁移脚本进行管理你的<strong>集合</strong>。
 </p>
 <p>
-    Similarly, you can manage your <strong>records</strong> from the Dashboard, with the Web APIs using the
-    <a href="/docs/how-to-use/">client-side SDKs</a>
-    or programmatically via the
+    同样，你也可以通过管理后台、Web API（使用
+    <a href="/docs/how-to-use/">客户端 SDK</a>
+    ）或通过
     <a href="/docs/go-records/">Go</a>/<a href="/docs/js-records/">JavaScript</a>
-    Record operations.
+    记录操作来管理你的<strong>记录</strong>。
 </p>
-<p>Here is what a collection edit panel looks like in the Dashboard:</p>
-<img src="/images/screenshots/collection-panel.png" alt="Collection panel screenshot" class="screenshot" />
+<p>以下是管理后台中集合编辑面板的示例：</p>
+<img src="/images/screenshots/collection-panel.png" alt="集合面板截图" class="screenshot" />
 
 <p>
-    Currently there are 3 collection types: <strong>Base</strong>, <strong>View</strong> and
-    <strong>Auth</strong>.
+    当前有 3 种集合类型：<strong>基础</strong>、<strong>视图</strong> 和
+    <strong>认证</strong>。
 </p>
 
-<HeadingLink title="Base collection" tag="h5" />
+<HeadingLink title="基础集合" tag="h5" />
 <p>
-    <strong>Base collection</strong> is the default collection type and it could be used to store any application
-    data (articles, products, posts, etc.).
+    <strong>基础集合</strong>是默认的集合类型，可用于存储任意应用数据（如文章、产品、帖子等）。
 </p>
 
-<HeadingLink title="View collection" tag="h5" />
+<HeadingLink title="视图集合" tag="h5" />
 <p>
-    <strong>View collection</strong> is a read-only collection type where the data is populated from a plain
-    SQL <code>SELECT</code> statement, allowing users to perform aggregations or any other custom queries in
-    general.
+    <strong>视图集合</strong>是一种只读集合，数据来源于普通 SQL <code>SELECT</code> 语句，允许用户进行聚合或其他自定义查询。
     <br />
-    For example, the following query will create a read-only collection with 3 <em>posts</em>
-    fields - <em>id</em>, <em>name</em> and <em>totalComments</em>:
+    例如，以下查询将创建一个只读集合，包含 3 个 <em>posts</em>
+    字段 - <em>id</em>、<em>name</em> 和 <em>totalComments</em>：
 </p>
 <CodeBlock
     language="sql"
@@ -71,72 +67,60 @@
         <i class="ri-information-line" />
     </div>
     <div class="content">
-        View collections don't receive realtime events because they don't have create/update/delete
-        operations.
+        视图集合不会接收实时事件，因为它们没有创建/更新/删除操作。
     </div>
 </div>
 
-<HeadingLink title="Auth collection" tag="h5" />
+<HeadingLink title="认证集合" tag="h5" />
 <p>
-    <strong>Auth collection</strong> has everything from the <strong>Base collection</strong> but with some additional
-    special fields to help you manage your app users and also providing various authentication options.
+    <strong>认证集合</strong>拥有<strong>基础集合</strong>的全部功能，并额外包含一些特殊字段，帮助你管理应用用户并提供多种认证选项。
 </p>
 <p>
-    Each Auth collection has the following special system fields:
-    <code>email</code>, <code>emailVisibility</code>, <code>verified</code>,
-    <code>password</code> and <code>tokenKey</code>.
+    每个认证集合都包含以下特殊系统字段：
+    <code>email</code>、<code>emailVisibility</code>、<code>verified</code>、
+    <code>password</code> 和 <code>tokenKey</code>。
     <br />
-    They cannot be renamed or deleted but can be configured using their specific field options. For example you
-    can make the user email required or optional.
+    这些字段不能重命名或删除，但可以通过各自的字段选项进行配置。例如，你可以设置用户邮箱为必填或可选。
 </p>
 <p>
-    You can have as many Auth collections as you want (users, managers, staffs, members, clients, etc.) each
-    with their own set of fields, separate login and records managing endpoints.
+    你可以创建任意多个认证集合（如 users、managers、staffs、members、clients 等），每个集合拥有独立的字段、登录和记录管理接口。
 </p>
-<p>You can build all sort of different access controls:</p>
+<p>你可以构建各种不同的访问控制：</p>
 <ul>
     <li>
-        <strong>Role (Group)</strong>
+        <strong>角色（分组）</strong>
         <br />
         <em>
-            For example, you could attach a "role" <code>select</code> field to your Auth collection with the
-            following options: "employee" and "staff". And then in some of your other collections you could
-            define the following rule to allow only "staff":
+            例如，你可以在认证集合中添加一个 "role" <code>select</code> 字段，选项为 "employee" 和 "staff"。然后在其他集合中定义如下规则，仅允许 "staff" 访问：
             <br />
             <code>@request.auth.role = "staff"</code>
         </em>
     </li>
     <li>
-        <strong>Relation (Ownership)</strong>
+        <strong>关联（所有权）</strong>
         <br />
         <em>
-            Let's say that you have 2 collections - "posts" base collection and "users" auth collection. In
-            your "posts" collection you can create "author"
-            <code>relation</code> field pointing to the "users" collection. To allow access to only the
-            "author" of the record(s), you could use a rule like:
+            假设你有 2 个集合 - "posts" 基础集合 和 "users" 认证集合。在 "posts" 集合中可以创建 "author"
+            <code>relation</code> 字段，指向 "users" 集合。要仅允许记录的 "author" 访问，可以使用如下规则：
             <code>@request.auth.id != "" && author = @request.auth.id</code>
             <br />
-            Nested relation fields look ups, including back-relations, are also supported, for example:
+            也支持嵌套关联字段查找，包括反向关联，例如：
             <code>someRelField.anotherRelField.author = @request.auth.id</code>
         </em>
     </li>
     <li>
-        <strong>Managed</strong>
+        <strong>托管</strong>
         <br />
         <em>
-            In addition to the default "List", "View", "Create", "Update", "Delete" API rules, Auth
-            collections have also a special "Manage" API rule that could be used to allow one user (it could
-            be even from a different collection) to be able to fully manage the data of another user (e.g.
-            changing their email, password, etc.).
+            除了默认的 "List"、"View"、"Create"、"Update"、"Delete" API 规则外，认证集合还拥有特殊的 "Manage" API 规则，可用于允许某个用户（甚至可以来自不同集合）完全管理另一个用户的数据（如更改邮箱、密码等）。
         </em>
     </li>
     <li>
-        <strong>Mixed</strong>
+        <strong>混合</strong>
         <br />
         <em>
-            You can build a mixed approach based on your unique use-case. Multiple rules can be grouped with
-            parenthesis <code>()</code> and combined with <code>&&</code>
-            (AND) and <code>||</code> (OR) operators:
+            你可以根据实际需求构建混合方案。多个规则可用括号 <code>()</code> 分组，并用 <code>&&</code>
+            （与）和 <code>||</code>（或）运算符组合：
             <br />
             <code>
                 @request.auth.id != "" && (@request.auth.role = "staff" || author = @request.auth.id)
@@ -145,20 +129,17 @@
     </li>
 </ul>
 
-<HeadingLink title="Fields" />
+<HeadingLink title="字段" />
 <div class="alert alert-info">
     <div class="icon">
         <i class="ri-information-line" />
     </div>
     <div class="content">
         <p>
-            All collection fields <em>(with exception of the <code>JSONField</code>)</em> are
-            <strong>non-nullable and uses a zero-default</strong> for their respective type as fallback value
-            when missing (empty string for <code>text</code>, 0 for <code>number</code>, etc.).
+            所有集合字段<em>（<code>JSONField</code> 除外）</em>都为<strong>非空，且使用零值</strong>作为缺省值（<code>text</code> 类型为空字符串，<code>number</code> 类型为 0 等）。
         </p>
         <p>
-            All field specific modifiers are supported both in the Web APIs and via the record Get/Set
-            methods.
+            所有字段的修饰符在 Web API 和记录 Get/Set 方法中均支持。
         </p>
     </div>
 </div>
@@ -167,26 +148,26 @@
     <Accordion single title="BoolField">
         <div class="content">
             <p>
-                BoolField defines <code>bool</code> type field to store a single <code>false</code>
-                (default) or <code>true</code> value.
+                BoolField 定义 <code>bool</code> 类型字段，用于存储单个 <code>false</code>
+                （默认）或 <code>true</code> 值。
             </p>
         </div>
     </Accordion>
     <Accordion single title="NumberField">
         <div class="content">
             <p>
-                NumberField defines <code>number</code> type field for storing numeric/float64 value:
-                <code>0</code> (default), <code>2</code>, <code>-1</code>, <code>1.5</code>.
+                NumberField 定义 <code>number</code> 类型字段，用于存储数值/float64 类型的值：
+                <code>0</code>（默认）、<code>2</code>、<code>-1</code>、<code>1.5</code>。
             </p>
-            <p>The following additional set modifiers are available:</p>
+            <p>支持以下额外的设置修饰符：</p>
             <ul>
                 <li>
                     <code>fieldName<strong>+</strong></code>
-                    adds number to the already existing record value.
+                    向已存在的记录值加上指定数值。
                 </li>
                 <li>
                     <code>fieldName<strong>-</strong></code>
-                    subtracts number from the already existing record value.
+                    从已存在的记录值减去指定数值。
                 </li>
             </ul>
         </div>
@@ -194,18 +175,18 @@
     <Accordion single title="TextField">
         <div class="content">
             <p>
-                TextField defines <code>text</code> type field for storing string values:
-                <code>""</code> (default), <code>"example"</code>.
+                TextField 定义 <code>text</code> 类型字段，用于存储字符串值：
+                <code>""</code>（默认）、<code>"example"</code>。
             </p>
-            <p>The following additional set modifiers are available:</p>
+            <p>支持以下额外的设置修饰符：</p>
             <ul>
                 <li>
                     <code>fieldName<strong>:autogenerate</strong></code>
-                    autogenerate a field value if the <code>AutogeneratePattern</code> field option is set.
+                    如果设置了 <code>AutogeneratePattern</code> 字段选项，则自动生成字段值。
                     <br />
-                    For example, submitting:
-                    <code>{`{"slug:autogenerate":"abc-"}`}</code> will result in <code>"abc-[random]"</code>
-                    <code>slug</code> field value.
+                    例如，提交：
+                    <code>{`{"slug:autogenerate":"abc-"}`}</code> 会生成 <code>"abc-[random]"</code>
+                    <code>slug</code> 字段值。
                 </li>
             </ul>
         </div>
@@ -213,41 +194,39 @@
     <Accordion single title="EmailField">
         <div class="content">
             <p>
-                EmailField defines <code>email</code> type field for storing a single email string address:
-                <code>""</code> (default), <code>"john@example.com"</code>.
+                EmailField 定义 <code>email</code> 类型字段，用于存储单个邮箱字符串地址：
+                <code>""</code>（默认）、<code>"john@example.com"</code>。
             </p>
         </div>
     </Accordion>
     <Accordion single title="URLField">
         <div class="content">
             <p>
-                URLField defines <code>url</code> type field for storing a single URL string value:
-                <code>""</code> (default), <code>"https://example.com"</code>.
+                URLField 定义 <code>url</code> 类型字段，用于存储单个 URL 字符串值：
+                <code>""</code>（默认）、<code>"https://example.com"</code>。
             </p>
         </div>
     </Accordion>
     <Accordion single title="EditorField">
         <div class="content">
             <p>
-                EditorField defines <code>editor</code> type field to store HTML formatted text:
-                <code>""</code> (default), <code>{`<p>example</p>`}</code>.
+                EditorField 定义 <code>editor</code> 类型字段，用于存储 HTML 格式文本：
+                <code>""</code>（默认）、<code>{`<p>example</p>`}</code>。
             </p>
         </div>
     </Accordion>
     <Accordion single title="DateField">
         <div class="content">
             <p>
-                DateField defines <code>date</code> type field to store a single datetime string value:
-                <code>""</code> (default), <code>"2022-01-01 00:00:00.000Z"</code>.
+                DateField 定义 <code>date</code> 类型字段，用于存储单个日期时间字符串值：
+                <code>""</code>（默认）、<code>"2022-01-01 00:00:00.000Z"</code>。
             </p>
             <p>
-                All PocketBase dates at the moment follows the RFC3399 format <code>Y-m-d H:i:s.uZ</code>
-                (e.g. <code>2024-11-10 18:45:27.123Z</code>).
+                所有 PocketBase 日期目前均采用 RFC3399 格式 <code>Y-m-d H:i:s.uZ</code>
+                （如 <code>2024-11-10 18:45:27.123Z</code>）。
             </p>
             <p>
-                Dates are compared as strings, meaning that when using the filters with a date field you'll
-                have to specify the full datetime string format. For example to target a single day (e.g.
-                November 19, 2024) you can use something like:
+                日期按字符串比较，因此在使用日期字段过滤时需指定完整的日期时间字符串。例如筛选某一天（如 2024 年 11 月 19 日）可使用：
                 <code>
                     {`created >= '2024-11-19 00:00:00.000Z' && created <= '2024-11-19 23:59:59.999Z'`}
                 </code>
@@ -257,160 +236,156 @@
     <Accordion single title="AutodateField">
         <div class="content">
             <p>
-                AutodateField defines an <code>autodate</code> type field and it is similar to the DateField but
-                its value is auto set on record create/update.
+                AutodateField 定义 <code>autodate</code> 类型字段，类似于 DateField，但其值会在记录创建/更新时自动设置。
             </p>
-            <p>This field is usually used for defining timestamp fields like "created" and "updated".</p>
+            <p>该字段通常用于定义如 "created" 和 "updated" 的时间戳字段。</p>
         </div>
     </Accordion>
     <Accordion single title="SelectField">
         <div class="content">
             <p>
-                SelectField defines <code>select</code> type field for storing single or multiple string values
-                from a predefined list.
+                SelectField 定义 <code>select</code> 类型字段，用于从预设列表中存储单个或多个字符串值。
             </p>
             <p>
-                It is usually intended for handling enums-like values such as
+                通常用于处理类似枚举的值，如
                 <code>pending/public/private</code>
-                statuses, simple <code>client/staff/manager/admin</code> roles, etc.
+                状态，简单的 <code>client/staff/manager/admin</code> 角色等。
             </p>
             <p>
-                For <strong>single</strong> <code>select</code>
-                <em>(the <code>MaxSelect</code> option is {`<=`} 1)</em>
-                the field value is a string:
-                <code>""</code>, <code>"optionA"</code>.
+                对于<strong>单选</strong> <code>select</code>
+                <em>（<code>MaxSelect</code> 选项为 {`<=`} 1）</em>
+                字段值为字符串：
+                <code>""</code>、<code>"optionA"</code>。
             </p>
             <p>
-                For <strong>multiple</strong> <code>select</code>
-                <em>(the <code>MaxSelect</code> option is {`>=`} 2)</em>
-                the field value is an array:
-                <code>[]</code>, <code>["optionA", "optionB"]</code>.
+                对于<strong>多选</strong> <code>select</code>
+                <em>（<code>MaxSelect</code> 选项为 {`>=`} 2）</em>
+                字段值为数组：
+                <code>[]</code>、<code>["optionA", "optionB"]</code>。
             </p>
-            <p>The following additional set modifiers are available:</p>
+            <p>支持以下额外的设置修饰符：</p>
             <ul>
                 <li>
                     <code>fieldName<strong>+</strong></code>
-                    appends one or more values to the existing one.
+                    向现有值追加一个或多个值。
                 </li>
                 <li>
                     <code><strong>+</strong>fieldName</code>
-                    prepends one or more values to the existing one.
+                    向现有值前置一个或多个值。
                 </li>
                 <li>
                     <code>fieldName<strong>-</strong></code>
-                    subtracts/removes one or more values from the existing one.
+                    从现有值中移除一个或多个值。
                 </li>
             </ul>
-            <p>For example: <code>{`{"permissions+": "optionA", "roles-": ["staff", "editor"]}`}</code></p>
+            <p>例如：<code>{`{"permissions+": "optionA", "roles-": ["staff", "editor"]}`}</code></p>
         </div>
     </Accordion>
     <Accordion single title="FileField">
         <div class="content">
             <p>
-                FileField defines <code>file</code> type field for managing record file(s).
+                FileField 定义 <code>file</code> 类型字段，用于管理记录文件。
             </p>
             <p>
-                PocketBase stores in the database only the file name. The file itself is stored either on the
-                local disk or in S3, depending on your application storage settings.
+                PocketBase 只在数据库中存储文件名，文件本身根据应用存储设置存储在本地磁盘或 S3。
             </p>
             <p>
-                For <strong>single</strong> <code>file</code>
-                <em>(the <code>MaxSelect</code> option is {`<=`} 1)</em>
-                the stored value is a string:
-                <code>""</code>, <code>"file1_Ab24ZjL.png"</code>.
+                对于<strong>单文件</strong> <code>file</code>
+                <em>（<code>MaxSelect</code> 选项为 {`<=`} 1）</em>
+                存储值为字符串：
+                <code>""</code>、<code>"file1_Ab24ZjL.png"</code>。
             </p>
             <p>
-                For <strong>multiple</strong> <code>file</code>
-                <em>(the <code>MaxSelect</code> option is {`>=`} 2)</em>
-                the stored value is an array:
-                <code>[]</code>, <code>["file1_Ab24ZjL.png", "file2_Frq24ZjL.txt"]</code>.
+                对于<strong>多文件</strong> <code>file</code>
+                <em>（<code>MaxSelect</code> 选项为 {`>=`} 2）</em>
+                存储值为数组：
+                <code>[]</code>、<code>["file1_Ab24ZjL.png", "file2_Frq24ZjL.txt"]</code>。
             </p>
-            <p>The following additional set modifiers are available:</p>
+            <p>支持以下额外的设置修饰符：</p>
             <ul>
                 <li>
                     <code>fieldName<strong>+</strong></code>
-                    appends one or more files to the existing field value.
+                    向现有字段值追加一个或多个文件。
                 </li>
                 <li>
                     <code><strong>+</strong>fieldName</code>
-                    prepends one or more files to the existing field value.
+                    向现有字段值前置一个或多个文件。
                 </li>
                 <li>
                     <code>fieldName<strong>-</strong></code>
-                    deletes one or more files from the existing field value.
+                    从现有字段值中删除一个或多个文件。
                 </li>
             </ul>
             <p>
-                For example:
+                例如：
                 <code>
                     {`{"documents+": new File(...), "documents-": ["file1_Ab24ZjL.txt", "file2_Frq24ZjL.txt"]}`}
                 </code>
             </p>
             <p>
-                You can find more detailed information in the
-                <a href="/docs/files-handling/">Files upload and handling</a> guide.
+                你可以在
+                <a href="/docs/files-handling/">文件上传与处理</a> 指南中查看更多详细信息。
             </p>
         </div>
     </Accordion>
     <Accordion single title="RelationField">
         <div class="content">
             <p>
-                RelationField defines <code>relation</code> type field for storing single or multiple collection
-                record references.
+                RelationField 定义 <code>relation</code> 类型字段，用于存储单个或多个集合记录引用。
             </p>
             <p>
-                For <strong>single</strong> <code>relation</code>
-                <em>(the <code>MaxSelect</code> option is {`<=`} 1)</em>
-                the field value is a string:
-                <code>""</code>, <code>"RECOD_ID"</code>.
+                对于<strong>单选</strong> <code>relation</code>
+                <em>（<code>MaxSelect</code> 选项为 {`<=`} 1）</em>
+                字段值为字符串：
+                <code>""</code>、<code>"RECOD_ID"</code>。
             </p>
             <p>
-                For <strong>multiple</strong> <code>relation</code>
-                <em>(the <code>MaxSelect</code> option is {`>=`} 2)</em>
-                the field value is an array:
-                <code>[]</code>, <code>["RECORD_ID1", "RECORD_ID2"]</code>.
+                对于<strong>多选</strong> <code>relation</code>
+                <em>（<code>MaxSelect</code> 选项为 {`>=`} 2）</em>
+                字段值为数组：
+                <code>[]</code>、<code>["RECORD_ID1", "RECORD_ID2"]</code>。
             </p>
-            <p>The following additional set modifiers are available:</p>
+            <p>支持以下额外的设置修饰符：</p>
             <ul>
                 <li>
                     <code>fieldName<strong>+</strong></code>
-                    appends one or more ids to the existing one.
+                    向现有值追加一个或多个 ID。
                 </li>
                 <li>
                     <code><strong>+</strong>fieldName</code>
-                    prepends one or more ids to the existing one.
+                    向现有值前置一个或多个 ID。
                 </li>
                 <li>
                     <code>fieldName<strong>-</strong></code>
-                    subtracts/removes one or more ids from the existing one.
+                    从现有值中移除一个或多个 ID。
                 </li>
             </ul>
-            <p>For example: <code>{`{"users+": "USER_ID", "categories-": ["CAT_ID1", "CAT_ID2"]}`}</code></p>
+            <p>例如：<code>{`{"users+": "USER_ID", "categories-": ["CAT_ID1", "CAT_ID2"]}`}</code></p>
         </div>
     </Accordion>
     <Accordion single title="JSONField">
         <div class="content">
             <p>
-                JSONField defines <code>json</code> type field for storing any serialized JSON value,
-                including <code>null</code> (default).
+                JSONField 定义 <code>json</code> 类型字段，用于存储任意序列化的 JSON 值，
+                包括 <code>null</code>（默认）。
             </p>
         </div>
     </Accordion>
     <Accordion single title="GeoPoint">
         <div class="content">
             <p>
-                GeoPoint defines <code>geoPoint</code> type field for storing geographic coordinates
-                (longitute, latitude) as a serialized json object. For example:
-                <code>{`{"lon":12.34,"lat":56.78}`}</code>.
+                GeoPoint 定义 <code>geoPoint</code> 类型字段，用于存储地理坐标
+                （经度、纬度）作为序列化的 JSON 对象。例如：
+                <code>{`{"lon":12.34,"lat":56.78}`}</code>。
             </p>
             <p>
-                The default/zero value of a <code>geoPoint</code> is the "Null Island", aka.
-                <code>{`{"lon":0,"lat":0}`}</code>.
+                <code>geoPoint</code> 的默认/零值为 "Null Island"，即
+                <code>{`{"lon":0,"lat":0}`}</code>。
             </p>
             <p>
-                When extending PocketBase with Go/JSVM, the <code>geoPoint</code> field value could be set as
-                <code>types.GeoPoint</code> instance or a regular map with <code>lon</code> and
-                <code>lat</code> keys:
+                在使用 Go/JSVM 扩展 PocketBase 时，<code>geoPoint</code> 字段值可以设置为
+                <code>types.GeoPoint</code> 实例或包含 <code>lon</code> 和
+                <code>lat</code> 键的常规映射：
             </p>
             <CodeTabs
                 go={`

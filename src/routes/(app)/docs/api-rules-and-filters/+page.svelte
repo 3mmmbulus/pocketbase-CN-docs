@@ -9,10 +9,10 @@
 
 <HeadingLink title="API rules" />
 <p>
-    <strong>API Rules</strong> are your collection access controls and data filters.
+    <strong>API Rules</strong> 是你的 Collection 访问控制和数据过滤器。
 </p>
 <p>
-    Each collection has <strong>5 rules</strong>, corresponding to the specific API action:
+    每个 Collection 有 <strong>5 条规则</strong>，分别对应特定的 API 操作：
 </p>
 <ul>
     <li>
@@ -32,26 +32,21 @@
     </li>
 </ul>
 <p>
-    Auth collections has an additional <code>options.manageRule</code> used to allow one user (it could be even
-    from a different collection) to be able to fully manage the data of another user (ex. changing their email,
-    password, etc.).
+    Auth collections 还有一个额外的 <code>options.manageRule</code>，用于允许某个用户（甚至可以来自不同的 Collection）完全管理另一个用户的数据（例如更改他们的邮箱、密码等）。
 </p>
 
-<p>Each rule could be set to:</p>
+<p>每条规则可以设置为：</p>
 <ul>
     <li>
-        <strong>"locked"</strong> - aka. <code>null</code>, which means that the action could be performed
-        only by an authorized superuser
+        <strong>"locked"</strong> - 即 <code>null</code>，表示只有授权的超级用户才能执行该操作
         <!--  -->
-        (<strong>this is the default</strong>)
+        （<strong>这是默认值</strong>）
     </li>
     <li>
-        <strong>Empty string</strong> - anyone will be able to perform the action (superusers, authorized users
-        and guests)
+        <strong>空字符串</strong> - 任何人都可以执行该操作（超级用户、已授权用户和访客）
     </li>
     <li>
-        <strong>Non-empty string</strong> - only users (authorized or not) that satisfy the rule filter expression
-        will be able to perform this action
+        <strong>非空字符串</strong> - 只有满足规则过滤表达式的用户（无论是否已授权）才能执行该操作
     </li>
 </ul>
 
@@ -61,31 +56,25 @@
     </div>
     <div class="content">
         <p>
-            <strong>PocketBase API Rules act also as records filter!</strong>
+            <strong>PocketBase API Rules 也作为记录过滤器！</strong>
             <br />
-            Or in other words, you could for example allow listing only the "active" records of your collection,
-            by using a simple filter expression such as:
+            换句话说，你可以只允许列出 Collection 中 "active" 状态的记录，只需使用如下简单的过滤表达式：
             <code>status = "active"</code>
-            (where "status" is a field defined in your Collection).
+            （其中 "status" 是你的 Collection 中定义的字段）。
         </p>
         <p>
-            Because of the above, the API will return 200 empty items response in case a request doesn't
-            satisfy a <code>listRule</code>, 400 for unsatisfied <code>createRule</code> and 404 for
-            unsatisfied <code>viewRule</code>, <code>updateRule</code> and <code>deleteRule</code>.
+            因此，如果请求不满足 <code>listRule</code>，API 会返回 200 并且 items 为空；不满足 <code>createRule</code> 返回 400；不满足 <code>viewRule</code>、<code>updateRule</code> 和 <code>deleteRule</code> 返回 404。
             <br />
-            All rules will return 403 in case they were "locked" (aka. superuser only) and the request client is
-            not a superuser.
+            如果规则为 "locked"（即仅限超级用户），而请求方不是超级用户，则所有规则都会返回 403。
         </p>
         <p>
-            The API Rules are ignored when the action is performed by an authorized superuser (<strong
-                >superusers can access everything</strong
-            >)!
+            当操作由已授权超级用户执行时，API Rules 会被忽略（<strong>超级用户拥有全部访问权限</strong>）！
         </p>
     </div>
 </div>
 
 <HeadingLink title="Filters syntax" />
-<p>You can find information about the available fields in your collection API rules tab:</p>
+<p>你可以在 Collection 的 API 规则标签页中查看可用字段的信息：</p>
 <img
     src="/images/screenshots/collection-rules.png"
     alt="Collection API Rules filters screenshot"
@@ -93,64 +82,60 @@
     width="550"
 />
 <p>
-    There is autocomplete to help you guide you while typing the rule filter expression, but in general you
-    have access to <strong>3 groups of fields</strong>:
+    在输入规则过滤表达式时有自动补全功能帮助你，但通常你可以访问 <strong>3 组字段</strong>：
 </p>
 <ul>
     <li>
-        <strong>Your Collection schema fields</strong>
+        <strong>你的 Collection schema 字段</strong>
         <br />
-        This includes all nested relation fields too, ex.
+        这也包括所有嵌套的关联字段，例如：
         <code>someRelField.status != "pending"</code>
     </li>
     <li>
         <code><strong>@request.*</strong></code>
         <br />
-        Used to access the current request data, such as query parameters, body/form fields, authorized user state,
-        etc.
+        用于访问当前请求数据，如查询参数、body/form 字段、已授权用户状态等。
         <ul>
             <li>
-                <code>@request.context</code> - the context where the rule is used (ex.
-                <code>@request.context != "oauth2"</code>)
+                <code>@request.context</code> - 规则使用的上下文（例如：
+                <code>@request.context != "oauth2"</code>）
                 <br />
                 <small class="txt-hint">
-                    The currently supported context values are
-                    <code>default</code>,
-                    <code>oauth2</code>,
-                    <code>otp</code>,
-                    <code>password</code>,
-                    <code>realtime</code>,
-                    <code>protectedFile</code>.
+                    当前支持的 context 值有
+                    <code>default</code>、
+                    <code>oauth2</code>、
+                    <code>otp</code>、
+                    <code>password</code>、
+                    <code>realtime</code>、
+                    <code>protectedFile</code>。
                 </small>
             </li>
             <li>
-                <code>@request.method</code> - the HTTP request method (ex.
-                <code>@request.method = "GET"</code>)
+                <code>@request.method</code> - HTTP 请求方法（例如：
+                <code>@request.method = "GET"</code>）
             </li>
             <li>
-                <code>@request.headers.*</code> - the request headers as string values (ex.
-                <code>@request.headers.x_token = "test"</code>)
+                <code>@request.headers.*</code> - 请求头部的字符串值（例如：
+                <code>@request.headers.x_token = "test"</code>）
                 <br />
                 <small class="txt-hint">
-                    Note: All header keys are normalized to lowercase and "-" is replaced with "_" (for
-                    example "X-Token" is "x_token").
+                    注意：所有 header 键都会被转为小写，并将 "-" 替换为 "_"（例如 "X-Token" 变为 "x_token"）。
                 </small>
             </li>
             <li>
-                <code>@request.query.*</code> - the request query parameters as string values (ex.
-                <code>@request.query.page = "1"</code>)
+                <code>@request.query.*</code> - 请求查询参数的字符串值（例如：
+                <code>@request.query.page = "1"</code>）
             </li>
             <li>
-                <code>@request.auth.*</code> - the current authenticated model (ex.
-                <code>@request.auth.id != ""</code>)
+                <code>@request.auth.*</code> - 当前已认证的模型（例如：
+                <code>@request.auth.id != ""</code>）
             </li>
             <li>
-                <code>@request.body.*</code> - the submitted body parameters (ex.
-                <code>@request.body.title != ""</code>)
+                <code>@request.body.*</code> - 提交的 body 参数（例如：
+                <code>@request.body.title != ""</code>）
                 <br />
                 <small class="txt-hint">
-                    Note: Uploaded files are not part of the <code class="txt-sm">@request.body</code>
-                    because they are evaluated separately (<em>this behavior may change in the future</em>).
+                    注意：上传的文件不属于 <code class="txt-sm">@request.body</code>，因为它们会被单独处理（<em>此行为未来可能会改变</em>）。
                 </small>
             </li>
         </ul>
@@ -158,9 +143,7 @@
     <li>
         <code><strong>@collection.*</strong></code>
         <p>
-            This filter could be used to target other collections that are not directly related to the current
-            one (aka. there is no relation field pointing to it) but both shares a common field value, like
-            for example a category id:
+            该过滤器可用于针对与当前 Collection 没有关联字段但有共同字段值的其他 Collection，例如 category id：
         </p>
         <CodeBlock
             content={`
@@ -168,8 +151,7 @@
             `}
         />
         <p>
-            In case you want to join the same collection multiple times but based on different criteria, you
-            can define an alias by appending <code>:alias</code> suffix to the collection name.
+            如果你想基于不同条件多次关联同一个 Collection，可以在 Collection 名称后添加 <code>:alias</code> 后缀定义别名。
         </p>
         <CodeBlock
             content={`
@@ -188,38 +170,36 @@
 <HeadingLink title="Special identifiers and modifiers" />
 
 <HeadingLink title="@ macros" tag="h5" />
-<p>The following datetime macros are available and can be used as part of the filter expression:</p>
+<p>以下日期时间宏可用，并可作为过滤表达式的一部分使用：</p>
 <CodeBlock
     class="m-b-0"
     language="html"
     content={`
         // all macros are UTC based
-        @now        - the current datetime as string
-        @second     - @now second number (0-59)
-        @minute     - @now minute number (0-59)
-        @hour       - @now hour number (0-23)
-        @weekday    - @now weekday number (0-6)
-        @day        - @now day number
-        @month      - @now month number
-        @year       - @now year number
-        @yesterday  - the yesterday datetime relative to @now as string
-        @tomorrow   - the tomorrow datetime relative to @now as string
-        @todayStart - beginning of the current day as datetime string
-        @todayEnd   - end of the current day as datetime string
-        @monthStart - beginning of the current month as datetime string
-        @monthEnd   - end of the current month as datetime string
-        @yearStart  - beginning of the current year as datetime string
-        @yearEnd    - end of the current year as datetime string
+        @now        - 当前时间（字符串）
+        @second     - 当前秒数 (0-59)
+        @minute     - 当前分钟数 (0-59)
+        @hour       - 当前小时数 (0-23)
+        @weekday    - 当前星期几 (0-6)
+        @day        - 当前日期
+        @month      - 当前月份
+        @year       - 当前年份
+        @yesterday  - 相对于 @now 的昨天时间（字符串）
+        @tomorrow   - 相对于 @now 的明天时间（字符串）
+        @todayStart - 当天开始时间（字符串）
+        @todayEnd   - 当天结束时间（字符串）
+        @monthStart - 当月开始时间（字符串）
+        @monthEnd   - 当月结束时间（字符串）
+        @yearStart  - 当年开始时间（字符串）
+        @yearEnd    - 当年结束时间（字符串）
     `}
 />
-<p>For example:</p>
+<p>例如：</p>
 <CodeBlock content={`@request.body.publicDate >= @now`} />
 
 <HeadingLink title=":isset modifier" tag="h5" />
 <p>
-    The <code>:isset</code> field modifier is available only for the <code>@request.*</code> fields and can be
-    used to check whether the client submitted a specific data with the request. Here is for example a rule that
-    disallows changing a "role" field:
+    <code>:isset</code> 字段修饰符仅适用于 <code>@request.*</code> 字段，可用于检查客户端是否提交了特定数据。例如，以下规则禁止更改 "role" 字段：
 </p>
 <CodeBlock
     class="m-b-0"
@@ -229,105 +209,88 @@
 />
 <p>
     <small class="txt-hint">
-        Note that <code class="txt-sm">@request.body.*:isset</code> at the moment doesn't support checking for
-        new uploaded files because they are evaluated separately and cannot be serialized (<em
-            >this behavior may change in the future</em
-        >).
+        注意 <code class="txt-sm">@request.body.*:isset</code> 目前不支持检查新上传的文件，因为它们会被单独处理且无法序列化（<em>此行为未来可能会改变</em>）。
     </small>
 </p>
 
 <HeadingLink title=":length modifier" tag="h5" />
 <p>
-    The <code>:length</code> field modifier could be used to check the number of items in an array field
-    (multiple <code>file</code>, <code>select</code>, <code>relation</code>).
+    <code>:length</code> 字段修饰符可用于检查数组字段（多文件、select、relation）的元素数量。
     <br />
-    Could be used with both the collection schema fields and the <code>@request.body.*</code> fields. For example:
+    可用于 Collection schema 字段和 <code>@request.body.*</code> 字段。例如：
 </p>
 <CodeBlock
     class="m-b-0"
     content={`
-        // check example submitted data: {"someSelectField": ["val1", "val2"]}
+        // 检查提交数据示例：{"someSelectField": ["val1", "val2"]}
         @request.body.someSelectField:length > 1
 
-        // check existing record field length
+        // 检查现有记录字段长度
         someRelationField:length = 2
     `}
 />
 <p>
     <small class="txt-hint">
-        Note that <code class="txt-sm">@request.body.*:length</code> at the moment doesn't support checking
-        for new uploaded files because they are evaluated separately and cannot be serialized (<em
-            >this behavior may change in the future</em
-        >).
+        注意 <code class="txt-sm">@request.body.*:length</code> 目前不支持检查新上传的文件，因为它们会被单独处理且无法序列化（<em>此行为未来可能会改变</em>）。
     </small>
 </p>
 
 <HeadingLink title=":each modifier" tag="h5" />
 <p>
-    The <code>:each</code> field modifier works only with multiple <code>select</code>, <code>file</code> and
-    <code>relation</code>
-    type fields. It could be used to apply a condition on each item from the field array. For example:
+    <code>:each</code> 字段修饰符仅适用于多选 <code>select</code>、<code>file</code> 和 <code>relation</code> 类型字段。可用于对字段数组中的每一项应用条件。例如：
 </p>
 <CodeBlock
     class="m-b-0"
     content={`
-        // check if all submitted select options contain the "create" text
+        // 检查所有提交的 select 选项是否包含 "create" 文本
         @request.body.someSelectField:each ~ "create"
 
-        // check if all existing someSelectField has "pb_" prefix
+        // 检查所有现有 someSelectField 是否以 "pb_" 前缀开头
         someSelectField:each ~ "pb_%"
     `}
 />
 <p>
     <small class="txt-hint">
-        Note that <code class="txt-sm">@request.body.*:each</code> at the moment doesn't support checking for
-        new uploaded files because they are evaluated separately and cannot be serialized (<em
-            >this behavior may change in the future</em
-        >).
+        注意 <code class="txt-sm">@request.body.*:each</code> 目前不支持检查新上传的文件，因为它们会被单独处理且无法序列化（<em>此行为未来可能会改变</em>）。
     </small>
 </p>
 
 <HeadingLink title=":lower modifier" tag="h5" />
 <p>
-    The <code>:lower</code> field modifier could be used to perform lower-case string comparisons. For example:
+    <code>:lower</code> 字段修饰符可用于进行小写字符串比较。例如：
 </p>
 <CodeBlock
     class="m-b-0"
     content={`
-        // check if the submitted lower-cased body "title" field is equal to "test" ("Test", "tEsT", etc.)
+        // 检查提交的 body "title" 字段小写后是否等于 "test"（"Test"、"tEsT" 等）
         @request.body.title:lower = "test"
 
-        // match existing records with lower-cased "title" equal to "test" ("Test", "tEsT", etc.)
+        // 匹配所有小写后 "title" 等于 "test" 的现有记录（"Test"、"tEsT" 等）
         title:lower ~ "test"
     `}
 />
 <p>
     <small class="txt-hint">
-        Under the hood it uses the
+        底层使用
         <a href="https://www.sqlite.org/lang_corefunc.html#lower" target="_blank" rel="noopener noreferrer">
-            SQLite <code>LOWER</code> scalar function
+            SQLite <code>LOWER</code> 标量函数
         </a>
-        and by default works only for ASCII characters, unless the ICU extension is loaded.
+        ，默认仅支持 ASCII 字符，除非加载了 ICU 扩展。
     </small>
 </p>
 
 <HeadingLink title="geoDistance(lonA, latA, lonB, latB)" tag="h5" />
 <p>
-    The <code>geoDistance(lonA, latA, lonB, latB)</code> function could be used to calculate the Haversine distance
-    between 2 geographic points in kilometres.
+    <code>geoDistance(lonA, latA, lonB, latB)</code> 函数可用于计算两地理点之间的哈弗辛距离（单位：公里）。
 </p>
 <p>
-    The function is intented to be used primarily with the <code>geoPoint</code> field type, but the accepted
-    arguments could be any plain number or collection field identifier. If the identifier cannot be resolved
-    and converted to a numeric value, it resolves to <code>null</code>. Note that the
-    <code>geoDistance</code> function always results in a single row/record value meaning that "any/at-least-one-of"
-    type of constraint will be applied even if some of its arguments originate from a multiple relation field.
+    该函数主要用于 <code>geoPoint</code> 字段类型，但参数也可以是任意数字或 Collection 字段标识符。如果标识符无法解析为数值，则为 <code>null</code>。注意 <code>geoDistance</code> 函数始终返回单行/记录值，即使部分参数来自多 relation 字段，也会应用“任意/至少一个”约束。
 </p>
-<p>For example:</p>
+<p>例如：</p>
 <CodeBlock
     class="m-b-0"
     content={`
-        // offices that are less than 25km from my location (address is a geoPoint field in the offices collection)
+        // 查询距离我当前位置小于 25 公里的办公室（address 是 offices collection 的 geoPoint 字段）
         geoDistance(address.lon, address.lat, 23.32, 42.69) < 25
     `}
 />
@@ -335,7 +298,7 @@
 <HeadingLink title="Examples" />
 <ul>
     <li class="m-b-sm">
-        Allow only registered users:
+        仅允许已注册用户访问：
         <CodeBlock
             content={`
                 @request.auth.id != ""
@@ -343,7 +306,7 @@
         />
     </li>
     <li class="m-b-sm">
-        Allow only registered users and return records that are either "active" or "pending":
+        仅允许已注册用户访问，并返回 "active" 或 "pending" 状态的记录：
         <CodeBlock
             content={`
                 @request.auth.id != "" && (status = "active" || status = "pending")
@@ -351,7 +314,7 @@
         />
     </li>
     <li class="m-b-sm">
-        Allow only registered users who are listed in an <em>allowed_users</em> multi-relation field value:
+        仅允许已注册用户且其 id 在 <em>allowed_users</em> 多 relation 字段中的用户访问：
         <CodeBlock
             content={`
                 @request.auth.id != "" && allowed_users.id ?= @request.auth.id
@@ -359,8 +322,7 @@
         />
     </li>
     <li class="m-b-sm">
-        Allow access by anyone and return only the records where the <em>title</em> field value starts with
-        "Lorem" (ex. "Lorem ipsum"):
+        允许任何人访问，仅返回 <em>title</em> 字段值以 "Lorem" 开头的记录（如 "Lorem ipsum"）：
         <CodeBlock
             content={`
                 title ~ "Lorem%"

@@ -6,28 +6,25 @@
 </script>
 
 <p>
-    Collections are usually managed via the Dashboard interface, but there are some situations where you may
-    want to create or edit a collection programmatically (usually as part of a
-    <a href="/docs/go-migrations">DB migration</a>). You can find all available Collection related operations
-    and methods in
+    通常你可以通过管理后台管理集合，但在某些场景下你可能希望以编程方式创建或编辑集合（通常作为
+    <a href="/docs/go-migrations">数据库迁移</a> 的一部分）。你可以在
     <a href="{import.meta.env.PB_GODOC_URL}/core#App" target="_blank" rel="noopener noreferrer">
         <code>core.App</code>
     </a>
-    and
+    和
     <a href="{import.meta.env.PB_GODOC_URL}/core#Collection" target="_blank" rel="noopener noreferrer">
         <code>core.Collection</code>
     </a>
-    , but below are listed some of the most common ones:
+    中找到所有可用的集合相关操作和方法，下面列出了一些最常用的方法：
 </p>
 
 <Toc />
 
-<HeadingLink title="Fetch collections" />
+<HeadingLink title="获取集合" />
 
-<HeadingLink title="Fetch single collection" tag="h5" />
+<HeadingLink title="获取单个集合" tag="h5" />
 <p class="txt-hint">
-    All single collection retrieval methods return <code>nil</code> and <code>sql.ErrNoRows</code> error if no
-    collection is found.
+    所有单个集合的获取方法在未找到集合时会返回 <code>nil</code> 和 <code>sql.ErrNoRows</code> 错误。
 </p>
 <CodeBlock
     language="go"
@@ -36,10 +33,9 @@
     `}
 />
 
-<HeadingLink title="Fetch multiple collections" tag="h5" />
+<HeadingLink title="获取多个集合" tag="h5" />
 <p class="txt-hint">
-    All multiple collections retrieval methods return empty slice and <code>nil</code> error if no collections
-    are found.
+    所有获取多个集合的方法在未找到集合时会返回空切片和 <code>nil</code> 错误。
 </p>
 <CodeBlock
     language="go"
@@ -50,14 +46,15 @@
     `}
 />
 
-<HeadingLink title="Custom collection query" tag="h5" />
+<HeadingLink title="自定义集合查询" tag="h5" />
 <p>
-    In addition to the above query helpers, you can also create custom Collection queries using
+    除了上述查询助手外，你还可以使用
     <a href="{import.meta.env.PB_GODOC_URL}/core#CollectionQuery" target="_blank" rel="noopener noreferrer">
         <code>CollectionQuery()</code>
     </a>
-    method. It returns a SELECT DB builder that can be used with the same methods described in the
-    <a href="/docs/go-database">Database guide</a>.
+    方法自定义集合查询。它返回一个 SELECT 数据库构造器，可与
+    <a href="/docs/go-database">数据库指南</a>
+    中描述的方法配合使用。
 </p>
 <CodeBlock
     language="go"
@@ -86,7 +83,7 @@
     `}
 />
 
-<HeadingLink title="Collection properties" />
+<HeadingLink title="集合属性" />
 <!-- note: listed temporary until godoc adds support for promoting the public fields and method of embedded unexported types -->
 <!-- prettier-ignore -->
 <CodeBlock
@@ -132,7 +129,7 @@
     `}
 />
 
-<HeadingLink title="Field definitions" />
+<HeadingLink title="字段定义" />
 <ul>
     {#each fieldNames as field}
         <li>
@@ -143,7 +140,7 @@
     {/each}
 </ul>
 
-<HeadingLink title="Create new collection" />
+<HeadingLink title="创建新集合" />
 <CodeBlock
     language="go"
     content={`
@@ -214,7 +211,7 @@
     `}
 />
 
-<HeadingLink title="Update existing collection" />
+<HeadingLink title="更新已有集合" />
 <CodeBlock
     language="go"
     content={`
@@ -256,7 +253,7 @@
     `}
 />
 
-<HeadingLink title="Delete collection" />
+<HeadingLink title="删除集合" />
 <CodeBlock
     language="go"
     content={`

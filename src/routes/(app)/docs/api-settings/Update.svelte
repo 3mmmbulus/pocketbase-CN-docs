@@ -135,10 +135,10 @@
     let responseTab = responses[0].code;
 </script>
 
-<Accordion single title="Update settings">
+<Accordion single title="更新设置">
     <div class="content m-b-sm">
-        <p>Bulk updates application settings and returns the updated settings list.</p>
-        <p>Only superusers can perform this action.</p>
+        <p>批量更新应用设置并返回更新后的设置列表。</p>
+        <p>仅超级用户可以执行此操作。</p>
     </div>
 
     <CodeTabs
@@ -176,20 +176,20 @@
         `}
     />
 
-    <h6 class="m-b-xs">API details</h6>
+    <h6 class="m-b-xs">API 详情</h6>
     <div class="api-route alert alert-warning">
         <strong class="label label-primary">PATCH</strong>
         <div class="content">/api/settings</div>
-        <small class="txt-hint auth-header">Requires <code>Authorization:TOKEN</code></small>
+        <small class="txt-hint auth-header">需要 <code>Authorization:TOKEN</code></small>
     </div>
 
-    <div class="section-title">Body Parameters</div>
+    <div class="section-title">请求体参数</div>
     <table class="table-compact table-border">
         <thead>
             <tr>
-                <th>Param</th>
-                <th>Type</th>
-                <th width="50%">Description</th>
+                <th>参数</th>
+                <th>类型</th>
+                <th width="50%">说明</th>
             </tr>
         </thead>
         <tbody>
@@ -198,40 +198,40 @@
                 <td colspan="3" class="bg-info-alt">
                     <strong>meta</strong>
                     <br />
-                    <small class="txt-hint">Application meta data (name, url, support email, etc.).</small>
+                    <small class="txt-hint">应用元数据（名称、URL、支持邮箱等）。</small>
                 </td>
             </tr>
             <tr>
                 <td class="min-width">
                     <div class="inline-flex flex-nowrap">
                         <span class="txt">├─</span>
-                        <span class="label label-success">Required</span>
+                        <span class="label label-success">必填</span>
                         <em>appName</em>
                     </div>
                 </td>
                 <td>
                     <span class="label">String</span>
                 </td>
-                <td>The app name.</td>
+                <td>应用名称。</td>
             </tr>
             <tr>
                 <td class="min-width">
                     <div class="inline-flex flex-nowrap">
                         <span class="txt">├─</span>
-                        <span class="label label-success">Required</span>
+                        <span class="label label-success">必填</span>
                         <em>appUrl</em>
                     </div>
                 </td>
                 <td>
                     <span class="label">String</span>
                 </td>
-                <td>The app public absolute url.</td>
+                <td>应用对外公开的绝对 URL。</td>
             </tr>
             <tr>
                 <td class="min-width">
                     <div class="inline-flex flex-nowrap">
                         <span class="txt">├─</span>
-                        <span class="label label-warning">Optional</span>
+                        <span class="label label-warning">可选</span>
                         <em>hideControls</em>
                     </div>
                 </td>
@@ -239,9 +239,9 @@
                     <span class="label">Boolean</span>
                 </td>
                 <td>
-                    Hides the collection create and update controls from the Dashboard.
+                    隐藏后台的集合创建和更新控件。
                     <small>
-                        Useful to prevent making accidental schema changes when in production environment.
+                        适用于生产环境防止误操作更改数据结构。
                     </small>
                 </td>
             </tr>
@@ -249,27 +249,27 @@
                 <td class="min-width">
                     <div class="inline-flex flex-nowrap">
                         <span class="txt">├─</span>
-                        <span class="label label-success">Required</span>
+                        <span class="label label-success">必填</span>
                         <em>senderName</em>
                     </div>
                 </td>
                 <td>
                     <span class="label">String</span>
                 </td>
-                <td>Transactional mails sender name.</td>
+                <td>事务邮件发送人名称。</td>
             </tr>
             <tr>
                 <td class="min-width">
                     <div class="inline-flex flex-nowrap">
                         <span class="txt">├─</span>
-                        <span class="label label-success">Required</span>
+                        <span class="label label-success">必填</span>
                         <em>senderAddress</em>
                     </div>
                 </td>
                 <td>
                     <span class="label">String</span>
                 </td>
-                <td>Transactional mails sender address.</td>
+                <td>事务邮件发送人邮箱。</td>
             </tr>
 
             <!-- logs -->
@@ -277,27 +277,27 @@
                 <td colspan="3" class="bg-info-alt">
                     <strong>logs</strong>
                     <br />
-                    <small class="txt-hint">App logger settings.</small>
+                    <small class="txt-hint">应用日志设置。</small>
                 </td>
             </tr>
             <tr>
                 <td class="min-width">
                     <div class="inline-flex flex-nowrap">
                         <span class="txt">└─</span>
-                        <span class="label label-warning">Optional</span>
+                        <span class="label label-warning">可选</span>
                         <em>maxDays</em>
                     </div>
                 </td>
                 <td>
                     <span class="label">Number</span>
                 </td>
-                <td>Max retention period. Set to <em>0</em> for no logs.</td>
+                <td>最大日志保留天数。设置为 <em>0</em> 表示不保留日志。</td>
             </tr>
             <tr>
                 <td class="min-width">
                     <div class="inline-flex flex-nowrap">
                         <span class="txt">└─</span>
-                        <span class="label label-warning">Optional</span>
+                        <span class="label label-warning">可选</span>
                         <em>minLevel</em>
                     </div>
                 </td>
@@ -305,9 +305,9 @@
                     <span class="label">Number</span>
                 </td>
                 <td>
-                    Specifies the minimum log persistent level.
+                    指定日志持久化的最低级别。
                     <br />
-                    The default log levels are:
+                    默认日志级别如下：
                     <ul>
                         <li>-4: DEBUG</li>
                         <li>0: INFO</li>
@@ -320,27 +320,27 @@
                 <td class="min-width">
                     <div class="inline-flex flex-nowrap">
                         <span class="txt">└─</span>
-                        <span class="label label-warning">Optional</span>
+                        <span class="label label-warning">可选</span>
                         <em>logIP</em>
                     </div>
                 </td>
                 <td>
                     <span class="label">Boolean</span>
                 </td>
-                <td>If enabled includes the client IP in the activity request logs.</td>
+                <td>启用后将在活动请求日志中包含客户端 IP。</td>
             </tr>
             <tr>
                 <td class="min-width">
                     <div class="inline-flex flex-nowrap">
                         <span class="txt">└─</span>
-                        <span class="label label-warning">Optional</span>
+                        <span class="label label-warning">可选</span>
                         <em>logAuthId</em>
                     </div>
                 </td>
                 <td>
                     <span class="label">Boolean</span>
                 </td>
-                <td>If enabled includes the authenticated record id in the activity request logs.</td>
+                <td>启用后将在活动请求日志中包含认证记录 id。</td>
             </tr>
 
             <!-- backups -->
@@ -348,47 +348,47 @@
                 <td colspan="3" class="bg-info-alt">
                     <strong>backups</strong>
                     <br />
-                    <small class="txt-hint">App data backups settings.</small>
+                    <small class="txt-hint">应用数据备份设置。</small>
                 </td>
             </tr>
             <tr>
                 <td class="min-width">
                     <div class="inline-flex flex-nowrap">
                         <span class="txt">├─</span>
-                        <span class="label label-warning">Optional</span>
+                        <span class="label label-warning">可选</span>
                         <em>cron</em>
                     </div>
                 </td>
                 <td>
                     <span class="label">String</span>
                 </td>
-                <td>Cron expression to schedule auto backups, e.g. <code>0 0 * * *</code>.</td>
+                <td>自动备份的 cron 表达式，例如 <code>0 0 * * *</code>。</td>
             </tr>
             <tr>
                 <td class="min-width">
                     <div class="inline-flex flex-nowrap">
                         <span class="txt">├─</span>
-                        <span class="label label-warning">Optional</span>
+                        <span class="label label-warning">可选</span>
                         <em>cronMaxKeep</em>
                     </div>
                 </td>
                 <td>
                     <span class="label">Number</span>
                 </td>
-                <td>The max number of cron generated backups to keep before removing older entries.</td>
+                <td>自动备份最多保留的数量，超出后会删除旧备份。</td>
             </tr>
             <tr>
                 <td class="min-width">
                     <div class="inline-flex flex-nowrap">
                         <span class="txt">└─</span>
-                        <span class="label label-warning">Optional</span>
+                        <span class="label label-warning">可选</span>
                         <em>s3</em>
                     </div>
                 </td>
                 <td>
                     <span class="label">Object</span>
                 </td>
-                <td>S3 configuration (the same fields as for the S3 file storage settings).</td>
+                <td>S3 配置（字段同 S3 文件存储设置）。</td>
             </tr>
 
             <!-- smtp -->
@@ -396,79 +396,79 @@
                 <td colspan="3" class="bg-info-alt">
                     <strong>smtp</strong>
                     <br />
-                    <small class="txt-hint">SMTP mail server settings.</small>
+                    <small class="txt-hint">SMTP 邮件服务器设置。</small>
                 </td>
             </tr>
             <tr>
                 <td class="min-width">
                     <div class="inline-flex flex-nowrap">
                         <span class="txt">├─</span>
-                        <span class="label label-warning">Optional</span>
+                        <span class="label label-warning">可选</span>
                         <em>enabled</em>
                     </div>
                 </td>
                 <td>
                     <span class="label">Boolean</span>
                 </td>
-                <td>Enable the use of the SMTP mail server for sending emails.</td>
+                <td>启用 SMTP 邮件服务器发送邮件。</td>
             </tr>
             <tr>
                 <td class="min-width">
                     <div class="inline-flex flex-nowrap">
                         <span class="txt">├─</span>
-                        <span class="label label-success">Required</span>
+                        <span class="label label-success">必填</span>
                         <em>host</em>
                     </div>
                 </td>
                 <td>
                     <span class="label">String</span>
                 </td>
-                <td>Mail server host (required if SMTP is enabled).</td>
+                <td>邮件服务器主机（启用 SMTP 时必填）。</td>
             </tr>
             <tr>
                 <td class="min-width">
                     <div class="inline-flex flex-nowrap">
                         <span class="txt">├─</span>
-                        <span class="label label-success">Required</span>
+                        <span class="label label-success">必填</span>
                         <em>port</em>
                     </div>
                 </td>
                 <td>
                     <span class="label">Number</span>
                 </td>
-                <td>Mail server port (required if SMTP is enabled).</td>
+                <td>邮件服务器端口（启用 SMTP 时必填）。</td>
             </tr>
             <tr>
                 <td class="min-width">
                     <div class="inline-flex flex-nowrap">
                         <span class="txt">├─</span>
-                        <span class="label label-warning">Optional</span>
+                        <span class="label label-warning">可选</span>
                         <em>username</em>
                     </div>
                 </td>
                 <td>
                     <span class="label">String</span>
                 </td>
-                <td>Mail server username.</td>
+                <td>邮件服务器用户名。</td>
             </tr>
             <tr>
                 <td class="min-width">
                     <div class="inline-flex flex-nowrap">
                         <span class="txt">├─</span>
-                        <span class="label label-warning">Optional</span>
+                        <span class="label label-warning">可选</span>
                         <em>password</em>
                     </div>
                 </td>
                 <td>
                     <span class="label">String</span>
                 </td>
-                <td>Mail server password.</td>
+                <td>邮件服务器密码。</td>
             </tr>
             <tr>
                 <td class="min-width">
                     <div class="inline-flex flex-nowrap">
                         <span class="txt">├─</span>
-                        <span class="label label-warning">Optional</span>
+                        <span class="label label-warning">可选</span>
                         <em>tls</em>
                     </div>
                 </td>
@@ -476,11 +476,10 @@
                     <span class="label">Boolean</span>
                 </td>
                 <td>
-                    Whether to enforce TLS connection encryption.
+                    是否强制使用 TLS 加密连接。
                     <br />
                     <small class="txt-hint">
-                        When <em>false</em> <em>StartTLS</em> command is send, leaving the server to decide whether
-                        to upgrade the connection or not).
+                        当为 <em>false</em> 时会发送 <em>StartTLS</em> 命令，由服务器决定是否升级连接。
                     </small>
                 </td>
             </tr>
@@ -488,7 +487,7 @@
                 <td class="min-width">
                     <div class="inline-flex flex-nowrap">
                         <span class="txt">├─</span>
-                        <span class="label label-warning">Optional</span>
+                        <span class="label label-warning">可选</span>
                         <em>authMethod</em>
                     </div>
                 </td>
@@ -496,16 +495,16 @@
                     <span class="label">String</span>
                 </td>
                 <td>
-                    The SMTP AUTH method to use - <em>PLAIN</em> or <em>LOGIN</em> (used mainly by Microsoft).
+                    SMTP 认证方式 - <em>PLAIN</em> 或 <em>LOGIN</em>（主要用于 Microsoft）。
                     <br />
-                    Default to <em>PLAIN</em> if empty.
+                    留空时默认为 <em>PLAIN</em>。
                 </td>
             </tr>
             <tr>
                 <td class="min-width">
                     <div class="inline-flex flex-nowrap">
                         <span class="txt">└─</span>
-                        <span class="label label-warning">Optional</span>
+                        <span class="label label-warning">可选</span>
                         <em>localName</em>
                     </div>
                 </td>
@@ -513,12 +512,11 @@
                     <span class="label">String</span>
                 </td>
                 <td>
-                    Optional domain name or (IP address) to use for the initial EHLO/HELO exchange.
+                    用于初始 EHLO/HELO 交换的可选域名或 IP 地址。
                     <br />
-                    If not explicitly set, <code>localhost</code> will be used.
+                    未设置时默认使用 <code>localhost</code>。
                     <br />
-                    Note that some SMTP providers, such as Gmail SMTP-relay, requires a proper domain name and
-                    and will reject attempts to use localhost.
+                    注意部分 SMTP 服务商（如 Gmail SMTP-relay）要求填写有效域名，否则会拒绝使用 localhost。
                 </td>
             </tr>
 
@@ -527,92 +525,92 @@
                 <td colspan="3" class="bg-info-alt">
                     <strong>s3</strong>
                     <br />
-                    <small class="txt-hint">S3 compatible file storage settings.</small>
+                    <small class="txt-hint">S3 兼容文件存储设置。</small>
                 </td>
             </tr>
             <tr>
                 <td class="min-width">
                     <div class="inline-flex flex-nowrap">
                         <span class="txt">├─</span>
-                        <span class="label label-warning">Optional</span>
+                        <span class="label label-warning">可选</span>
                         <em>enabled</em>
                     </div>
                 </td>
                 <td>
                     <span class="label">Boolean</span>
                 </td>
-                <td>Enable the use of a S3 compatible storage.</td>
+                <td>启用 S3 兼容存储。</td>
             </tr>
             <tr>
                 <td class="min-width">
                     <div class="inline-flex flex-nowrap">
                         <span class="txt">├─</span>
-                        <span class="label label-success">Required</span>
+                        <span class="label label-success">必填</span>
                         <em>bucket</em>
                     </div>
                 </td>
                 <td>
                     <span class="label">String</span>
                 </td>
-                <td>S3 storage bucket (required if enabled).</td>
+                <td>S3 存储桶（启用时必填）。</td>
             </tr>
             <tr>
                 <td class="min-width">
                     <div class="inline-flex flex-nowrap">
                         <span class="txt">├─</span>
-                        <span class="label label-success">Required</span>
+                        <span class="label label-success">必填</span>
                         <em>region</em>
                     </div>
                 </td>
                 <td>
                     <span class="label">String</span>
                 </td>
-                <td>S3 storage region (required if enabled).</td>
+                <td>S3 存储区域（启用时必填）。</td>
             </tr>
             <tr>
                 <td class="min-width">
                     <div class="inline-flex flex-nowrap">
                         <span class="txt">├─</span>
-                        <span class="label label-success">Required</span>
+                        <span class="label label-success">必填</span>
                         <em>endpoint</em>
                     </div>
                 </td>
                 <td>
                     <span class="label">String</span>
                 </td>
-                <td>S3 storage public endpoint (required if enabled).</td>
+                <td>S3 存储公开 endpoint（启用时必填）。</td>
             </tr>
             <tr>
                 <td class="min-width">
                     <div class="inline-flex flex-nowrap">
                         <span class="txt">├─</span>
-                        <span class="label label-success">Required</span>
+                        <span class="label label-success">必填</span>
                         <em>accessKey</em>
                     </div>
                 </td>
                 <td>
                     <span class="label">String</span>
                 </td>
-                <td>S3 storage access key (required if enabled).</td>
+                <td>S3 存储 access key（启用时必填）。</td>
             </tr>
             <tr>
                 <td class="min-width">
                     <div class="inline-flex flex-nowrap">
                         <span class="txt">├─</span>
-                        <span class="label label-success">Required</span>
+                        <span class="label label-success">必填</span>
                         <em>secret</em>
                     </div>
                 </td>
                 <td>
                     <span class="label">String</span>
                 </td>
-                <td>S3 storage secret (required if enabled).</td>
+                <td>S3 存储 secret（启用时必填）。</td>
             </tr>
             <tr>
                 <td class="min-width">
                     <div class="inline-flex flex-nowrap">
                         <span class="txt">└─</span>
-                        <span class="label label-warning">Optional</span>
+                        <span class="label label-warning">可选</span>
                         <em>forcePathStyle</em>
                     </div>
                 </td>
@@ -620,9 +618,9 @@
                     <span class="label">Boolean</span>
                 </td>
                 <td>
-                    Forces the S3 request to use path-style addressing, e.g.
-                    "https://s3.amazonaws.com/BUCKET/KEY" instead of the default
-                    "https://BUCKET.s3.amazonaws.com/KEY".
+                    强制 S3 请求使用 path-style 访问方式，例如
+                    "https://s3.amazonaws.com/BUCKET/KEY"，而不是默认的
+                    "https://BUCKET.s3.amazonaws.com/KEY"。
                 </td>
             </tr>
 
@@ -631,53 +629,53 @@
                 <td colspan="3" class="bg-info-alt">
                     <strong>batch</strong>
                     <br />
-                    <small class="txt-hint">Batch logs settings.</small>
+                    <small class="txt-hint">批量日志设置。</small>
                 </td>
             </tr>
             <tr>
                 <td class="min-width">
                     <div class="inline-flex flex-nowrap">
                         <span class="txt">├─</span>
-                        <span class="label label-warning">Optional</span>
+                        <span class="label label-warning">可选</span>
                         <em>enabled</em>
                     </div>
                 </td>
                 <td>
                     <span class="label">Boolean</span>
                 </td>
-                <td>Enable the batch Web APIs.</td>
+                <td>启用批量 Web API。</td>
             </tr>
             <tr>
                 <td class="min-width">
                     <div class="inline-flex flex-nowrap">
                         <span class="txt">├─</span>
-                        <span class="label label-success">Required</span>
+                        <span class="label label-success">必填</span>
                         <em>maxRequests</em>
                     </div>
                 </td>
                 <td>
                     <span class="label">Number</span>
                 </td>
-                <td>The maximum allowed batch request to execute.</td>
+                <td>允许的最大批量请求数。</td>
             </tr>
             <tr>
                 <td class="min-width">
                     <div class="inline-flex flex-nowrap">
                         <span class="txt">├─</span>
-                        <span class="label label-success">Required</span>
+                        <span class="label label-success">必填</span>
                         <em>timeout</em>
                     </div>
                 </td>
                 <td>
                     <span class="label">Number</span>
                 </td>
-                <td>The max duration in seconds to wait before cancelling the batch transaction.</td>
+                <td>批量事务最大等待秒数，超时自动取消。</td>
             </tr>
             <tr>
                 <td class="min-width">
                     <div class="inline-flex flex-nowrap">
                         <span class="txt">└─</span>
-                        <span class="label label-warning">Optional</span>
+                        <span class="label label-warning">可选</span>
                         <em>maxBodySize</em>
                     </div>
                 </td>
@@ -685,9 +683,9 @@
                     <span class="label">Number</span>
                 </td>
                 <td>
-                    The maximum allowed batch request body size in bytes.
+                    批量请求体最大允许字节数。
                     <br />
-                    If not set, fallbacks to max ~128MB.
+                    未设置时默认最大约 128MB。
                 </td>
             </tr>
 
@@ -696,27 +694,27 @@
                 <td colspan="3" class="bg-info-alt">
                     <strong>rateLimits</strong>
                     <br />
-                    <small class="txt-hint">Rate limiter settings.</small>
+                    <small class="txt-hint">限流器设置。</small>
                 </td>
             </tr>
             <tr>
                 <td class="min-width">
                     <div class="inline-flex flex-nowrap">
                         <span class="txt">├─</span>
-                        <span class="label label-warning">Optional</span>
+                        <span class="label label-warning">可选</span>
                         <em>enabled</em>
                     </div>
                 </td>
                 <td>
                     <span class="label">Boolean</span>
                 </td>
-                <td>Enable the builtin rate limiter.</td>
+                <td>启用内置限流器。</td>
             </tr>
             <tr>
                 <td class="min-width">
                     <div class="inline-flex flex-nowrap">
                         <span class="txt">└─</span>
-                        <span class="label label-warning">Optional</span>
+                        <span class="label label-warning">可选</span>
                         <em>rules</em>
                     </div>
                 </td>
@@ -724,17 +722,16 @@
                     <span class="label">{`Array<RateLimitRule>`}</span>
                 </td>
                 <td>
-                    List of rate limit rules. Each rule have:
+                    限流规则列表。每条规则包含：
                     <ul>
                         <li>
-                            <code>label</code> - the identifier of the rule.
+                            <code>label</code> - 规则标识符。
                             <br />
-                            It could be a tag, complete path or path prerefix (when ends with `/`).
+                            可以是标签、完整路径或以 `/` 结尾的路径前缀。
                         </li>
-                        <li><code>maxRequests</code> - the max allowed number of requests per duration.</li>
+                        <li><code>maxRequests</code> - 每个周期允许的最大请求数。</li>
                         <li>
-                            <code>duration</code> - specifies the interval (in seconds) per which to reset the
-                            counted/accumulated rate limiter tokens..
+                            <code>duration</code> - 指定每隔多少秒重置计数/令牌。
                         </li>
                     </ul>
                 </td>
@@ -745,49 +742,49 @@
                 <td colspan="3" class="bg-info-alt">
                     <strong>trustedProxy</strong>
                     <br />
-                    <small class="txt-hint">Trusted proxy headers settings.</small>
+                    <small class="txt-hint">可信代理头设置。</small>
                 </td>
             </tr>
             <tr>
                 <td class="min-width">
                     <div class="inline-flex flex-nowrap">
                         <span class="txt">├─</span>
-                        <span class="label label-warning">Optional</span>
+                        <span class="label label-warning">可选</span>
                         <em>headers</em>
                     </div>
                 </td>
                 <td>
                     <span class="label">{`Array<String>`}</span>
                 </td>
-                <td>List of explicit trusted header(s) to check.</td>
+                <td>需要检查的显式可信 header 列表。</td>
             </tr>
             <tr>
                 <td class="min-width">
                     <div class="inline-flex flex-nowrap">
                         <span class="txt">└─</span>
-                        <span class="label label-warning">Optional</span>
+                        <span class="label label-warning">可选</span>
                         <em>useLeftmostIP</em>
                     </div>
                 </td>
                 <td>
                     <span class="label">Boolean</span>
                 </td>
-                <td>Specifies to use the left-mostish IP from the trusted headers.</td>
+                <td>指定是否使用最左侧的 IP。</td>
             </tr>
         </tbody>
     </table>
     <small class="block txt-hint m-t-10 m-b-base">
-        Body parameters could be sent as <em>JSON</em> or
-        <em>multipart/form-data</em>.
+        请求体参数可通过 <em>JSON</em> 或
+        <em>multipart/form-data</em> 方式发送。
     </small>
 
-    <div class="section-title">Query parameters</div>
+    <div class="section-title">查询参数</div>
     <table class="table-compact table-border m-b-base">
         <thead>
             <tr>
-                <th>Param</th>
-                <th>Type</th>
-                <th width="50%">Description</th>
+                <th>参数</th>
+                <th>类型</th>
+                <th width="50%">说明</th>
             </tr>
         </thead>
         <tbody>
@@ -795,7 +792,7 @@
         </tbody>
     </table>
 
-    <div class="section-title">Responses</div>
+    <div class="section-title">响应</div>
     <div class="tabs">
         <div class="tabs-header compact combined left">
             {#each responses as response (response.code)}

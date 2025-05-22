@@ -37,10 +37,10 @@
     let responseTab = responses[0].code;
 </script>
 
-<Accordion single title="Generate Apple client secret">
+<Accordion single title="生成 Apple 客户端密钥">
     <div class="content m-b-sm">
-        <p>Generates a new Apple OAuth2 client secret key.</p>
-        <p>Only superusers can perform this action.</p>
+        <p>生成新的 Apple OAuth2 客户端密钥。</p>
+        <p>仅超级用户可以执行此操作。</p>
     </div>
 
     <CodeTabs
@@ -68,39 +68,39 @@
         `}
     />
 
-    <h6 class="m-b-xs">API details</h6>
+    <h6 class="m-b-xs">API 详情</h6>
     <div class="api-route alert alert-success">
         <strong class="label label-primary">POST</strong>
         <div class="content">/api/settings/apple/generate-client-secret</div>
-        <small class="txt-hint auth-header">Requires <code>Authorization:TOKEN</code></small>
+        <small class="txt-hint auth-header">需要 <code>Authorization:TOKEN</code></small>
     </div>
 
-    <div class="section-title">Body Parameters</div>
+    <div class="section-title">请求体参数</div>
     <table class="table-compact table-border">
         <thead>
             <tr>
-                <th>Param</th>
-                <th>Type</th>
-                <th width="50%">Description</th>
+                <th>参数</th>
+                <th>类型</th>
+                <th width="50%">说明</th>
             </tr>
         </thead>
         <tbody>
             <tr>
                 <td>
                     <div class="inline-flex">
-                        <span class="label label-success">Required</span>
+                        <span class="label label-success">必填</span>
                         <span class="txt">clientId</span>
                     </div>
                 </td>
                 <td>
                     <span class="label">String</span>
                 </td>
-                <td>The identifier of your app (aka. Service ID).</td>
+                <td>你的应用标识符（即 Service ID）。</td>
             </tr>
             <tr>
                 <td>
                     <div class="inline-flex">
-                        <span class="label label-success">Required</span>
+                        <span class="label label-success">必填</span>
                         <span class="txt">teamId</span>
                     </div>
                 </td>
@@ -108,14 +108,13 @@
                     <span class="label">String</span>
                 </td>
                 <td>
-                    10-character string associated with your developer account (usually could be found next to
-                    your name in the Apple Developer site).
+                    与你的开发者账号关联的 10 位字符串（通常可在 Apple Developer 网站你的名字旁边找到）。
                 </td>
             </tr>
             <tr>
                 <td>
                     <div class="inline-flex">
-                        <span class="label label-success">Required</span>
+                        <span class="label label-success">必填</span>
                         <span class="txt">keyId</span>
                     </div>
                 </td>
@@ -123,26 +122,25 @@
                     <span class="label">String</span>
                 </td>
                 <td>
-                    10-character key identifier generated for the "Sign in with Apple" private key associated
-                    with your developer account.
+                    为“Sign in with Apple”私钥生成的 10 位密钥标识符，关联你的开发者账号。
                 </td>
             </tr>
             <tr>
                 <td>
                     <div class="inline-flex">
-                        <span class="label label-success">Required</span>
+                        <span class="label label-success">必填</span>
                         <span class="txt">privateKey</span>
                     </div>
                 </td>
                 <td>
                     <span class="label">String</span>
                 </td>
-                <td>PrivateKey is the private key associated to your app.</td>
+                <td>privateKey 是与你的应用关联的私钥。</td>
             </tr>
             <tr>
                 <td>
                     <div class="inline-flex">
-                        <span class="label label-success">Required</span>
+                        <span class="label label-success">必填</span>
                         <span class="txt">duration</span>
                     </div>
                 </td>
@@ -150,19 +148,19 @@
                     <span class="label">Number</span>
                 </td>
                 <td>
-                    Duration specifies how long the generated JWT token should be considered valid.
+                    duration 指定生成的 JWT token 有效时长。
                     <br />
-                    The specified value must be in seconds and max 15777000 (~6months).
+                    该值必须为秒，最大 15777000（约 6 个月）。
                 </td>
             </tr>
         </tbody>
     </table>
     <small class="block txt-hint m-t-10 m-b-base">
-        Body parameters could be sent as <em>JSON</em> or
-        <em>multipart/form-data</em>.
+        请求体参数可通过 <em>JSON</em> 或
+        <em>multipart/form-data</em> 方式发送。
     </small>
 
-    <div class="section-title">Responses</div>
+    <div class="section-title">响应</div>
     <div class="tabs">
         <div class="tabs-header compact combined left">
             {#each responses as response (response.code)}

@@ -118,11 +118,11 @@
     let responseTab = responses[0].code;
 </script>
 
-<Accordion single title="List settings">
+<Accordion single title="列出设置">
     <div class="content m-b-sm">
-        <p>Returns a list with all available application settings.</p>
-        <p>Secret/password fields are automatically redacted with <em>******</em> characters.</p>
-        <p>Only superusers can perform this action.</p>
+        <p>返回所有可用应用设置的列表。</p>
+        <p>密钥/密码字段会自动用 <em>******</em> 字符隐藏。</p>
+        <p>仅超级用户可以执行此操作。</p>
     </div>
 
     <CodeTabs
@@ -150,20 +150,20 @@
         `}
     />
 
-    <h6 class="m-b-xs">API details</h6>
+    <h6 class="m-b-xs">API 详情</h6>
     <div class="api-route alert alert-info">
         <strong class="label label-primary">GET</strong>
         <div class="content">/api/settings</div>
-        <small class="txt-hint auth-header">Requires <code>Authorization:TOKEN</code></small>
+        <small class="txt-hint auth-header">需要 <code>Authorization:TOKEN</code></small>
     </div>
 
-    <div class="section-title">Query parameters</div>
+    <div class="section-title">查询参数</div>
     <table class="table-compact table-border m-b-base">
         <thead>
             <tr>
-                <th>Param</th>
-                <th>Type</th>
-                <th width="50%">Description</th>
+                <th>参数</th>
+                <th>类型</th>
+                <th width="50%">说明</th>
             </tr>
         </thead>
         <tbody>
@@ -171,7 +171,7 @@
         </tbody>
     </table>
 
-    <div class="section-title">Responses</div>
+    <div class="section-title">响应</div>
     <div class="tabs">
         <div class="tabs-header compact combined left">
             {#each responses as response (response.code)}

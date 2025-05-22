@@ -7,22 +7,22 @@
 </script>
 
 <p>
-    <code>app.Logger()</code> provides access to a standard <code>slog.Logger</code> implementation that
-    writes any logs into the database so that they can be later explored from the PocketBase
-    <em>Dashboard > Logs</em> section.
+    <code>app.Logger()</code> 提供了一个标准的 <code>slog.Logger</code> 实现，
+    可将所有日志写入数据库，便于后续在 PocketBase
+    <em>Dashboard > Logs</em> 部分查看。
 </p>
 
 <LogsWriteAlert />
 
 <Toc />
 
-<HeadingLink title="Log methods" />
+<HeadingLink title="日志方法" />
 <p>
-    All standard
+    所有标准的
     <a href="https://pkg.go.dev/log/slog" target="_blank" rel="noopener noreferrer">
         <code>slog.Logger</code>
     </a>
-    methods are available but below is a list with some of the most notable ones.
+    方法均可用，以下是一些常用方法的列表。
 </p>
 
 <HeadingLink title="Debug(message, attrs...)" tag="h5" />
@@ -83,8 +83,7 @@
 
 <HeadingLink title="With(attrs...)" tag="h5" />
 <p>
-    <code>With(atrs...)</code> creates a new local logger that will "inject" the specified attributes with each
-    following log.
+    <code>With(atrs...)</code> 会创建一个新的本地 logger，每次日志都会自动“注入”指定的属性。
 </p>
 <CodeBlock
     language="go"
@@ -101,8 +100,7 @@
 
 <HeadingLink title="WithGroup(name)" tag="h5" />
 <p>
-    <code>WithGroup(name)</code> creates a new local logger that wraps all logs attributes under the specified
-    group name.
+    <code>WithGroup(name)</code> 会创建一个新的本地 logger，将所有日志属性包裹在指定的分组名下。
 </p>
 <CodeBlock
     language="go"
@@ -116,13 +114,12 @@
 
 <LogsSettingsSection />
 
-<HeadingLink title="Custom log queries" />
+<HeadingLink title="自定义日志查询" />
 <p>
-    The logs are usually meant to be filtered from the UI but if you want to programmatically retrieve and
-    filter the stored logs you can make use of the
+    日志通常建议在界面中筛选，但如果你希望以编程方式获取和筛选已存储的日志，可以使用
     <a href="{import.meta.env.PB_GODOC_URL}/core#BaseApp.LogsQuery" target="_blank" rel="noopener noreferrer">
         <code>app.LogQuery()</code>
-    </a> query builder method. For example:
+    </a> 查询构造器。例如：
 </p>
 <CodeBlock
     language="go"
